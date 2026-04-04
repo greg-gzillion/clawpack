@@ -7,7 +7,7 @@ from pathlib import Path
 
 class TXAgent:
     def __init__(self):
-        self.testnet_rpc = "https://full-node.testnet-1.tx.dev:26657"
+        self.testnet_rpc = "https://full-node.testnet-1.coreum.dev:26657"
         self.chain_id = "coreum-testnet-1"
         
     def get_status(self):
