@@ -1,0 +1,782 @@
+{
+  "docs_index": [
+    {
+      "path": "business/PHOENIXPME.md",
+      "size": 8520,
+      "preview": "# PhoenixPME Auction Platform - Roadmap\n\n**Last Updated:** February 24, 2026  \n**Next Milestone:** March 6, 2026 - TX Testnet 6.0 Launch (9 days)\n\n## \u2705 CURRENT STATUS (as of Feb 24, 2026)\n\n| Priority "
+    },
+    {
+      "path": "business/FOCUS_PHOENIXPME.md",
+      "size": 871,
+      "preview": "# \ud83c\udfaf PHOENIXPME AUCTION PLATFORM - CURRENT FOCUS\n\n## BUILDING NOW:\n1. Auction/escrow for physical precious metals\n2. 1.1% fee \u2192 Community Reserve Fund\n3. Basic eBay-like functionality\n\n## NOT BUILDING "
+    }
+  ],
+  "project_index": [
+    {
+      "path": "phoenix_token.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/clean_query.rs",
+      "type": "contract",
+      "functions": [
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/minimal_query.rs",
+      "type": "contract",
+      "functions": [
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/typenum-fe981ff7528269a1/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/serde-69ff3dfd0cd92ab0/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/serde_core-6c3fdcee8b57e72d/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/serde-9008cc74defea92e/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/typenum-11628aee10636605/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/wasm32-unknown-unknown/release/build/serde_core-33dd5096c1a219cb/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/serde-e9ca77665a2e959c/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/typenum-e5fac465d7cdd662/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/typenum-c6f19d3ab8ecbcbc/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/serde-05af5beb34012ef4/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/isle_s390x.rs",
+      "type": "contract",
+      "functions": [
+        "unit",
+        "u32_add",
+        "s32_add_fallible",
+        "u32_nonnegative",
+        "offset32",
+        "u32_lteq",
+        "u8_lteq",
+        "u8_lt",
+        "simm32",
+        "uimm8"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/version.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/inst_builder.rs",
+      "type": "contract",
+      "functions": [
+        "jump",
+        "brz",
+        "brnz",
+        "br_table",
+        "debugtrap",
+        "return_",
+        "call",
+        "call_indirect",
+        "func_addr",
+        "splat"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/settings-riscv64.rs",
+      "type": "contract",
+      "functions": [
+        "new",
+        "iter",
+        "predicate_view",
+        "numbered_predicate",
+        "has_m",
+        "has_a",
+        "has_f",
+        "has_d",
+        "has_v",
+        "has_b"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/settings-x86.rs",
+      "type": "contract",
+      "functions": [
+        "new",
+        "iter",
+        "predicate_view",
+        "numbered_predicate",
+        "has_sse3",
+        "has_ssse3",
+        "has_sse41",
+        "has_sse42",
+        "has_avx",
+        "has_avx2"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/isle_riscv64.rs",
+      "type": "contract",
+      "functions": [
+        "unit",
+        "u32_add",
+        "s32_add_fallible",
+        "u32_nonnegative",
+        "offset32",
+        "u32_lteq",
+        "u8_lteq",
+        "u8_lt",
+        "simm32",
+        "uimm8"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/isle_x64.rs",
+      "type": "contract",
+      "functions": [
+        "unit",
+        "u32_add",
+        "s32_add_fallible",
+        "u32_nonnegative",
+        "offset32",
+        "u32_lteq",
+        "u8_lteq",
+        "u8_lt",
+        "simm32",
+        "uimm8"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/isle_opt.rs",
+      "type": "contract",
+      "functions": [
+        "unit",
+        "u32_add",
+        "s32_add_fallible",
+        "u32_nonnegative",
+        "offset32",
+        "u32_lteq",
+        "u8_lteq",
+        "u8_lt",
+        "simm32",
+        "uimm8"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/settings.rs",
+      "type": "contract",
+      "functions": [
+        "new",
+        "iter",
+        "all",
+        "fmt",
+        "from_str",
+        "all",
+        "fmt",
+        "from_str",
+        "all",
+        "fmt"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/types.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/opcodes.rs",
+      "type": "contract",
+      "functions": [
+        "from",
+        "opcode",
+        "typevar_operand",
+        "take_value_list",
+        "put_value_list",
+        "eq",
+        "from",
+        "opcode",
+        "with_args",
+        "is_terminator"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/isle_aarch64.rs",
+      "type": "contract",
+      "functions": [
+        "unit",
+        "u32_add",
+        "s32_add_fallible",
+        "u32_nonnegative",
+        "offset32",
+        "u32_lteq",
+        "u8_lteq",
+        "u8_lt",
+        "simm32",
+        "uimm8"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-codegen-93b023451869af04/out/settings-arm64.rs",
+      "type": "contract",
+      "functions": [
+        "new",
+        "iter",
+        "predicate_view",
+        "numbered_predicate",
+        "has_lse",
+        "has_pauth",
+        "sign_return_address_all",
+        "sign_return_address",
+        "sign_return_address_with_bkey",
+        "use_bti"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/target-lexicon-b60a9a91bbb15bf9/out/host.rs",
+      "type": "contract",
+      "functions": [
+        "host",
+        "host",
+        "host",
+        "host",
+        "host",
+        "host"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/serde_core-72ac49f382cefe72/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/serde_core-63846a40900fd271/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/target/debug/build/cranelift-isle-b07f220b65a8c2cd/out/isle_tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_run_pass_let",
+        "test_run_pass_nodebug",
+        "test_run_pass_construct_and_extract",
+        "test_run_pass_bound_var",
+        "test_run_pass_test2",
+        "test_run_pass_prio_trie_bug",
+        "test_run_pass_conversions",
+        "test_run_pass_tutorial",
+        "test_run_pass_conversions_extern",
+        "test_run_pass_test4"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/state.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/contract.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate",
+        "execute",
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/helpers.rs",
+      "type": "contract",
+      "functions": [
+        "calculate_fee",
+        "calculate_collateral"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/lib.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/phoenix_pme.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/msg.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/src/error.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix-escrow/tests/integration_tests.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/thiserror-0efaa2c8f4b61654/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/serde_core-e6d87826bb4230bf/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/thiserror-2d8e713179f55cad/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/serde-85a50868e52be7b2/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/typenum-159d1372409aad8b/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/typenum-21eebce44a8a3751/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/serde-78c012670738d69d/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/wasm32-unknown-unknown/release/build/serde_core-86983ad41b1182a7/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/release/build/typenum-ca7ecdb76c600ae4/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/auction/target/release/build/thiserror-8cb878bb1ec51dbd/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/release/build/serde-7efdfc7462181ff3/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/release/build/serde_core-58e9030f34793c86/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/debug/build/typenum-fa7f2a554fca2cf1/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/auction/target/debug/build/serde-1d0bc57d932fdf57/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/debug/build/serde_core-25ee74d02b86f26d/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/target/debug/build/thiserror-840bc648e8f1962b/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/src/lib.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/src/contract/mod.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate",
+        "execute",
+        "execute_create_auction",
+        "execute_buy_it_now",
+        "execute_place_bid",
+        "execute_close_auction",
+        "execute_claim_winnings",
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/auction/src/msg/mod.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/src/error/mod.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/src/tests/mod.rs",
+      "type": "contract",
+      "functions": [
+        "valid_addr",
+        "test_instantiate",
+        "test_create_auction",
+        "test_place_bid",
+        "test_buy_it_now",
+        "test_end_to_end_auction_flow"
+      ]
+    },
+    {
+      "path": "contracts/auction/src/state/mod.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/fuzz/fuzz_targets/auction_fuzz.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/fuzz/fuzz_targets/fuzz_target_1.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/fuzz/target/x86_64-unknown-linux-gnu/release/build/typenum-62ae0c2fb298d4e1/out/tests.rs",
+      "type": "contract",
+      "functions": [
+        "test_0_BitAnd_0",
+        "test_0_BitOr_0",
+        "test_0_BitXor_0",
+        "test_0_Shl_0",
+        "test_0_Shr_0",
+        "test_0_Add_0",
+        "test_0_Mul_0",
+        "test_0_Pow_0",
+        "test_0_Min_0",
+        "test_0_Max_0"
+      ]
+    },
+    {
+      "path": "contracts/auction/fuzz/target/x86_64-unknown-linux-gnu/release/build/serde-9dccc6f0222dcf55/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/fuzz/target/x86_64-unknown-linux-gnu/release/build/serde_core-1184165dcae962b1/out/private.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/auction/fuzz/target/x86_64-unknown-linux-gnu/release/build/crunchy-a1c356e227526b7c/out/lib.rs",
+      "type": "contract",
+      "functions": [
+        "invalid_range",
+        "start_at_one_with_step",
+        "start_at_one",
+        "test_all"
+      ]
+    },
+    {
+      "path": "contracts/auction-working/src/lib.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate",
+        "execute",
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/phoenix-cosmwasm/src/lib.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate",
+        "execute",
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/auction-guaranteed/src/lib.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate",
+        "execute",
+        "query"
+      ]
+    },
+    {
+      "path": "contracts/auction-guaranteed/tests/integration_tests.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix_auction/reputation_system.rs",
+      "type": "contract",
+      "functions": []
+    },
+    {
+      "path": "contracts/phoenix_auction/fee_accumulator.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate"
+      ]
+    },
+    {
+      "path": "contracts/phoenix_auction/escrow_contract.rs",
+      "type": "contract",
+      "functions": [
+        "instantiate"
+      ]
+    },
+    {
+      "path": "deploy-phoenix.sh",
+      "type": "script"
+    },
+    {
+      "path": "apps/frontend/node_modules/thread-stream/test/ts/transpile.sh",
+      "type": "script"
+    },
+    {
+      "path": "apps/frontend/node_modules/exit/test/fixtures/create-files.sh",
+      "type": "script"
+    },
+    {
+      "path": "apps/backend/scripts/test-db-setup.sh",
+      "type": "script"
+    },
+    {
+      "path": "apps/backend/node_modules/exit-x/test/fixtures/create-files.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/phoenix-escrow/fix_tests.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/deploy/instantiate_auction.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/deploy/deploy_phoenix.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/deploy/deploy_coreum_simple.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/deploy/deploy_coreum.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/build/build_and_deploy.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction/scripts/build/build_and_deploy_final.sh",
+      "type": "script"
+    },
+    {
+      "path": "contracts/auction-guaranteed/track_deployment.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy_auction.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/generate_test_addresses.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/build.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/deploy_tx.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/deploy-tx-testnet.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/build_for_coreum.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/build_coreum.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/build_and_deploy.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/document_token.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/deploy_phoenix.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/track_deployment.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/deploy-testnet.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/quick-build.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/build_and_deploy_final.sh",
+      "type": "script"
+    },
+    {
+      "path": "scripts/deploy/deploy_coreum.sh",
+      "type": "script"
+    }
+  ],
+  "compliance_notes": []
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgentForLaw</title>
+    <style>
+        body { font-family: monospace; max-width: 800px; margin: 0 auto; padding: 20px; background: #0a0a0a; color: #00ff00; }
+        textarea, input, select { width: 100%; padding: 10px; margin: 5px 0; background: #1a1a1a; color: #00ff00; border: 1px solid #00ff00; font-family: monospace; }
+        button { background: #00ff00; color: #0a0a0a; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; margin: 5px; }
+        button:hover { background: #00cc00; }
+        pre { background: #1a1a1a; padding: 10px; overflow-x: auto; white-space: pre-wrap; }
+        .tab { display: inline-block; padding: 10px 20px; background: #1a1a1a; cursor: pointer; margin-right: 5px; }
+        .tab.active { background: #00ff00; color: #0a0a0a; }
+        .content { display: none; }
+        .content.active { display: block; }
+        .result { border-top: 1px solid #00ff00; margin-top: 20px; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🦞 AgentForLaw</h1>
+    <p>Apply law. State statutes. Draft documents.</p>
+    
+    <div>
+        <div class="tab active" onclick="showTab('analyze')">Analyze</div>
+        <div class="tab" onclick="showTab('statute')">Statute</div>
+        <div class="tab" onclick="showTab('contract')">Contract</div>
+        <div class="tab" onclick="showTab('will')">Will</div>
+        <div class="tab" onclick="showTab('constitution')">Constitution</div>
+        <div class="tab" onclick="showTab('memory')">Memory</div>
+    </div>
+    
+    <div id="analyze" class="content active">
+        <h3>Apply Law to Question</h3>
+        <textarea id="analyze_question" rows="3" placeholder="What is the statute of limitations for breach of contract under the UCC?"></textarea>
+        <button onclick="analyze()">Apply Law</button>
+        <div id="analyze_result" class="result"></div>
+    </div>
+    
+    <div id="statute" class="content">
+        <h3>Look Up Statute</h3>
+        <input type="text" id="statute_citation" placeholder="15 USC 78a">
+        <button onclick="lookupStatute()">Look Up</button>
+        <div id="statute_result" class="result"></div>
+    </div>
+    
+    <div id="contract" class="content">
+        <h3>Draft Contract</h3>
+        <select id="contract_type">
+            <option value="service">Service</option>
+            <option value="sale">Sale</option>
+            <option value="employment">Employment</option>
+            <option value="lease">Lease</option>
+            <option value="partnership">Partnership</option>
+            <option value="loan">Loan</option>
+        </select>
+        <input type="text" id="contract_parties" placeholder='{"party_a":"Acme","party_b":"Jane"}' value='{"party_a":"Acme","party_b":"Jane"}'>
+        <input type="text" id="contract_provisions" placeholder='{"services":"consulting","payment":"$5000"}' value='{"services":"consulting","payment":"$5000"}'>
+        <button onclick="draftContract()">Draft</button>
+        <div id="contract_result" class="result"></div>
+    </div>
+    
+    <div id="will" class="content">
+        <h3>Draft Will</h3>
+        <input type="text" id="will_parties" placeholder='{"name":"John Smith"}' value='{"name":"John Smith"}'>
+        <input type="text" id="will_provisions" placeholder='{"executor":"Mary","beneficiary":"children"}' value='{"executor":"Mary","beneficiary":"children"}'>
+        <button onclick="draftWill()">Draft</button>
+        <div id="will_result" class="result"></div>
+    </div>
+    
+    <div id="constitution" class="content">
+        <h3>Read Constitution</h3>
+        <button onclick="getAmendment(1)">1st Amendment</button>
+        <button onclick="getAmendment(2)">2nd Amendment</button>
+        <button onclick="getAmendment(4)">4th Amendment</button>
+        <button onclick="getAmendment(5)">5th Amendment</button>
+        <button onclick="getAmendment(14)">14th Amendment</button>
+        <div id="constitution_result" class="result"></div>
+    </div>
+    
+    <div id="memory" class="content">
+        <h3>Shared Memory</h3>
+        <input type="text" id="memory_key" placeholder="key">
+        <input type="text" id="memory_value" placeholder="value">
+        <button onclick="remember()">Store</button>
+        <button onclick="recall()">Recall</button>
+        <button onclick="listAgents()">List Agents</button>
+        <div id="memory_result" class="result"></div>
+    </div>
+    
+    <script>
+        async function analyze() {
+            const q = document.getElementById('analyze_question').value;
+            const res = await fetch('/analyze', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({question: q})});
+            const data = await res.json();
+            document.getElementById('analyze_result').innerHTML = `<pre>${data.answer}</pre>`;
+        }
+        async function lookupStatute() {
+            const citation = document.getElementById('statute_citation').value;
+            const res = await fetch('/statute', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({citation: citation})});
+            const data = await res.json();
+            document.getElementById('statute_result').innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+        async function draftContract() {
+            const contract_type = document.getElementById('contract_type').value;
+            const parties = JSON.parse(document.getElementById('contract_parties').value);
+            const provisions = JSON.parse(document.getElementById('contract_provisions').value);
+            const res = await fetch('/draft/contract', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({contract_type, parties, provisions})});
+            const data = await res.json();
+            document.getElementById('contract_result').innerHTML = `<pre>${data.contract}</pre>`;
+        }
+        async function draftWill() {
+            const parties = JSON.parse(document.getElementById('will_parties').value);
+            const provisions = JSON.parse(document.getElementById('will_provisions').value);
+            const res = await fetch('/draft/will', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({parties, provisions})});
+            const data = await res.json();
+            document.getElementById('will_result').innerHTML = `<pre>${data.will}</pre>`;
+        }
+        async function getAmendment(num) {
+            const res = await fetch(`/constitution/amendment/${num}`);
+            const data = await res.json();
+            document.getElementById('constitution_result').innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+        async function remember() {
+            const key = document.getElementById('memory_key').value;
+            const value = document.getElementById('memory_value').value;
+            const res = await fetch('/memory/remember', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({key, value})});
+            const data = await res.json();
+            document.getElementById('memory_result').innerHTML = `<pre>Stored: ${data.stored}</pre>`;
+        }
+        async function recall() {
+            const key = document.getElementById('memory_key').value;
+            const res = await fetch(`/memory/recall/${key}`);
+            const data = await res.json();
+            document.getElementById('memory_result').innerHTML = `<pre>${JSON.stringify(data.results, null, 2)}</pre>`;
+        }
+        async function listAgents() {
+            const res = await fetch('/memory/agents');
+            const data = await res.json();
+            document.getElementById('memory_result').innerHTML = `<pre>${JSON.stringify(data.agents, null, 2)}</pre>`;
+        }
+        function showTab(tabId) {
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

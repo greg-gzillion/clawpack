@@ -1,0 +1,5 @@
+{
+  "chat": "llama3.2:3b",
+  "explain": "codellama:7b",
+  "generate": "deepseek-coder:6.7b"
+}

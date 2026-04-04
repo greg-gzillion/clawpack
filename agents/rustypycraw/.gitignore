@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Rust
+target/
+debug/
+release/
+*.rs.bk
+*.rlib
+*.prof
+*.raw
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+*.whl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Session files
+*.json
+!docs/references.md
+!.github/workflows/*.yml
+
+# OS
+.DS_Store
+Thumbs.db

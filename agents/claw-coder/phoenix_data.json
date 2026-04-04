@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-03T23:00:01.877399",
+  "active_escrows": 2,
+  "contracts_scanned": 207,
+  "crf_balance": 0,
+  "phnx_supply": 0,
+  "fee_collected": 0.0,
+  "collateral_ratio": 10,
+  "fee_rate": 1.1,
+  "inspection_hours": 48,
+  "total_volume": 0,
+  "total_commits": 499
+}

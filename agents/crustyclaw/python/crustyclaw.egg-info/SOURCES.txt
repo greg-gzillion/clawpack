@@ -1,0 +1,16 @@
+setup.py
+crustyclaw/__init__.py
+crustyclaw/agents.py
+crustyclaw/harness.py
+crustyclaw/knowledge.py
+crustyclaw/main.py
+crustyclaw/memory.py
+crustyclaw/polyglot.py
+crustyclaw/security.py
+crustyclaw/shared_memory.py
+crustyclaw.egg-info/PKG-INFO
+crustyclaw.egg-info/SOURCES.txt
+crustyclaw.egg-info/dependency_links.txt
+crustyclaw.egg-info/entry_points.txt
+crustyclaw.egg-info/requires.txt
+crustyclaw.egg-info/top_level.txt

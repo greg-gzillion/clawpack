@@ -1,0 +1,2 @@
+{"created_at_ms":1775264945251,"session_id":"session-1775264945251-0","type":"session_meta","updated_at_ms":1775264945251,"version":1}
+{"message":{"blocks":[{"text":"ask What is Rust?","type":"text"}],"role":"user"},"type":"message"}
