@@ -4,3 +4,9 @@
     "deny": ["Bash(rm -rf /)", "Read(.env)"]
   }
 }
+,
+  "coreum": {
+    "testnet_rpc": "https://full-node.testnet-1.coreum.dev:26657",
+    "chain_id": "coreum-testnet-1",
+    "denom": "utestcore"
+  }

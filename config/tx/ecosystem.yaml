@@ -1,0 +1,48 @@
+# TX Ecosystem Configuration
+name: TX Blockchain
+website: https://tx.org
+docs: https://docs.tx.org
+github: https://github.com/tokenize-x/tx-chain
+
+# Networks
+networks:
+  mainnet:
+    chain_id: tx-mainnet-1
+    rpc: https://full-node.tx.org:26657
+    rest: https://full-node.tx.org:1317
+    explorer: https://explorer.tx.org
+  
+  testnet:
+    chain_id: coreum-testnet-1
+    rpc: https://full-node.testnet-1.tx.dev:26657
+    rest: https://full-node.testnet-1.tx.dev:1317
+    faucet: https://faucet.testnet-1.tx.dev
+  
+  devnet:
+    chain_id: tx-devnet-1
+    rpc: https://full-node.devnet-1.tx.dev:26657
+
+# Key Features
+features:
+  - Smart Tokens (native token management)
+  - WASM Smart Contracts
+  - IBC Interoperability
+  - XRPL Bridge
+  - Built-in DEX
+  - Compliance (KYC/AML, whitelisting, clawbacks)
+
+# Asset Types Supported
+asset_types:
+  - Equities & ETFs
+  - Real Estate
+  - Funds (VC, PE, hedge)
+  - Commodities
+  - IP & Royalties
+  - Structured Products
+
+# Developer Resources
+developer_resources:
+  playground: https://tx.org/developers-hub
+  docs: https://docs.tx.org
+  github: https://github.com/tokenize-x/tx-chain
+  discord: "https://discord.gg/tx"  # Placeholder

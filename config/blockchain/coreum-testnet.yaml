@@ -1,0 +1,16 @@
+# Coreum Testnet Configuration
+name: Coreum Testnet
+rpc_endpoint: https://full-node.testnet-1.coreum.dev:26657
+rest_endpoint: https://full-node.testnet-1.coreum.dev:1317
+chain_id: coreum-testnet-1
+denom: utestcore
+explorer: https://testnet.coreum.dev/cosmos/tx/
+
+# Smart contract addresses (example - update with actual)
+contracts:
+  auction: core1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  token: core1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Monitoring settings
+health_check_interval: 60  # seconds
+alert_on_sync_failure: true
