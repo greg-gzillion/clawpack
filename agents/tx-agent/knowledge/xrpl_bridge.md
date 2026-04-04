@@ -2,7 +2,7 @@
 
 **Source:** https://docs.tx.org/docs-bridge/overview
 **Category:** bridge
-**Stored:** 2026-04-04T00:28:43.758706
+**Stored:** 2026-04-04T00:29:31.106527
 
 TX-XRPL Bridge enables cross-chain asset transfers:
 - Move assets between XRPL and TX blockchain

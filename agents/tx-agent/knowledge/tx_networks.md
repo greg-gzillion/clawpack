@@ -2,7 +2,7 @@
 
 **Source:** https://docs.tx.org
 **Category:** network
-**Stored:** 2026-04-04T00:28:43.758640
+**Stored:** 2026-04-04T00:29:31.106430
 
 TX Blockchain Networks:
 - Mainnet: tx-mainnet-1, RPC: https://full-node.tx.org:26657
