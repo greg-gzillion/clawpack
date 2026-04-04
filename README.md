@@ -14,7 +14,7 @@ ollama pull deepseek-coder:6.7b
 
 | Agent | Purpose |
 |-------|---------|
-| agentforlaw | Legal contracts |
+| agentforlaw | Contracts |
 | claw-code | Claude reimplementation |
 | claw-coder | Python AI assistant |
 | crustyclaw | Bug detection |
