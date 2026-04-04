@@ -1,0 +1,6 @@
+# API Keys - NEVER COMMIT
+*.env
+*_key*
+*secret*
+gsk_*
+.env.local
