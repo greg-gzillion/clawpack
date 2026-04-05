@@ -1,24 +1,56 @@
-\# 🌐 Polyclaw - Translation Agent
+\# 🌐 Polyclaw - Cross-Learning Translation Agent
 
 
 
-Multi-language translation agent with cross-learning (20+ languages).
+\[!\[Python 3.12+](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
+
+\[!\[Languages](https://img.shields.io/badge/Languages-20+-green.svg)](https://github.com/greg-gzillion/clawpack/tree/main/agents/polyclaw)
+
+\[!\[Cross-Learning](https://img.shields.io/badge/Cross--Learning-Active-brightgreen.svg)](https://github.com/greg-gzillion/clawpack)
 
 
 
-\## Commands
-
-\- `/to \[lang] \[text]` - Translate text
-
-\- `/learn \[term]` - Learn from other agents
-
-\- `/stats` - Show translation statistics
-
-\- `/languages` - List all languages
+\## 🌟 Overview
 
 
 
-\## Supported Languages
+Polyclaw is a \*\*multi-language translation agent\*\* with cross-learning capabilities. It can translate text between 20+ languages and learns from other Clawpack agents (especially Mediclaw) to build a persistent translation cache.
 
-English, Spanish, French, German, Italian, Portuguese, Russian, Chinese, Japanese, Korean, Arabic, Hindi, Turkish, Dutch, Polish, Swedish, Vietnamese, Thai, Indonesian, Malay
+
+
+\### 🎯 Key Features
+
+
+
+| Feature | Description |
+
+|---------|-------------|
+
+| 🌐 \*\*20+ Languages\*\* | Support for major world languages |
+
+| 🧠 \*\*Cross-Learning\*\* | Learns medical terms from Mediclaw |
+
+| 💾 \*\*Translation Cache\*\* | Never translates the same text twice |
+
+| 🔄 \*\*Shared Memory\*\* | Translations available to all agents |
+
+| 📊 \*\*Statistics\*\* | Track translation usage |
+
+| ⚡ \*\*Fast\*\* | Cached translations in milliseconds |
+
+
+
+\## 🚀 Quick Start
+
+
+
+\### Run Polyclaw
+
+
+
+```bash
+
+cd clawpack
+
+python agents/polyclaw/polyclaw\_shared.py
 
