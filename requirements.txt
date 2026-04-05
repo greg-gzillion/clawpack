@@ -1,0 +1,7 @@
+# Core dependencies for Clawpack
+# Tracked by Dependabot for security updates
+
+# API requests library
+requests>=2.31.0,<3.0.0
+
+# Note: sqlite3 is built into Python - no installation needed
