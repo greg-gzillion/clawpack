@@ -11,14 +11,16 @@ Clawpack is a **cross-learning AI agent ecosystem** where multiple specialized a
 
 ### 🎯 Key Features
 
-- **🧠 Cross-Learning Agents** - Agents share knowledge via shared SQLite database
-- **🌐 Multi-Language Translation** - 20+ languages with Polyclaw
-- **🏥 Medical Information** - Evidence-based medical knowledge with Mediclaw
-- **🔗 Blockchain Expertise** - TX blockchain and RWA tokenization knowledge
-- **💾 Persistent Memory** - Never lose learned information
-- **🔄 Smart Routing** - Auto-selects best agent for each query
-- **📦 Backup System** - Automatic and manual backups
-- **🚀 Zero API Redundancy** - Cached answers reused across agents
+| Feature | Description |
+|---------|-------------|
+| 🧠 **Cross-Learning Agents** | Agents share knowledge via shared SQLite database |
+| 🌐 **Multi-Language Translation** | 20+ languages with Polyclaw |
+| 🏥 **Medical Information** | Evidence-based medical knowledge with Mediclaw |
+| 🔗 **Blockchain Expertise** | TX blockchain and RWA tokenization knowledge |
+| 💾 **Persistent Memory** | Never lose learned information |
+| 🔄 **Smart Routing** | Auto-selects best agent for each query |
+| 📦 **Backup System** | Automatic and manual backups |
+| 🚀 **Zero API Redundancy** | Cached answers reused across agents |
 
 ## 🤖 Agents
 
@@ -26,17 +28,24 @@ Clawpack is a **cross-learning AI agent ecosystem** where multiple specialized a
 
 | Agent | File | Purpose | Commands |
 |-------|------|---------|----------|
-| 🦞 **Unified Controller** | `unified_shared.py` | Smart router, general Q&A | Natural language |
-| 🌐 **Polyclaw** | `polyclaw_shared.py` | Translation (20+ languages) | `/to`, `/learn`, `/stats` |
-| 🏥 **Mediclaw** | `mediclaw_shared.py` | Medical information | `/ask`, `/homeo`, `/emergency` |
-| 💾 **Knowledge Persistence** | `knowledge_persistence.py` | Backup & maintenance | Menu-driven |
-| 🦞 **Eagleclaw** | `chat_with_agent.py` | Main AI assistant | Natural language |
-| 🔧 **Claw-coder** | Integrated | Python AI assistant | Code generation |
-| 🐛 **Crustyclaw** | Integrated | Bug detection | Code analysis |
-| 🦀 **Rustypycraw** | Integrated | Code generation | Python/CLI |
-| 💻 **Sysclaw** | Integrated | Local machine maintenance | System commands |
+| 🧠 **Unified Controller** | `agents/unified/unified_shared.py` | Smart router, general Q&A | Natural language |
+| 🌐 **Polyclaw** | `agents/polyclaw/polyclaw_shared.py` | Translation (20+ languages) | `/to`, `/learn`, `/stats` |
+| 🏥 **Mediclaw** | `agents/mediclaw/mediclaw_shared.py` | Medical information | `/ask`, `/homeo`, `/emergency` |
+| 💾 **Knowledge Persistence** | `agents/knowledge/knowledge_persistence.py` | Backup & maintenance | Menu-driven |
 
-### Agent Capabilities Matrix
+### Additional Agents
+
+| Agent | Directory | Purpose |
+|-------|-----------|---------|
+| 🦞 **Eagleclaw** | `agents/eagleclaw/` | Main AI assistant |
+| 🔧 **Claw-coder** | `agents/claw-coder/` | Python AI assistant |
+| 🐛 **Crustyclaw** | `agents/crustyclaw/` | Bug detection |
+| 🦀 **Rustypycraw** | `agents/rustypycraw/` | Code generation |
+| 💻 **Sysclaw** | `agents/sysclaw/` | System maintenance |
+| ⚖️ **AgentForLaw** | `agents/agentforlaw/` | Legal assistance |
+| 🔗 **TX-Agent** | `agents/tx-agent/` | TX blockchain |
+
+### Agent Capabilities
 
 | Agent | Reads Shared Memory | Writes Shared Memory | API Calls | Cache |
 |-------|--------------------|---------------------|-----------|-------|
@@ -56,36 +65,227 @@ python --version
 
 # Required packages
 pip install requests
-pip install sqlite3  # Built-in
 
 # Optional: Local LLM with Ollama
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull llama3.2:3b
 ollama pull deepseek-coder:6.7b
+Installation
+bash
+# Clone repository
+git clone https://github.com/greg-gzillion/clawpack.git
+cd clawpack
 
-[![Python 3.12+](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Code style: black](https://img.shields.io/badge/Code%20Style-Black-black.svg)](https://github.com/psf/black)
+# Set up API key (get from https://openrouter.ai/keys)
+export OPENROUTER_API_KEY="your-key-here"
 
-## 🌟 Overview
+# Run any agent
+python agents/unified/unified_shared.py
+📖 Usage Examples
+1. Unified Controller - General Knowledge
+bash
+python agents/unified/unified_shared.py
+text
+❓ Ask me anything: What is the XRPL bridge?
+🤖 [NEW - SAVED TO SHARED MEMORY]
+The XRPL Bridge enables cross-chain transfers between XRP Ledger and other blockchains...
+2. Polyclaw - Translation
+bash
+python agents/polyclaw/polyclaw_shared.py
+text
+🌐 Polyclaw> /to es "Smart Tokens on TX blockchain"
+📝 TRANSLATION: "Tokens Inteligentes en la cadena de bloques TX"
 
-Clawpack is a **cross-learning AI agent ecosystem** where multiple specialized agents share knowledge, learn from each other, and maintain persistent memory. Built with Python and powered by DeepSeek AI, Clawpack creates a collaborative intelligence system that grows over time.
+🌐 Polyclaw> /stats
+📊 SHARED LEARNING STATS:
+  Total translations: 10
+3. Mediclaw - Medical Information
+bash
+python agents/mediclaw/mediclaw_shared.py
+text
+🏥 Mediclaw> /ask What is diabetes?
+📚 Diabetes is a chronic condition where blood sugar levels are too high...
 
-### 🎯 Key Features
+🏥 Mediclaw> /homeo Arnica
+🌿 Homeopathic remedy for trauma, bruising, and shock...
 
-- **🧠 Cross-Learning Agents** - Agents share knowledge via shared SQLite database
-- **🌐 Multi-Language Translation** - 20+ languages with Polyclaw
-- **🏥 Medical Information** - Evidence-based medical knowledge with Mediclaw
-- **🔗 Blockchain Expertise** - TX blockchain and RWA tokenization knowledge
-- **💾 Persistent Memory** - Never lose learned information
-- **🔄 Smart Routing** - Auto-selects best agent for each query
-- **📦 Backup System** - Automatic and manual backups
-- **🚀 Zero API Redundancy** - Cached answers reused across agents
+🏥 Mediclaw> /emergency chest pain
+⚠️ URGENT: 'chest pain' - Call emergency services NOW!
+4. Knowledge Persistence - Backup
+bash
+python agents/knowledge/knowledge_persistence.py
+text
+📊 KNOWLEDGE HEALTH:
+  Medical entries: 7
+  Translation entries: 10
+  Latest backup: 2 days ago
 
-## 🤖 Agents
+📋 COMMANDS:
+  1. Create backup
+  2. Restore from backup
+  3. Consolidate duplicates
+  4. Export knowledge
+📁 Repository Structure
+text
+clawpack/
+├── agents/
+│   ├── mediclaw/          # 🏥 Medical information agent
+│   ├── polyclaw/          # 🌐 Translation agent
+│   ├── unified/           # 🧠 Smart controller
+│   ├── knowledge/         # 💾 Backup & persistence
+│   ├── eagleclaw/         # 🦞 Main AI assistant
+│   ├── claw-coder/        # 🔧 Python AI assistant
+│   ├── crustyclaw/        # 🐛 Bug detection
+│   ├── rustypycraw/       # 🦀 Code generation
+│   ├── sysclaw/           # 💻 System maintenance
+│   ├── agentforlaw/       # ⚖️ Legal assistance
+│   └── tx-agent/          # 🔗 TX blockchain
+├── docs/                  # 📚 Documentation
+├── config/                # ⚙️ Configuration files
+└── claw-shared/           # 🔄 Shared utilities
+💾 Knowledge Base
+All agents share a central SQLite database at ~/.claw_memory/shared_memory.db
 
-### 1. 🦞 Unified Controller (`unified_shared.py`)
-**Smart router that coordinates all agents**
+Database Schema
+sql
+-- Medical knowledge from all agents
+CREATE TABLE medical_knowledge (
+    id INTEGER PRIMARY KEY,
+    query TEXT UNIQUE,
+    response TEXT,
+    specialty TEXT,
+    timestamp TEXT,
+    source_agent TEXT,
+    usage_count INTEGER DEFAULT 1
+);
 
-```bash
-python unified_shared.py
+-- Translations cached from Polyclaw
+CREATE TABLE translations (
+    id INTEGER PRIMARY KEY,
+    source_text TEXT,
+    target_language TEXT,
+    translated_text TEXT,
+    source_agent TEXT,
+    timestamp TEXT
+);
+
+-- TX Blockchain facts
+CREATE TABLE tx_knowledge (
+    id INTEGER PRIMARY KEY,
+    topic TEXT UNIQUE,
+    content TEXT,
+    source TEXT
+);
+🔧 Configuration
+API Key Setup
+Get your free API key from OpenRouter
+
+python
+# In each agent file
+CLOUD_API_KEY = "sk-or-v1-your-key-here"
+Environment Variable (Optional)
+bash
+# Linux/Mac
+export OPENROUTER_API_KEY="sk-or-v1-your-key-here"
+
+# Windows
+set OPENROUTER_API_KEY=sk-or-v1-your-key-here
+📊 Monitoring & Analytics
+Quick Health Check
+bash
+python -c "
+import sqlite3, os
+db = os.path.expanduser('~/.claw_memory/shared_memory.db')
+conn = sqlite3.connect(db)
+c = conn.cursor()
+c.execute('SELECT COUNT(*) FROM medical_knowledge')
+print(f'Medical: {c.fetchone()[0]}')
+c.execute('SELECT COUNT(*) FROM translations')
+print(f'Translations: {c.fetchone()[0]}')
+conn.close()
+"
+View All Knowledge
+bash
+# View all medical knowledge
+python -c "
+import sqlite3, os
+db = os.path.expanduser('~/.claw_memory/shared_memory.db')
+c = sqlite3.connect(db).cursor()
+c.execute('SELECT query FROM medical_knowledge')
+for row in c.fetchall():
+    print(f'• {row[0]}')
+"
+🛠️ Troubleshooting
+Issue	Solution
+API Key Error	Check CLOUD_API_KEY in agent files
+Database Locked	Close other agents, run knowledge persistence to repair
+Translations not saving	Check write permissions to ~/.claw_memory/
+Agent not learning	Verify shared memory path exists
+🤝 Contributing
+Contributions welcome! Please:
+
+Fork the repository
+
+Create a feature branch
+
+Submit a pull request
+
+Development Guidelines
+Follow PEP 8
+
+Use type hints
+
+Document new functions
+
+Maintain cross-learning compatibility
+
+📄 License
+MIT License - See LICENSE file for details
+
+🙏 Acknowledgments
+OpenRouter for AI API access
+
+DeepSeek for language model
+
+Ollama for local LLM support
+
+📞 Support
+Issues: GitHub Issues
+
+Documentation: /docs folder
+
+Examples: See usage examples above
+
+🎯 Roadmap
+Completed ✅
+Cross-learning agent architecture
+
+Shared SQLite memory
+
+Translation agent (20+ languages)
+
+Medical information agent
+
+Backup and restore system
+
+Knowledge persistence
+
+In Progress 🚧
+Web interface
+
+REST API
+
+Real-time collaboration
+
+Planned 📅
+Cloud backup (Google Drive, S3)
+
+Knowledge version control (git)
+
+More specialized agents
+
+Docker deployment
+
+Built with 🦞 by the Clawpack Team
+
+
