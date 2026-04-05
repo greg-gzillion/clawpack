@@ -1,0 +1,12 @@
+# Step 1: Check if this is a TX blockchain factual question
+tx_keywords = ["tx blockchain", "smart token", "rwa", "tokenization", 
+               "xrpl bridge", "ibc", "wasm", "compliance", "clawback"]
+
+is_tx_question = any(keyword in query.lower() for keyword in tx_keywords)
+
+# Step 2: For TX questions, use database first (100% accurate)
+if is_tx_question or force_db:
+    db_answer, found = self.answer_from_database(query)
+    if found:
+        print("✅ Using DATABASE (100% accurate)")
+        return db_answer

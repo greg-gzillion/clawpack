@@ -1,0 +1,65 @@
+{
+  "providers": {
+    "ollama": {
+      "base_url": "http://127.0.0.1:11434",
+      "api_key": "ollama",
+      "models": {
+        "llama3.2:3b": {"size": "2.0 GB", "type": "local", "purpose": "general"},
+        "deepseek-coder:6.7b": {"size": "3.8 GB", "type": "local", "purpose": "coding"},
+        "codellama:7b": {"size": "3.8 GB", "type": "local", "purpose": "debugging"},
+        "phi3:mini": {"size": "3.8 GB", "type": "local", "purpose": "system"},
+        "gemma3:27b": {"size": "~16 GB", "type": "local", "purpose": "advanced"},
+        "gemma3:12b": {"size": "~7 GB", "type": "local", "purpose": "balanced"},
+        "gemma3:4b": {"size": "~2.5 GB", "type": "local", "purpose": "fast"},
+        "deepseek-r1:8b": {"size": "~5 GB", "type": "local", "purpose": "reasoning"},
+        "qwen3-coder:30b": {"size": "~18 GB", "type": "local", "purpose": "expert coding"},
+        "qwen3-vl:30b": {"size": "~18 GB", "type": "local", "purpose": "vision"}
+      }
+    },
+    "cloud": {
+      "base_url": "https://api.openrouter.ai/api/v1",
+      "api_key": "YOUR_API_KEY_HERE",
+      "models": {
+        "gpt-oss:120b-cloud": {"size": "cloud", "type": "cloud", "purpose": "ultra", "cost": "high"},
+        "gpt-oss:20b-cloud": {"size": "cloud", "type": "cloud", "purpose": "premium", "cost": "medium"},
+        "deepseek-v3.1:671b-cloud": {"size": "cloud", "type": "cloud", "purpose": "giant", "cost": "very_high"},
+        "qwen3-coder:480b-cloud": {"size": "cloud", "type": "cloud", "purpose": "massive_coding", "cost": "very_high"},
+        "qwen3-vl:235b-cloud": {"size": "cloud", "type": "cloud", "purpose": "vision", "cost": "high"},
+        "minimax-m2:cloud": {"size": "cloud", "type": "cloud", "purpose": "conversation", "cost": "medium"},
+        "alm-4.6:cloud": {"size": "cloud", "type": "cloud", "purpose": "general", "cost": "medium"}
+      }
+    }
+  },
+  "agent_model_map": {
+    "eagleclaw": {
+      "primary": {"provider": "ollama", "model": "llama3.2:3b"},
+      "premium": {"provider": "cloud", "model": "gpt-oss:20b-cloud"},
+      "ultra": {"provider": "cloud", "model": "deepseek-v3.1:671b-cloud"}
+    },
+    "crustyclaw": {
+      "primary": {"provider": "ollama", "model": "codellama:7b"},
+      "premium": {"provider": "cloud", "model": "gpt-oss:20b-cloud"},
+      "ultra": {"provider": "cloud", "model": "qwen3-coder:480b-cloud"}
+    },
+    "rustypycraw": {
+      "primary": {"provider": "ollama", "model": "deepseek-coder:6.7b"},
+      "premium": {"provider": "ollama", "model": "qwen3-coder:30b"},
+      "ultra": {"provider": "cloud", "model": "qwen3-coder:480b-cloud"}
+    },
+    "claw-coder": {
+      "primary": {"provider": "ollama", "model": "deepseek-coder:6.7b"},
+      "premium": {"provider": "ollama", "model": "qwen3-coder:30b"},
+      "ultra": {"provider": "cloud", "model": "deepseek-v3.1:671b-cloud"}
+    },
+    "agentforlaw": {
+      "primary": {"provider": "ollama", "model": "gemma3:27b"},
+      "premium": {"provider": "cloud", "model": "minimax-m2:cloud"},
+      "ultra": {"provider": "cloud", "model": "deepseek-v3.1:671b-cloud"}
+    },
+    "sysclaw": {
+      "primary": {"provider": "ollama", "model": "phi3:mini"},
+      "premium": {"provider": "ollama", "model": "gemma3:12b"}
+    }
+  },
+  "default_tier": "primary"
+}

@@ -1,0 +1,12 @@
+{
+  "openrouter": {
+    "api_key": "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",
+    "base_url": "https://openrouter.ai/api/v1",
+    "models": {
+      "gpt-oss:120b-cloud": "gryphe/mythomax-l2-13b",
+      "deepseek-v3.1:671b-cloud": "deepseek/deepseek-chat",
+      "qwen3-coder:480b-cloud": "qwen/qwen-2-72b-instruct",
+      "minimax-m2:cloud": "minimax/minimax-01"
+    }
+  }
+}
