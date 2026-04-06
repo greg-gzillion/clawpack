@@ -3,7 +3,34 @@ import sqlite3
 import json
 import shutil
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
+# Shared memory integration for Knowledge Agent
+import sqlite3
+from pathlib import Path
+
+class SharedMemory:
+    def __init__(self):
+        self.db_path = Path.home() / ".claw_memory" / "shared_memory.db"
+    
+    def get_all_knowledge(self):
+        try:
+            conn = sqlite3.connect(str(self.db_path))
+            c = conn.cursor()
+            
+            # Get all tables data
+            result = {}
+            tables = ['medical_knowledge', 'translations', 'math_knowledge', 'language_vocab', 'tx_knowledge']
+            for table in tables:
+                try:
+                    c.execute(f'SELECT COUNT(*) FROM {table}')
+                    result[table] = c.fetchone()[0]
+                except:
+                    result[table] = 0
+            
+            conn.close()
+            return result
+        except:
+            return {}, timedelta
 import os
 
 class KnowledgePersistence:

@@ -5,6 +5,26 @@ import sympy as sp
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
+# Shared memory integration
+import sqlite3
+from pathlib import Path
+
+def save_to_shared_memory(expression, result, operation):
+    try:
+        db_path = Path.home() / ".claw_memory" / "shared_memory.db"
+        conn = sqlite3.connect(str(db_path))
+        c = conn.cursor()
+        c.execute('''CREATE TABLE IF NOT EXISTS math_knowledge
+                     (id INTEGER PRIMARY KEY, expression TEXT UNIQUE, 
+                      result TEXT, operation TEXT, timestamp TEXT)''')
+        c.execute('INSERT OR REPLACE INTO math_knowledge (expression, result, operation, timestamp) VALUES (?,?,?,?)',
+                  (expression, str(result), operation, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        return False
+
 import os
 
 # Create plots directory

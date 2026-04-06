@@ -6,6 +6,30 @@ import subprocess
 import psutil
 import shutil
 from datetime import datetime
+# Shared memory integration for sysclaw
+import sqlite3
+from pathlib import Path
+
+class SharedMemory:
+    def __init__(self):
+        self.db_path = Path.home() / ".claw_memory" / "shared_memory.db"
+        self.db_path.parent.mkdir(exist_ok=True)
+    
+    def log_system_event(self, event_type, details):
+        try:
+            conn = sqlite3.connect(str(self.db_path))
+            c = conn.cursor()
+            c.execute('''CREATE TABLE IF NOT EXISTS system_events
+                         (id INTEGER PRIMARY KEY, event_type TEXT, 
+                          details TEXT, timestamp TEXT)''')
+            c.execute('INSERT INTO system_events (event_type, details, timestamp) VALUES (?,?,?)',
+                      (event_type, details, datetime.now().isoformat()))
+            conn.commit()
+            conn.close()
+            return True
+        except:
+            return False
+
 import json
 
 class SysClaw:
