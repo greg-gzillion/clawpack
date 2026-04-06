@@ -1,0 +1,58 @@
+﻿{
+  "citations": {
+    "supreme_court": {
+      "format": "{case_name}, {volume} U.S. {page} ({year})",
+      "examples": [
+        "Marbury v. Madison, 5 U.S. 137 (1803)",
+        "Brown v. Board of Education, 347 U.S. 483 (1954)",
+        "Roe v. Wade, 410 U.S. 113 (1973)",
+        "Citizens United v. FEC, 558 U.S. 310 (2010)"
+      ]
+    },
+    "federal_circuit": {
+      "format": "{case_name}, {volume} F.{series} {page} ({circuit} {year})",
+      "examples": [
+        "Miranda v. Arizona, 384 F.2d 1 (9th Cir. 1967)",
+        "United States v. Jones, 565 F.3d 123 (2d Cir. 2009)"
+      ]
+    },
+    "federal_district": {
+      "format": "{case_name}, {volume} F. Supp. {page} ({district} {year})",
+      "examples": [
+        "Brown v. Board of Education, 98 F. Supp. 797 (D. Kan. 1951)"
+      ]
+    },
+    "us_code": {
+      "format": "{volume} U.S.C. § {section} ({year})",
+      "examples": [
+        "42 U.S.C. § 1983 (2018)",
+        "18 U.S.C. § 242 (2018)"
+      ]
+    },
+    "cfr": {
+      "format": "{title} C.F.R. § {section} ({year})",
+      "examples": [
+        "12 C.F.R. § 226.5 (2020)"
+      ]
+    },
+    "law_review": {
+      "format": "{author}, {title}, {volume} {journal} {page} ({year})",
+      "examples": [
+        "Laurence H. Tribe, The Constitution in Cyberspace, 21 Harv. J.L. & Tech. 1 (2007)"
+      ]
+    }
+  },
+  "abbreviations": {
+    "US": "United States",
+    "F": "Federal Reporter",
+    "F_Supp": "Federal Supplement",
+    "USC": "United States Code",
+    "CFR": "Code of Federal Regulations",
+    "Fed_Reg": "Federal Register"
+  },
+  "short_forms": {
+    "id": "Same source as immediately preceding citation",
+    "supra": "Previously cited source",
+    "hereinafter": "Short title for long citations"
+  }
+}
