@@ -1,4 +1,4 @@
-# Secure API key loading - NO HARDCODED KEYS
+﻿# Secure API key loading - NO HARDCODED KEYS
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -25,7 +25,60 @@ from datetime import datetime
 
 CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 
-class UnifiedShared:
+
+
+    def query_webclaw(self, topic):
+        """Search Webclaw references for information"""
+        webclaw_refs = Path(__file__).parent.parent / "webclaw" / "references"
+        
+        # Search all agent references
+        results = []
+        for agent_ref in webclaw_refs.iterdir():
+            if agent_ref.is_dir():
+                for md_file in agent_ref.rglob("*.md"):
+                    try:
+                        content = md_file.read_text(encoding='utf-8')
+                        if topic.lower() in content.lower():
+                            results.append({
+                                "agent": agent_ref.name,
+                                "file": md_file.name,
+                                "preview": content[:300]
+                            })
+                    except:
+                        pass
+                # Also search JSON files (court rules)
+                for json_file in agent_ref.rglob("*.json"):
+                    try:
+                        import json
+                        content = json_file.read_text(encoding='utf-8')
+                        if topic.lower() in content.lower():
+                            results.append({
+                                "agent": agent_ref.name,
+                                "file": json_file.name,
+                                "preview": content[:300]
+                            })
+                    except:
+                        pass
+        
+        return results[:5]  # Top 5 matches
+    
+    def get_shared_knowledge_summary(self):
+        """Get summary of all shared knowledge"""
+        conn = sqlite3.connect(str(self.shared_path))
+        c = conn.cursor()
+        
+        summary = {}
+        tables = ['medical_knowledge', 'translations', 'math_knowledge', 'language_vocab', 'agentforlaw_knowledge']
+        
+        for table in tables:
+            try:
+                c.execute(f'SELECT COUNT(*) FROM {table}')
+                summary[table] = c.fetchone()[0]
+            except:
+                summary[table] = 0
+        
+        conn.close()
+        return summary
     def __init__(self):
         self.shared_path = Path.home() / ".claw_memory" / "shared_memory.db"
         self.init_db()
@@ -80,7 +133,7 @@ class UnifiedShared:
         
         if medical:
             conn.close()
-            return f"📚 [FROM {medical[1]}]\n{medical[0]}"
+            return f"ðŸ“š [FROM {medical[1]}]\n{medical[0]}"
         
         # Check TX knowledge
         cursor.execute("SELECT content FROM tx_knowledge WHERE topic LIKE ?", (f"%{question}%",))
@@ -88,7 +141,7 @@ class UnifiedShared:
         
         if tx:
             conn.close()
-            return f"🔗 [FROM TX KNOWLEDGE BASE]\n{tx[0]}"
+            return f"ðŸ”— [FROM TX KNOWLEDGE BASE]\n{tx[0]}"
         
         conn.close()
         
@@ -117,27 +170,27 @@ class UnifiedShared:
                 conn.commit()
                 conn.close()
                 
-                return f"🤖 [NEW - SAVED TO SHARED MEMORY]\n{result}"
+                return f"ðŸ¤– [NEW - SAVED TO SHARED MEMORY]\n{result}"
             return f"Error: {response.status_code}"
         except Exception as e:
             return f"Error: {e}"
     
     def chat(self):
         print("\n" + "="*70)
-        print("🦞 UNIFIED SHARED - Cross-Learning Controller")
+        print("ðŸ¦ž UNIFIED SHARED - Cross-Learning Controller")
         print("="*70)
-        print("\n💡 This agent reads from AND writes to shared memory!")
+        print("\nðŸ’¡ This agent reads from AND writes to shared memory!")
         print("   Other agents (Mediclaw, Polyclaw) can learn from these answers.")
         print("="*70)
         
         while True:
-            question = input("\n❓ Ask me anything: ").strip()
+            question = input("\nâ“ Ask me anything: ").strip()
             if not question:
                 continue
             if question.lower() == 'quit':
                 break
             
-            print("\n🤔 Searching shared memory...")
+            print("\nðŸ¤” Searching shared memory...")
             result = self.smart_query(question)
             print(f"\n{result}\n")
             print("-"*50)

@@ -195,7 +195,7 @@ class AgentForLaw:
         print("-" * 50)
         info = get_court_info(jurisdiction)
         if info:
-            print(info[:1500])
+            print(info[:1500])`n            self.save_court_to_shared_memory(jurisdiction, info[:500])
             save_to_shared_memory(f"court_{jurisdiction}", info[:300], "court_info", jurisdiction)
         else:
             print(f"❌ No info found for: {jurisdiction}")
