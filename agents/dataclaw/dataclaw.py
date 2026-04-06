@@ -1,20 +1,30 @@
 ﻿#!/usr/bin/env python3
 """
-DATACLAW - Local/Personal Citation & Reference Manager
+DATACLAW - Central Personal Library Manager
 
-PURPOSE: Manages YOUR personal references, e-books, and research notes
-RELATIONSHIP TO WEBCLAW: 
-   - Webclaw = GLOBAL standard citations (Bluebook, APA, MLA, Chicago)
-   - DataClaw = LOCAL personal references (your books, your notes, your citations)
+DESIGN PHILOSOPHY:
+- Each agent has its OWN local library folder
+- DataClaw provides a CENTRAL interface to manage ALL personal libraries
+- Follows same hierarchical structure as Webclaw but for LOCAL content
+- User-friendly: easy to add, search, organize personal materials
 
-This agent is OPTIONAL and does NOT interfere with Webclaw's global citation system.
-All standard citations should come from Webclaw. DataClaw is for your personal library.
+STRUCTURE:
+  agents/{agent_name}/library/
+    ├── e_books/        # Personal e-books and PDFs
+    ├── research/       # Research papers
+    ├── notes/          # Personal notes
+    ├── citations/      # Saved citations
+    ├── templates/      # Custom templates
+    ├── references/     # Reference materials
+    ├── imports/        # Import queue
+    └── archive/        # Archived materials
 """
 
 import sys
 import os
 import json
-import sqlite3
+import shutil
+import hashlib
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -24,191 +34,233 @@ from typing import Dict, List, Optional
 # ============================================
 AGENT_DIR = Path(__file__).parent
 ROOT_DIR = AGENT_DIR.parent.parent
-SHARED_DB = Path.home() / ".claw_memory" / "shared_memory.db"
-DATACLAW_DB = AGENT_DIR / "personal_library.db"
-LIBRARY_DIR = AGENT_DIR / "my_library"
-NOTES_DIR = AGENT_DIR / "my_notes"
+AGENTS_DIR = ROOT_DIR / "agents"
 
-# Create directories
-LIBRARY_DIR.mkdir(exist_ok=True)
-NOTES_DIR.mkdir(exist_ok=True)
+# Library categories
+LIBRARY_CATEGORIES = ["e_books", "research", "notes", "citations", "templates", "references", "imports", "archive"]
+
+# Supported file extensions
+SUPPORTED_EXTENSIONS = {
+    "text": [".txt", ".md", ".json", ".csv"],
+    "document": [".pdf", ".docx", ".odt"],
+    "ebook": [".epub", ".mobi", ".azw"],
+    "image": [".jpg", ".png", ".gif", ".svg"],
+    "audio": [".mp3", ".wav", ".ogg"],
+    "video": [".mp4", ".webm"]
+}
 
 # ============================================
-# DATABASE SCHEMA (Personal only)
+# DATABASE (for indexing personal library)
 # ============================================
+DATACLAW_DB = AGENT_DIR / "library_index.db"
 
-def init_dataclaw_db():
-    """Initialize personal reference database"""
+def init_database():
+    """Initialize the personal library index"""
     conn = sqlite3.connect(str(DATACLAW_DB))
     c = conn.cursor()
     
-    # My personal book collection
-    c.execute('''CREATE TABLE IF NOT EXISTS my_books
+    # Master index of all personal library items
+    c.execute('''CREATE TABLE IF NOT EXISTS library_index
                  (id INTEGER PRIMARY KEY,
-                  title TEXT UNIQUE,
-                  author TEXT,
-                  isbn TEXT,
-                  publisher TEXT,
-                  year TEXT,
+                  agent TEXT,
                   category TEXT,
-                  file_path TEXT,
-                  notes TEXT,
-                  tags TEXT,
-                  added_date TEXT)''')
-    
-    # My saved citations (personal use)
-    c.execute('''CREATE TABLE IF NOT EXISTS my_citations
-                 (id INTEGER PRIMARY KEY,
+                  filename TEXT,
+                  filepath TEXT,
+                  file_hash TEXT,
+                  file_size INTEGER,
                   title TEXT,
-                  citation_text TEXT,
-                  citation_style TEXT,
-                  source TEXT,
-                  notes TEXT,
-                  saved_date TEXT)''')
-    
-    # My research notes
-    c.execute('''CREATE TABLE IF NOT EXISTS my_notes
-                 (id INTEGER PRIMARY KEY,
-                  title TEXT UNIQUE,
-                  content TEXT,
-                  tags TEXT,
-                  created_date TEXT,
-                  modified_date TEXT)''')
-    
-    # My reading list
-    c.execute('''CREATE TABLE IF NOT EXISTS my_reading_list
-                 (id INTEGER PRIMARY KEY,
-                  title TEXT UNIQUE,
                   author TEXT,
-                  priority INTEGER DEFAULT 1,
-                  status TEXT DEFAULT 'pending',
+                  tags TEXT,
                   notes TEXT,
-                  added_date TEXT)''')
+                  added_date TEXT,
+                  last_accessed TEXT,
+                  access_count INTEGER DEFAULT 0)''')
+    
+    # Search history
+    c.execute('''CREATE TABLE IF NOT EXISTS search_history
+                 (id INTEGER PRIMARY KEY,
+                  query TEXT,
+                  results_count INTEGER,
+                  timestamp TEXT)''')
     
     conn.commit()
     conn.close()
 
-# ============================================
-# PERSONAL REFERENCE FUNCTIONS
-# ============================================
+def get_agent_libraries():
+    """Get list of all agents with library folders"""
+    libraries = []
+    for agent_dir in AGENTS_DIR.iterdir():
+        if agent_dir.is_dir():
+            library_dir = agent_dir / "library"
+            if library_dir.exists():
+                libraries.append({
+                    "agent": agent_dir.name,
+                    "path": library_dir,
+                    "categories": [c for c in LIBRARY_CATEGORIES if (library_dir / c).exists()]
+                })
+    return libraries
 
-def add_personal_book(title, author, **kwargs):
-    """Add a book to my personal library"""
+def index_file(agent: str, category: str, filepath: Path) -> Dict:
+    """Index a file in the personal library"""
     conn = sqlite3.connect(str(DATACLAW_DB))
     c = conn.cursor()
     
-    try:
-        c.execute('''INSERT OR REPLACE INTO my_books
-                     (title, author, isbn, publisher, year, category, file_path, notes, tags, added_date)
-                     VALUES (?,?,?,?,?,?,?,?,?,?)''',
-                  (title, author, kwargs.get('isbn', ''), kwargs.get('publisher', ''),
-                   kwargs.get('year', ''), kwargs.get('category', 'general'),
-                   kwargs.get('file_path', ''), kwargs.get('notes', ''), kwargs.get('tags', ''),
-                   datetime.now().isoformat()))
-        conn.commit()
-        print(f"📚 Added to personal library: {title}")
-        return True
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
-    finally:
+    # Calculate file hash for deduplication
+    with open(filepath, 'rb') as f:
+        file_hash = hashlib.md5(f.read()).hexdigest()
+    
+    file_size = filepath.stat().st_size
+    
+    # Try to extract title from filename
+    title = filepath.stem.replace('_', ' ').replace('-', ' ')
+    
+    # Check if already indexed
+    c.execute("SELECT id FROM library_index WHERE file_hash = ?", (file_hash,))
+    existing = c.fetchone()
+    
+    if existing:
         conn.close()
+        return {"status": "exists", "id": existing[0]}
+    
+    c.execute('''INSERT INTO library_index
+                 (agent, category, filename, filepath, file_hash, file_size, title, added_date)
+                 VALUES (?,?,?,?,?,?,?,?)''',
+              (agent, category, filepath.name, str(filepath), file_hash, file_size, title, datetime.now().isoformat()))
+    
+    item_id = c.lastrowid
+    conn.commit()
+    conn.close()
+    
+    return {"status": "indexed", "id": item_id}
 
-def list_my_books(category=None):
-    """List books in my personal library"""
+def search_library(query: str, agent: str = None, category: str = None) -> List[Dict]:
+    """Search the personal library"""
     conn = sqlite3.connect(str(DATACLAW_DB))
     c = conn.cursor()
+    
+    sql = "SELECT agent, category, filename, title, tags, added_date FROM library_index WHERE filename LIKE ? OR title LIKE ?"
+    params = [f'%{query}%', f'%{query}%']
+    
+    if agent:
+        sql += " AND agent = ?"
+        params.append(agent)
     
     if category:
-        c.execute("SELECT title, author, year FROM my_books WHERE category = ? ORDER BY title", (category,))
-    else:
-        c.execute("SELECT title, author, year FROM my_books ORDER BY title")
+        sql += " AND category = ?"
+        params.append(category)
     
-    results = c.fetchall()
+    sql += " ORDER BY added_date DESC LIMIT 50"
+    
+    c.execute(sql, params)
+    results = [{"agent": r[0], "category": r[1], "filename": r[2], "title": r[3], "tags": r[4], "date": r[5]} for r in c.fetchall()]
     conn.close()
     
-    if results:
-        print(f"\n📚 My Personal Library ({len(results)} books):")
-        for title, author, year in results:
-            print(f"  • {title} - {author} ({year})")
-    else:
-        print("\n📚 No books in personal library yet")
+    # Save search history
+    conn = sqlite3.connect(str(DATACLAW_DB))
+    c = conn.cursor()
+    c.execute("INSERT INTO search_history (query, results_count, timestamp) VALUES (?,?,?)",
+              (query, len(results), datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
+    
     return results
 
-def save_personal_citation(title, citation_text, citation_style, notes=""):
-    """Save a citation to my personal collection"""
-    conn = sqlite3.connect(str(DATACLAW_DB))
-    c = conn.cursor()
-    
-    try:
-        c.execute('''INSERT INTO my_citations
-                     (title, citation_text, citation_style, notes, saved_date)
-                     VALUES (?,?,?,?,?)''',
-                  (title, citation_text, citation_style, notes, datetime.now().isoformat()))
-        conn.commit()
-        print(f"📝 Saved personal citation: {title}")
-        return True
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
-    finally:
-        conn.close()
+# ============================================
+# FILE MANAGEMENT FUNCTIONS
+# ============================================
 
-def list_my_citations():
-    """List my saved personal citations"""
-    conn = sqlite3.connect(str(DATACLAW_DB))
-    c = conn.cursor()
-    c.execute("SELECT title, citation_style, saved_date FROM my_citations ORDER BY saved_date DESC LIMIT 20")
-    results = c.fetchall()
-    conn.close()
+def add_file(source_path: str, agent: str, category: str) -> Dict:
+    """Add a file to an agent's personal library"""
+    source = Path(source_path)
+    if not source.exists():
+        return {"error": f"File not found: {source_path}"}
     
-    if results:
-        print(f"\n📝 My Saved Citations ({len(results)}):")
-        for title, style, date in results:
-            print(f"  • {title} ({style}) - {date[:10]}")
-    else:
-        print("\n📝 No saved citations yet")
-    return results
+    if agent not in [l["agent"] for l in get_agent_libraries()]:
+        return {"error": f"Agent '{agent}' not found or has no library"}
+    
+    if category not in LIBRARY_CATEGORIES:
+        return {"error": f"Invalid category. Choose from: {', '.join(LIBRARY_CATEGORIES)}"}
+    
+    # Destination path
+    dest_dir = AGENTS_DIR / agent / "library" / category
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Handle duplicate filenames
+    dest_path = dest_dir / source.name
+    counter = 1
+    while dest_path.exists():
+        stem = source.stem
+        dest_path = dest_dir / f"{stem}_{counter}{source.suffix}"
+        counter += 1
+    
+    # Copy file
+    shutil.copy2(source, dest_path)
+    
+    # Index the file
+    index_result = index_file(agent, category, dest_path)
+    
+    return {
+        "status": "success",
+        "source": str(source),
+        "destination": str(dest_path),
+        "agent": agent,
+        "category": category,
+        "indexed": index_result
+    }
 
-def add_note(title, content, tags=""):
-    """Add a personal research note"""
-    conn = sqlite3.connect(str(DATACLAW_DB))
-    c = conn.cursor()
+def list_agent_library(agent: str, category: str = None) -> List[Dict]:
+    """List contents of an agent's personal library"""
+    library_dir = AGENTS_DIR / agent / "library"
+    if not library_dir.exists():
+        return []
     
-    try:
-        c.execute('''INSERT OR REPLACE INTO my_notes
-                     (title, content, tags, created_date, modified_date)
-                     VALUES (?,?,?,?,?)''',
-                  (title, content, tags, datetime.now().isoformat(), datetime.now().isoformat()))
-        conn.commit()
+    items = []
+    categories_to_scan = [category] if category else LIBRARY_CATEGORIES
+    
+    for cat in categories_to_scan:
+        cat_dir = library_dir / cat
+        if cat_dir.exists():
+            for file in cat_dir.iterdir():
+                if file.is_file():
+                    items.append({
+                        "agent": agent,
+                        "category": cat,
+                        "filename": file.name,
+                        "size": file.stat().st_size,
+                        "modified": datetime.fromtimestamp(file.stat().st_mtime).isoformat()
+                    })
+    
+    return items
+
+def get_library_stats() -> Dict:
+    """Get statistics for all personal libraries"""
+    stats = {"agents": {}, "total_files": 0, "total_size_bytes": 0}
+    
+    for agent_info in get_agent_libraries():
+        agent = agent_info["agent"]
+        agent_stats = {"categories": {}, "total_files": 0, "total_size_bytes": 0}
         
-        # Also save as markdown file
-        note_file = NOTES_DIR / f"{title.replace(' ', '_')}.md"
-        note_file.write_text(f"# {title}\n\nCreated: {datetime.now()}\nTags: {tags}\n\n{content}")
+        for category in agent_info["categories"]:
+            cat_dir = agent_info["path"] / category
+            if cat_dir.exists():
+                files = list(cat_dir.iterdir())
+                file_count = len([f for f in files if f.is_file()])
+                total_size = sum(f.stat().st_size for f in files if f.is_file())
+                
+                agent_stats["categories"][category] = {
+                    "files": file_count,
+                    "size_bytes": total_size,
+                    "size_mb": round(total_size / (1024 * 1024), 2)
+                }
+                agent_stats["total_files"] += file_count
+                agent_stats["total_size_bytes"] += total_size
         
-        print(f"📝 Saved personal note: {title}")
-        return True
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
-    finally:
-        conn.close()
-
-def show_stats():
-    """Show personal library statistics"""
-    conn = sqlite3.connect(str(DATACLAW_DB))
-    c = conn.cursor()
+        stats["agents"][agent] = agent_stats
+        stats["total_files"] += agent_stats["total_files"]
+        stats["total_size_bytes"] += agent_stats["total_size_bytes"]
     
-    print("\n📊 DATACLAW - Personal Library Statistics")
-    print("-" * 40)
-    
-    tables = ['my_books', 'my_citations', 'my_notes', 'my_reading_list']
-    for table in tables:
-        c.execute(f"SELECT COUNT(*) FROM {table}")
-        count = c.fetchone()[0]
-        print(f"  • {table}: {count} items")
-    
-    conn.close()
+    stats["total_size_mb"] = round(stats["total_size_bytes"] / (1024 * 1024), 2)
+    return stats
 
 # ============================================
 # MAIN AGENT CLASS
@@ -216,186 +268,137 @@ def show_stats():
 
 class DataClaw:
     def __init__(self):
-        init_dataclaw_db()
+        init_database()
         self.print_welcome()
     
     def print_welcome(self):
         print("\n" + "="*70)
-        print("🗄️ DATACLAW - Personal Citation & Reference Manager")
+        print("🗄️ DATACLAW - Personal Library Manager")
         print("="*70)
-        print("PURPOSE: Manage YOUR personal references and research")
+        print("MANAGE YOUR PERSONAL LIBRARY FOR EACH AGENT")
         print("="*70)
-        print("\n📚 COMMANDS (Personal Library Only):")
-        print("  /book add \"Title\" \"Author\"     - Add book to my library")
-        print("  /book list [category]           - List my books")
-        print("  /cite save \"Title\" \"Citation\"  - Save personal citation")
-        print("  /cite list                      - List my citations")
-        print("  /note add \"Title\"              - Add research note")
-        print("  /note list                      - List my notes")
-        print("  /reading add \"Title\" \"Author\"  - Add to reading list")
-        print("  /reading list                   - Show reading list")
-        print("  /stats                          - Show library stats")
+        print("\n📚 COMMANDS:")
+        print("  /agents                    - List agents with libraries")
+        print("  /list [agent] [category]   - List library contents")
+        print("  /add [file] [agent] [cat]  - Add file to library")
+        print("  /search [query] [agent]    - Search library")
+        print("  /stats                     - Show library statistics")
+        print("  /import [dir] [agent]      - Import entire directory")
+        print("  /clean [agent] [category]  - Remove duplicates")
         print("  /help, /quit")
         print("="*70)
-        print("💡 NOTE: For STANDARD citations (Bluebook, APA, MLA, Chicago)")
-        print("   use Webclaw references or ask Unified Controller")
-        print(f"📁 My Library: {LIBRARY_DIR}")
-        print(f"📁 My Notes: {NOTES_DIR}")
+        print("📁 LIBRARY STRUCTURE:")
+        print("   agents/{agent}/library/")
+        for cat in LIBRARY_CATEGORIES:
+            print(f"     ├── {cat}/")
         print("="*70)
     
-    def handle_book_add(self, args):
-        """Add a book: /book add \"Title\" \"Author\" category=law isbn=123"""
-        import re
-        # Parse quoted strings
-        parts = re.findall(r'"([^"]*)"', args)
-        if len(parts) < 2:
-            print("Usage: /book add \"Title\" \"Author\" [category=value] [isbn=value]")
+    def handle_agents(self):
+        libraries = get_agent_libraries()
+        print("\n🤖 Agents with Personal Libraries:")
+        for lib in libraries:
+            categories_str = ", ".join(lib["categories"])
+            print(f"  • {lib['agent']} - categories: {categories_str}")
+    
+    def handle_list(self, args):
+        parts = args.split()
+        agent = parts[0] if len(parts) > 0 else None
+        category = parts[1] if len(parts) > 1 else None
+        
+        if not agent:
+            print("Usage: /list [agent] [category]")
             return
         
-        title = parts[0]
-        author = parts[1]
-        
-        # Parse optional key=value parameters
-        kwargs = {}
-        remaining = args
-        for part in parts:
-            remaining = remaining.replace(f'"{part}"', '')
-        
-        for pair in remaining.split():
-            if '=' in pair:
-                key, value = pair.split('=', 1)
-                kwargs[key.lower()] = value
-        
-        add_personal_book(title, author, **kwargs)
+        items = list_agent_library(agent, category)
+        if items:
+            print(f"\n📁 Library for {agent}:")
+            for item in items:
+                size_kb = round(item["size"] / 1024, 1)
+                print(f"  📄 {item['category']}/{item['filename']} ({size_kb} KB)")
+        else:
+            print(f"No items found for {agent}")
     
-    def handle_book_list(self, category=None):
-        list_my_books(category)
-    
-    def handle_cite_save(self, args):
-        """Save citation: /cite save \"Title\" \"Citation\" style=bluebook notes=\"my notes\" """
-        import re
-        parts = re.findall(r'"([^"]*)"', args)
-        if len(parts) < 2:
-            print("Usage: /cite save \"Title\" \"Citation\" [style=bluebook] [notes=...]")
+    def handle_add(self, args):
+        parts = args.split()
+        if len(parts) < 3:
+            print("Usage: /add [file_path] [agent] [category]")
+            print(f"Categories: {', '.join(LIBRARY_CATEGORIES)}")
             return
         
-        title = parts[0]
-        citation = parts[1]
+        file_path = parts[0]
+        agent = parts[1]
+        category = parts[2]
         
-        # Parse options
-        style = "bluebook"
-        notes = ""
-        remaining = args
-        for part in parts:
-            remaining = remaining.replace(f'"{part}"', '')
-        
-        for pair in remaining.split():
-            if '=' in pair:
-                key, value = pair.split('=', 1)
-                if key == 'style':
-                    style = value
-                elif key == 'notes':
-                    notes = value
-        
-        save_personal_citation(title, citation, style, notes)
+        result = add_file(file_path, agent, category)
+        if "error" in result:
+            print(f"❌ {result['error']}")
+        else:
+            print(f"✅ Added to {agent}/{category}: {result['destination']}")
     
-    def handle_cite_list(self):
-        list_my_citations()
-    
-    def handle_note_add(self, args):
-        """Add note: /note add \"Title\" tags=research"""
-        import re
-        parts = re.findall(r'"([^"]*)"', args)
+    def handle_search(self, args):
+        parts = args.split()
         if len(parts) < 1:
-            print("Usage: /note add \"Title\" [tags=value]")
+            print("Usage: /search [query] [agent]")
             return
         
-        title = parts[0]
+        query = parts[0]
+        agent = parts[1] if len(parts) > 1 else None
         
-        # Parse tags
-        tags = ""
-        remaining = args
-        for part in parts:
-            remaining = remaining.replace(f'"{part}"', '')
-        
-        for pair in remaining.split():
-            if '=' in pair:
-                key, value = pair.split('=', 1)
-                if key == 'tags':
-                    tags = value
-        
-        print(f"Enter note content (end with Ctrl+Z on new line):")
-        lines = []
-        try:
-            while True:
-                line = input()
-                lines.append(line)
-        except EOFError:
-            pass
-        
-        content = '\n'.join(lines)
-        add_note(title, content, tags)
-    
-    def handle_note_list(self):
-        conn = sqlite3.connect(str(DATACLAW_DB))
-        c = conn.cursor()
-        c.execute("SELECT title, created_date FROM my_notes ORDER BY created_date DESC")
-        results = c.fetchall()
-        conn.close()
-        
+        results = search_library(query, agent)
         if results:
-            print(f"\n📝 My Notes ({len(results)}):")
-            for title, date in results:
-                print(f"  • {title} - {date[:10]}")
+            print(f"\n🔍 Found {len(results)} results for '{query}':")
+            for r in results:
+                print(f"  📄 {r['agent']}/{r['category']}/{r['filename']}")
+                print(f"     Title: {r['title']} - Added: {r['date'][:10]}")
         else:
-            print("\n📝 No notes yet")
+            print(f"No results found for '{query}'")
     
-    def handle_reading_add(self, args):
-        """Add to reading list: /reading add \"Title\" \"Author\" priority=1"""
-        import re
-        parts = re.findall(r'"([^"]*)"', args)
+    def handle_stats(self):
+        stats = get_library_stats()
+        print("\n📊 PERSONAL LIBRARY STATISTICS")
+        print("=" * 50)
+        for agent, agent_stats in stats["agents"].items():
+            print(f"\n🤖 {agent}:")
+            print(f"   Total files: {agent_stats['total_files']}")
+            print(f"   Total size: {agent_stats['total_size_bytes'] / (1024*1024):.2f} MB")
+            for cat, cat_stats in agent_stats["categories"].items():
+                print(f"     📁 {cat}/: {cat_stats['files']} files ({cat_stats['size_mb']} MB)")
+        
+        print(f"\n📊 TOTAL: {stats['total_files']} files, {stats['total_size_mb']} MB")
+    
+    def handle_import(self, args):
+        parts = args.split()
         if len(parts) < 2:
-            print("Usage: /reading add \"Title\" \"Author\" [priority=1-5]")
+            print("Usage: /import [directory] [agent]")
             return
         
-        title = parts[0]
-        author = parts[1]
+        dir_path = Path(parts[0])
+        agent = parts[1]
         
-        priority = 1
-        remaining = args
-        for part in parts:
-            remaining = remaining.replace(f'"{part}"', '')
+        if not dir_path.exists():
+            print(f"Directory not found: {dir_path}")
+            return
         
-        for pair in remaining.split():
-            if '=' in pair:
-                key, value = pair.split('=', 1)
-                if key == 'priority':
-                    priority = int(value)
+        print(f"Importing files from {dir_path} to {agent}...")
         
-        conn = sqlite3.connect(str(DATACLAW_DB))
-        c = conn.cursor()
-        c.execute('''INSERT OR REPLACE INTO my_reading_list
-                     (title, author, priority, added_date)
-                     VALUES (?,?,?,?)''',
-                  (title, author, priority, datetime.now().isoformat()))
-        conn.commit()
-        conn.close()
-        print(f"📖 Added to reading list: {title}")
-    
-    def handle_reading_list(self):
-        conn = sqlite3.connect(str(DATACLAW_DB))
-        c = conn.cursor()
-        c.execute("SELECT title, author, priority, status FROM my_reading_list ORDER BY priority")
-        results = c.fetchall()
-        conn.close()
+        # Auto-detect file types and place in appropriate categories
+        for file in dir_path.iterdir():
+            if file.is_file():
+                ext = file.suffix.lower()
+                if ext in SUPPORTED_EXTENSIONS["ebook"]:
+                    category = "e_books"
+                elif ext in SUPPORTED_EXTENSIONS["document"]:
+                    category = "research"
+                elif ext in SUPPORTED_EXTENSIONS["text"]:
+                    category = "notes"
+                else:
+                    category = "imports"
+                
+                result = add_file(str(file), agent, category)
+                if "error" not in result:
+                    print(f"  ✅ Imported: {file.name} → {category}/")
         
-        if results:
-            print(f"\n📖 My Reading List:")
-            for title, author, priority, status in results:
-                stars = "⭐" * priority
-                print(f"  • {stars} {title} - {author} ({status})")
-        else:
-            print("\n📖 Reading list empty")
+        print("Import complete!")
     
     def run(self):
         self.print_welcome()
@@ -406,30 +409,24 @@ class DataClaw:
                     continue
                 
                 if cmd == "/quit":
-                    print("Goodbye! Happy researching!")
+                    print("Goodbye!")
                     break
                 elif cmd == "/help":
                     self.print_welcome()
+                elif cmd == "/agents":
+                    self.handle_agents()
                 elif cmd == "/stats":
-                    show_stats()
-                elif cmd.startswith("/book add "):
-                    self.handle_book_add(cmd[9:])
-                elif cmd.startswith("/book list"):
-                    parts = cmd.split()
-                    category = parts[2] if len(parts) > 2 else None
-                    self.handle_book_list(category)
-                elif cmd.startswith("/cite save "):
-                    self.handle_cite_save(cmd[10:])
-                elif cmd == "/cite list":
-                    self.handle_cite_list()
-                elif cmd.startswith("/note add "):
-                    self.handle_note_add(cmd[9:])
-                elif cmd == "/note list":
-                    self.handle_note_list()
-                elif cmd.startswith("/reading add "):
-                    self.handle_reading_add(cmd[12:])
-                elif cmd == "/reading list":
-                    self.handle_reading_list()
+                    self.handle_stats()
+                elif cmd.startswith("/list "):
+                    self.handle_list(cmd[6:])
+                elif cmd.startswith("/add "):
+                    self.handle_add(cmd[5:])
+                elif cmd.startswith("/search "):
+                    self.handle_search(cmd[8:])
+                elif cmd.startswith("/import "):
+                    self.handle_import(cmd[8:])
+                elif cmd == "/clean":
+                    print("Clean command - removes duplicates (coming soon)")
                 else:
                     print("Unknown command. Try /help")
                     
