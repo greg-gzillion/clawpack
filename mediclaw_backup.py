@@ -1,8 +1,9 @@
+﻿import os
 # mediclaw.py - Mediclaw: Medical Information & Wellness Agent
 import requests
 
 # Your working API key
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class Mediclaw:
     def __init__(self):
@@ -65,9 +66,9 @@ Please provide a helpful response about: {query}"""
     
     def chat(self):
         print("\n" + "="*70)
-        print("🦞 MEDICLAW - Medical Information & Wellness Agent")
+        print("ðŸ¦ž MEDICLAW - Medical Information & Wellness Agent")
         print("="*70)
-        print("\n⚠️ IMPORTANT DISCLAIMER:")
+        print("\nâš ï¸ IMPORTANT DISCLAIMER:")
         print("Mediclaw provides general medical information only.")
         print("This is NOT a substitute for professional medical advice.")
         print("For medical emergencies, call emergency services immediately.")
@@ -96,7 +97,7 @@ Please provide a helpful response about: {query}"""
         print("="*70)
         
         while True:
-            cmd = input("\n🏥 Mediclaw> ").strip()
+            cmd = input("\nðŸ¥ Mediclaw> ").strip()
             
             if not cmd:
                 continue
@@ -106,7 +107,7 @@ Please provide a helpful response about: {query}"""
                 print("\nCommands: /ask, /emergency, /firstaid, /symptoms, /wellness, /disclaimer, /help, /quit")
                 continue
             if cmd == '/disclaimer':
-                print("\n⚠️ MEDICAL DISCLAIMER:")
+                print("\nâš ï¸ MEDICAL DISCLAIMER:")
                 print("Mediclaw is an AI assistant providing general medical information only.")
                 print("Information provided is not a substitute for professional medical advice.")
                 print("Always consult a qualified healthcare provider for medical concerns.")
@@ -116,45 +117,45 @@ Please provide a helpful response about: {query}"""
             # Parse command
             if cmd.startswith('/ask '):
                 question = cmd[5:]
-                print(f"\n🦞 Mediclaw is analyzing your question...\n")
+                print(f"\nðŸ¦ž Mediclaw is analyzing your question...\n")
                 result = self.get_response(question)
-                print(f"\n📋 RESPONSE:\n{result}\n")
+                print(f"\nðŸ“‹ RESPONSE:\n{result}\n")
                 print("-"*50)
             
             elif cmd.startswith('/emergency '):
                 symptoms = cmd[11:]
                 is_emergency, keyword = self.emergency_check(symptoms)
                 
-                print(f"\n🚨 EMERGENCY CHECK: {symptoms}")
+                print(f"\nðŸš¨ EMERGENCY CHECK: {symptoms}")
                 print("-"*50)
                 
                 if is_emergency:
-                    print(f"\n⚠️ URGENT: '{keyword}' detected!")
+                    print(f"\nâš ï¸ URGENT: '{keyword}' detected!")
                     print("This symptom requires IMMEDIATE medical attention.")
                     print("Call emergency services (911 in US, 112 in EU, 000 in Australia) NOW.")
                 else:
-                    print("\n✅ No immediate emergency indicators detected.")
+                    print("\nâœ… No immediate emergency indicators detected.")
                     print("However, if symptoms worsen or concern you, consult a healthcare provider.")
                 
                 print("\n" + "-"*50)
             
             elif cmd.startswith('/firstaid '):
                 situation = cmd[10:]
-                print(f"\n🩹 FIRST AID FOR: {situation}\n")
+                print(f"\nðŸ©¹ FIRST AID FOR: {situation}\n")
                 result = self.get_response(f"Provide first aid guidance for: {situation}. Include step-by-step instructions.")
                 print(f"{result}\n")
                 print("-"*50)
             
             elif cmd.startswith('/symptoms '):
                 description = cmd[10:]
-                print(f"\n🔍 SYMPTOM CHECK: {description}\n")
+                print(f"\nðŸ” SYMPTOM CHECK: {description}\n")
                 result = self.get_response(f"Based on these symptoms: {description}. Provide possible explanations and guidance. Emphasize when to see a doctor.")
                 print(f"{result}\n")
                 print("-"*50)
             
             elif cmd.startswith('/wellness '):
                 topic = cmd[10:]
-                print(f"\n🌿 WELLNESS ADVICE: {topic}\n")
+                print(f"\nðŸŒ¿ WELLNESS ADVICE: {topic}\n")
                 result = self.get_response(f"Provide wellness and preventive health advice about: {topic}")
                 print(f"{result}\n")
                 print("-"*50)

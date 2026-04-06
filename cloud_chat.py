@@ -1,4 +1,4 @@
-import requests
+﻿import requests
 import os
 
 # Try to get API key from environment
@@ -9,13 +9,13 @@ if not api_key:
     import ctypes
     from ctypes import wintypes
     # Fallback to direct User variable
-    api_key = "sk-or-v1-9ac727fd3c357e1004288bd430a5a38c5ca773be60a0ea115a90e5400c9ac2b"
+    API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 if not api_key:
     api_key = input("Enter your OpenRouter API key: ")
 
 print(f"API Key loaded: {api_key[:20]}...")  # Show first 20 chars to verify
-print("☁️ Cloud Chat (DeepSeek)")
+print("â˜ï¸ Cloud Chat (DeepSeek)")
 print("Type 'quit' to exit\n")
 
 while True:
@@ -39,7 +39,7 @@ while True:
     
     if response.status_code == 200:
         answer = response.json()['choices'][0]['message']['content']
-        print(f"\n🤖 Answer: {answer}\n")
+        print(f"\nðŸ¤– Answer: {answer}\n")
     else:
         print(f"Error: {response.status_code}")
         print(f"Details: {response.text}\n")

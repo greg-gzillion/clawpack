@@ -4,3 +4,21 @@
 *secret*
 gsk_*
 .env.local
+# API Keys & Secrets - NEVER COMMIT
+.env
+.env.*.local
+*.key
+*.pem
+secrets.py
+**/secrets/
+.claw_config/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

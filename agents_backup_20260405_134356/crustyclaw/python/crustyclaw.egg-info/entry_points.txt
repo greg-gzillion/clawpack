@@ -1,0 +1,2 @@
+[console_scripts]
+crustyclaw = crustyclaw.main:main

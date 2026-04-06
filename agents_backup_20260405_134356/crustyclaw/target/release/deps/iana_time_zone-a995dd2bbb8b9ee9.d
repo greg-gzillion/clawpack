@@ -1,0 +1,9 @@
+/home/greg/dev/crustyclaw/target/release/deps/iana_time_zone-a995dd2bbb8b9ee9.d: /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/lib.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/ffi_utils.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/tz_linux.rs
+
+/home/greg/dev/crustyclaw/target/release/deps/libiana_time_zone-a995dd2bbb8b9ee9.rlib: /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/lib.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/ffi_utils.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/tz_linux.rs
+
+/home/greg/dev/crustyclaw/target/release/deps/libiana_time_zone-a995dd2bbb8b9ee9.rmeta: /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/lib.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/ffi_utils.rs /home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/tz_linux.rs
+
+/home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/lib.rs:
+/home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/ffi_utils.rs:
+/home/greg/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/iana-time-zone-0.1.65/src/tz_linux.rs:

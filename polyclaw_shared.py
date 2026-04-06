@@ -1,10 +1,11 @@
+﻿import os
 # polyclaw_shared.py - Polyclaw with Cross-Learning Translation
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class PolyclawShared:
     def __init__(self):
@@ -75,7 +76,7 @@ class PolyclawShared:
         conn.commit()
         conn.close()
         
-        print("✅ Polyclaw connected to shared learning system!")
+        print("âœ… Polyclaw connected to shared learning system!")
     
     def check_shared_translation(self, text, target_lang):
         """Check if another agent has already translated this"""
@@ -93,7 +94,7 @@ class PolyclawShared:
         conn.close()
         
         if result:
-            print(f"💡 [Found translation from {result[1]}]")
+            print(f"ðŸ’¡ [Found translation from {result[1]}]")
             return result[0]
         return None
     
@@ -111,7 +112,7 @@ class PolyclawShared:
         
         conn.commit()
         conn.close()
-        print("💡 [Polyclaw shared this translation with other agents]")
+        print("ðŸ’¡ [Polyclaw shared this translation with other agents]")
     
     def translate(self, text, target_lang, source_lang="auto"):
         """Translate text - checks shared memory first"""
@@ -163,14 +164,14 @@ TRANSLATION:"""
         conn.close()
         
         if results:
-            print(f"\n📚 Learning from Mediclaw about: {medical_term}")
+            print(f"\nðŸ“š Learning from Mediclaw about: {medical_term}")
             for query, response in results:
-                print(f"  📖 Found: {query[:50]}...")
+                print(f"  ðŸ“– Found: {query[:50]}...")
                 # Auto-translate key terms to multiple languages
                 for lang in ["es", "fr", "de", "zh", "ja"]:
                     if len(query) < 100:
                         trans = self.translate(query[:50], lang)
-                        print(f"    → {self.languages.get(lang, lang)}: {trans[:60]}...")
+                        print(f"    â†’ {self.languages.get(lang, lang)}: {trans[:60]}...")
             return True
         return False
     
@@ -193,46 +194,46 @@ TRANSLATION:"""
         
         conn.close()
         
-        print("\n📊 SHARED LEARNING STATS:")
+        print("\nðŸ“Š SHARED LEARNING STATS:")
         print(f"  Total translations in shared memory: {trans_count}")
         for agent, count in agents:
             print(f"    {agent}: {count} translations")
     
     def chat(self):
         print("\n" + "="*70)
-        print("🦞 POLYCLAW SHARED - Cross-Learning Translation Agent")
+        print("ðŸ¦ž POLYCLAW SHARED - Cross-Learning Translation Agent")
         print("="*70)
-        print("\n⚠️ This agent learns from and teaches other Clawpack agents!")
+        print("\nâš ï¸ This agent learns from and teaches other Clawpack agents!")
         print("="*70)
         
-        print("\n🌐 AVAILABLE LANGUAGES:")
+        print("\nðŸŒ AVAILABLE LANGUAGES:")
         langs = list(self.languages.items())
         for i in range(0, len(langs), 5):
             row = langs[i:i+5]
             print("  " + "  ".join([f"{code}: {name[:7]}" for code, name in row]))
         
-        print("\n📚 COMMANDS:")
+        print("\nðŸ“š COMMANDS:")
         print("  /to [lang] [text]     - Translate text (learns from others)")
         print("  /learn [term]         - Learn medical terms from Mediclaw")
         print("  /stats                - Show shared learning statistics")
         print("  /languages            - List all languages")
         print("  /quit                 - Exit")
         
-        print("\n📖 EXAMPLES:")
+        print("\nðŸ“– EXAMPLES:")
         print("  /to es What are Smart Tokens on TX blockchain?")
         print("  /learn diabetes")
         print("  /stats")
         print("="*70)
         
         while True:
-            cmd = input("\n🌐 Polyclaw> ").strip()
+            cmd = input("\nðŸŒ Polyclaw> ").strip()
             
             if not cmd:
                 continue
             if cmd == '/quit':
                 break
             if cmd == '/languages':
-                print("\n🌐 SUPPORTED LANGUAGES:")
+                print("\nðŸŒ SUPPORTED LANGUAGES:")
                 for code, name in self.languages.items():
                     print(f"  {code}: {name}")
                 continue
@@ -253,16 +254,16 @@ TRANSLATION:"""
                     print(f"Unknown language. Use /languages to see all.")
                     continue
                 
-                print(f"\n🦞 Translating to {self.languages[target_lang]}...")
-                print("🔍 Checking if another agent has translated this...")
+                print(f"\nðŸ¦ž Translating to {self.languages[target_lang]}...")
+                print("ðŸ” Checking if another agent has translated this...")
                 
                 result = self.translate(text, target_lang)
-                print(f"\n📝 TRANSLATION:\n{result}\n")
+                print(f"\nðŸ“ TRANSLATION:\n{result}\n")
                 print("-"*50)
             
             elif cmd.startswith('/learn '):
                 term = cmd[7:]
-                print(f"\n🔍 Learning about: {term}")
+                print(f"\nðŸ” Learning about: {term}")
                 self.learn_from_medical(term)
                 print()
             

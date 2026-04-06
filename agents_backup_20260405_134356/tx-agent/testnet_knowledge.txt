@@ -1,0 +1,7 @@
+Coreum Testnet Wallet Creation:
+Binary: cored (not txd, not coreumd)
+Address prefix: testcore
+Address prefix: testcore
+Address prefix: testcore
+Create wallet: ./cored keys add wallet --chain-id coreum-testnet-1
+Faucet: curl -X POST https://faucet.testnet-1.coreum.dev/claim -H "Content-Type: application/json" -d "{\"address\": \"ADDRESS\", \"denom\": \"utestcore\"}"

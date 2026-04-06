@@ -1,0 +1,10 @@
+﻿{
+  "agent_name": "webclaw",
+  "version": "1.0",
+  "role": "reference_keeper",
+  "capabilities": ["medical_references", "legal_references", "programming_references", "blockchain_references"],
+  "references_path": "agents/webclaw/references",
+  "auto_learn": true,
+  "share_memory": true,
+  "cross_learn": true
+}

@@ -1,10 +1,11 @@
-﻿# mediclaw.py - COMPLETE MEDICLAW: All Specialties + Homeopathy
+﻿import os
+# mediclaw.py - COMPLETE MEDICLAW: All Specialties + Homeopathy
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class CompleteMediclaw:
     def __init__(self):
@@ -250,3 +251,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

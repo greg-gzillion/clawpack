@@ -1,0 +1,20 @@
+﻿{
+  "version": "1.0",
+  "enabled": true,
+  "learning_rate": 0.01,
+  "memory_retention_days": 30,
+  "patterns": {
+    "max_patterns": 1000,
+    "min_occurrences": 3,
+    "confidence_threshold": 0.7
+  },
+  "feedback": {
+    "positive_reinforcement": true,
+    "negative_correction": true,
+    "peer_review": true
+  },
+  "agents": [
+    "webclaw", "mediclaw", "agentforlaw", "tx-agent", 
+    "rustypycraw", "polyclaw", "mathematicaclaw", "docuclaw"
+  ]
+}

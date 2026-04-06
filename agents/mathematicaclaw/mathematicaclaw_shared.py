@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 # mathematicaclaw_shared.py - Mathematical Computing Agent
 
-import requests
-import sqlite3
+import os
+import sys
 import math
 import cmath
+import requests
+import sqlite3
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
-# Import plotting libraries
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
+# Set matplotlib backend
 matplotlib.use('Agg')
+
+# Import unified LLM for explanations
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from claw_shared.llm_integration import llm
 
 # Import symbolic math
 try:
@@ -22,8 +28,6 @@ try:
 except ImportError:
     SYMPY_AVAILABLE = False
     print("⚠️ SymPy not installed. Install with: pip install sympy")
-
-CLOUD_API_KEY = "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"
 
 
 class SharedMemory:
@@ -77,14 +81,16 @@ class Mathematicaclaw:
         print("🧮 MATHEMATICACLAW - Mathematical Computing Agent")
         print("="*70)
         print("\n📚 COMMANDS:")
-        print("  /calc <expr>      - Calculate (2+2, sin(pi/2))")
-        print("  /solve <eq>       - Solve equation (x^2 - 4 = 0)")
-        print("  /derive <expr>    - Derivative (x^3)")
-        print("  /integrate <expr> - Integral (x^2) or (x^2 from 0 to 2)")
-        print("  /limit <expr>     - Limit (sin(x)/x)")
-        print("  /taylor <expr>    - Taylor series (sin(x))")
-        print("  /plot <func>      - Plot function (sin(x))")
-        print("  /stats <nums>     - Statistics (1,2,3,4,5)")
+        print("  /calc <expr>        - Calculate (2+2, sin(pi/2))")
+        print("  /solve <eq>         - Solve equation (x^2 - 4 = 0)")
+        print("  /derive <expr>      - Derivative (x^3)")
+        print("  /integrate <expr>   - Integral (x^2) or (x^2 from 0 to 2)")
+        print("  /limit <expr>       - Limit (sin(x)/x)")
+        print("  /taylor <expr>      - Taylor series (sin(x))")
+        print("  /plot <func>        - Plot function (sin(x))")
+        print("  /stats <nums>       - Statistics (1,2,3,4,5)")
+        print("  /explain <concept>  - Explain math concept (uses LLM)")
+        print("  /solve_steps <prob> - Solve with step-by-step (uses LLM)")
         print("  /help, /quit")
         print("="*70)
     
@@ -240,6 +246,29 @@ class Mathematicaclaw:
             "max": max(data)
         }
     
+    def explain(self, concept: str) -> str:
+        """Use local LLM to explain math concepts"""
+        print(f"📖 Explaining: {concept}")
+        prompt = f"""Explain this mathematical concept in simple terms: {concept}
+
+Include:
+- What it is
+- How it works  
+- A simple example
+- Why it's useful"""
+        return llm.generate_with_learning(prompt, "math")
+
+    def solve_with_steps(self, problem: str) -> str:
+        """Use local LLM to solve with step-by-step explanation"""
+        print(f"🔍 Solving with steps: {problem}")
+        prompt = f"""Solve this math problem step by step: {problem}
+
+Show:
+1. The approach
+2. Each step with explanation
+3. The final answer"""
+        return llm.generate_with_learning(prompt, "math")
+    
     def run(self):
         while True:
             cmd = input("\n🧮 Mathematicaclaw> ").strip()
@@ -251,7 +280,25 @@ class Mathematicaclaw:
                 self._print_welcome()
                 continue
             
-            # /calc
+            # /explain - uses LLM
+            if cmd.startswith('/explain '):
+                concept = cmd[9:]
+                result = self.explain(concept)
+                print("\n" + "="*50)
+                print(result)
+                print("="*50)
+                continue
+            
+            # /solve_steps - uses LLM
+            if cmd.startswith('/solve_steps '):
+                problem = cmd[13:]
+                result = self.solve_with_steps(problem)
+                print("\n" + "="*50)
+                print(result)
+                print("="*50)
+                continue
+            
+            # /calc - exact math
             if cmd.startswith('/calc '):
                 r = self.calc(cmd[6:])
                 if r["success"]:
@@ -260,7 +307,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /solve
+            # /solve - exact equation solving
             if cmd.startswith('/solve '):
                 r = self.solve(cmd[7:])
                 if r["success"]:
@@ -269,7 +316,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /derive
+            # /derive - exact derivative
             if cmd.startswith('/derive '):
                 r = self.derive(cmd[8:])
                 if r["success"]:
@@ -278,7 +325,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /integrate
+            # /integrate - exact integral
             if cmd.startswith('/integrate '):
                 expr = cmd[11:]
                 if " from " in expr:
@@ -295,7 +342,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /limit
+            # /limit - exact limit
             if cmd.startswith('/limit '):
                 r = self.limit(cmd[7:])
                 if r["success"]:
@@ -304,7 +351,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /taylor
+            # /taylor - exact series
             if cmd.startswith('/taylor '):
                 r = self.taylor(cmd[8:])
                 if r["success"]:
@@ -313,7 +360,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /plot
+            # /plot - graph
             if cmd.startswith('/plot '):
                 r = self.plot(cmd[6:])
                 if r["success"]:
@@ -322,7 +369,7 @@ class Mathematicaclaw:
                     print(f"❌ {r['error']}")
                 continue
             
-            # /stats
+            # /stats - statistics
             if cmd.startswith('/stats '):
                 try:
                     data = [float(x.strip()) for x in cmd[7:].split(',')]

@@ -1,6 +1,7 @@
+﻿import os
 import requests
 
-API_KEY = "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"
+API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 # Confirmed working free models
 models = [
@@ -9,14 +10,14 @@ models = [
     "openchat/openchat-7b:free"
 ]
 
-print("☁️ Cloud Chat (Testing Models)")
+print("â˜ï¸ Cloud Chat (Testing Models)")
 print("Type 'quit' to exit")
 print("Type 'next' to change models\n")
 
 current = 0
 
 while True:
-    print(f"\n📡 Model: {models[current]}")
+    print(f"\nðŸ“¡ Model: {models[current]}")
     user_input = input("You: ")
     
     if user_input.lower() == 'quit':
@@ -37,7 +38,7 @@ while True:
         )
         
         if r.status_code == 200:
-            print(f"\n🤖 {r.json()['choices'][0]['message']['content']}\n")
+            print(f"\nðŸ¤– {r.json()['choices'][0]['message']['content']}\n")
         else:
             print(f"Error {r.status_code}: {r.text[:100]}\n")
             

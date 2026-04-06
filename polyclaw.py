@@ -1,8 +1,9 @@
+﻿import os
 # polyclaw.py - Polyclaw: Multi-Language Translation Agent (Enhanced)
 import requests
 
 # Your working API key
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class Polyclaw:
     def __init__(self):
@@ -78,12 +79,12 @@ class Polyclaw:
         
         # Group languages by region for display
         self.regions = {
-            "🌎 Major Languages": ["en", "es", "fr", "de", "it", "pt", "ru", "zh", "ja", "ko", "ar", "hi"],
-            "🇮🇳 Indian Subcontinent": ["bn", "pa", "ur", "te", "ta", "mr", "gu", "kn", "ml", "ne", "si"],
-            "🇪🇺 European": ["nl", "pl", "sv", "da", "no", "fi", "el", "cs", "hu", "ro", "uk", "bg", "sr", "hr", "sk", "sl", "lt", "lv", "et", "is", "mt"],
-            "🌏 Southeast Asian": ["vi", "th", "id", "ms", "tl", "my", "km", "lo"],
-            "🌍 African/Middle Eastern": ["he", "iw", "ar", "am", "sw", "af"],
-            "🌏 Other Asian": ["mn"]
+            "ðŸŒŽ Major Languages": ["en", "es", "fr", "de", "it", "pt", "ru", "zh", "ja", "ko", "ar", "hi"],
+            "ðŸ‡®ðŸ‡³ Indian Subcontinent": ["bn", "pa", "ur", "te", "ta", "mr", "gu", "kn", "ml", "ne", "si"],
+            "ðŸ‡ªðŸ‡º European": ["nl", "pl", "sv", "da", "no", "fi", "el", "cs", "hu", "ro", "uk", "bg", "sr", "hr", "sk", "sl", "lt", "lv", "et", "is", "mt"],
+            "ðŸŒ Southeast Asian": ["vi", "th", "id", "ms", "tl", "my", "km", "lo"],
+            "ðŸŒ African/Middle Eastern": ["he", "iw", "ar", "am", "sw", "af"],
+            "ðŸŒ Other Asian": ["mn"]
         }
     
     def translate(self, text, to_lang, from_lang="auto"):
@@ -118,7 +119,7 @@ TRANSLATION:"""
     def show_languages(self):
         """Display all languages by region"""
         print("\n" + "="*70)
-        print("🌐 AVAILABLE LANGUAGES (35+ languages)")
+        print("ðŸŒ AVAILABLE LANGUAGES (35+ languages)")
         print("="*70)
         
         for region, langs in self.regions.items():
@@ -135,12 +136,12 @@ TRANSLATION:"""
                 print(line)
         
         print("\n" + "="*70)
-        print("💡 Tip: Use language codes like 'en', 'es', 'fr', 'de', 'zh', 'ja', 'ar', 'hi', etc.")
+        print("ðŸ’¡ Tip: Use language codes like 'en', 'es', 'fr', 'de', 'zh', 'ja', 'ar', 'hi', etc.")
         print("="*70)
     
     def chat(self):
         print("\n" + "="*70)
-        print("🦞 POLYCLAW ENHANCED - 35+ Language Translation Agent")
+        print("ðŸ¦ž POLYCLAW ENHANCED - 35+ Language Translation Agent")
         print("="*70)
         
         self.show_languages()
@@ -158,7 +159,7 @@ TRANSLATION:"""
         print("="*70)
         
         while True:
-            cmd = input("\n🌐 Polyclaw> ").strip()
+            cmd = input("\nðŸŒ Polyclaw> ").strip()
             
             if not cmd:
                 continue
@@ -186,9 +187,9 @@ TRANSLATION:"""
                     print(f"Type /list to see all 35+ supported languages")
                     continue
                 
-                print(f"\n🦞 Translating to {self.languages[target_lang]}...\n")
+                print(f"\nðŸ¦ž Translating to {self.languages[target_lang]}...\n")
                 result = self.translate(text, target_lang)
-                print(f"\n📝 TRANSLATION ({self.languages[target_lang]}):\n{result}\n")
+                print(f"\nðŸ“ TRANSLATION ({self.languages[target_lang]}):\n{result}\n")
                 print("-"*50)
             else:
                 print("Unknown command. Use /to [lang] [text] or /help")

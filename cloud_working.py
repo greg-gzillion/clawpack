@@ -1,9 +1,10 @@
+﻿import os
 import requests
 
 # YOUR API KEY
-API_KEY = "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"
+API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
-print("☁️ Cloud Chat (Free Models)")
+print("â˜ï¸ Cloud Chat (Free Models)")
 print("Models available:")
 print("1. Google Gemini Flash (fast)")
 print("2. Meta Llama 3.2 (good)")
@@ -48,7 +49,7 @@ while True:
         if response.status_code == 200:
             data = response.json()
             answer = data['choices'][0]['message']['content']
-            print(f"\n🤖 {answer}\n")
+            print(f"\nðŸ¤– {answer}\n")
         else:
             print(f"Error: {response.status_code}")
             print(f"Try typing 'next' to switch models\n")

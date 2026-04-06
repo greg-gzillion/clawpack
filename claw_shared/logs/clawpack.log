@@ -1,0 +1,5 @@
+﻿[2026-04-05 17:38:39] INFO - Clawpack logging system initialized
+[2026-04-05 17:38:39] INFO - Auto-learn system: ENABLED
+[2026-04-05 17:38:39] INFO - Shared memory: ENABLED
+[2026-04-05 17:38:39] INFO - Cross-agent learning: ENABLED
+[2026-04-05 17:38:39] INFO - Active agents: webclaw, mediclaw, agentforlaw, tx-agent

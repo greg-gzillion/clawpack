@@ -1,10 +1,11 @@
+﻿import os
 # mediclaw.py - COMPLETE MEDICLAW: All Specialties + Homeopathy
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class CompleteMediclaw:
     def __init__(self):
@@ -162,16 +163,16 @@ def main():
     m = CompleteMediclaw()
     
     print("\n" + "="*70)
-    print("🦞 COMPLETE MEDICLAW - All Specialties + Homeopathy")
+    print("ðŸ¦ž COMPLETE MEDICLAW - All Specialties + Homeopathy")
     print("="*70)
-    print("\n⚠️ DISCLAIMER: For medical education only. Not a substitute for professional care.")
+    print("\nâš ï¸ DISCLAIMER: For medical education only. Not a substitute for professional care.")
     print("="*70)
     
     print("\n" + "="*70)
     print("COMMANDS:")
     print("="*70)
     
-    print("\n🔬 CONVENTIONAL MEDICINE:")
+    print("\nðŸ”¬ CONVENTIONAL MEDICINE:")
     print("  /oncology [topic]     - Cancer, chemotherapy, immunotherapy")
     print("  /cardiology [topic]   - Heart disease, hypertension")
     print("  /neurology [topic]    - Stroke, epilepsy, Alzheimer's")
@@ -188,29 +189,29 @@ def main():
     print("  /nutrition [topic]    - Diet, vitamins, supplements")
     print("  /sleep [topic]        - Insomnia, sleep apnea")
     
-    print("\n🌿 HOMEOPATHY & INTEGRATIVE:")
+    print("\nðŸŒ¿ HOMEOPATHY & INTEGRATIVE:")
     print("  /homeo [remedy]           - Homeopathic remedy information")
     print("  /homeo-symptom [symptoms] - Find remedies for symptoms")
     print("  /homeo-categories         - Show all remedy categories")
     print("  /homeo-sources            - Reputable homeopathy sources")
     print("  /integrative [condition]  - Integrative medicine approach")
     
-    print("\n💊 MEDICATIONS:")
+    print("\nðŸ’Š MEDICATIONS:")
     print("  /med [name]           - Medication information")
     print("  /meds [category]      - List medications by category")
     print("  /categories           - Show all medication categories")
     
-    print("\n🏥 FIRST AID & EMERGENCIES:")
+    print("\nðŸ¥ FIRST AID & EMERGENCIES:")
     print("  /firstaid [situation] - First aid guidance")
     print("  /emergency [symptoms] - Emergency symptom checker")
     
-    print("\n📖 GENERAL:")
+    print("\nðŸ“– GENERAL:")
     print("  /ask [question]       - General medical question")
     print("  /help                 - This menu")
     print("  /quit                 - Exit")
     
     print("\n" + "="*70)
-    print("📚 EXAMPLES:")
+    print("ðŸ“š EXAMPLES:")
     print("="*70)
     print("  /homeo Arnica")
     print("  /homeo-symptom anxiety insomnia")
@@ -223,7 +224,7 @@ def main():
     print("="*70)
     
     while True:
-        cmd = input("\n🏥 Mediclaw> ").strip()
+        cmd = input("\nðŸ¥ Mediclaw> ").strip()
         
         if not cmd:
             continue
@@ -234,15 +235,15 @@ def main():
         
         # Homeopathy commands
         if cmd == '/homeo-categories':
-            print("\n🌿 HOMEOPATHIC REMEDY CATEGORIES:")
+            print("\nðŸŒ¿ HOMEOPATHIC REMEDY CATEGORIES:")
             for cat, remedies in m.homeopathic_remedies.items():
                 print(f"\n{cat.upper()}:")
                 print(f"  {', '.join(remedies)}")
-            print("\n💡 Use /homeo [remedy] for detailed information")
+            print("\nðŸ’¡ Use /homeo [remedy] for detailed information")
             continue
         
         if cmd == '/homeo-sources':
-            print("\n📚 REPUTABLE HOMEOPATHIC SOURCES:")
+            print("\nðŸ“š REPUTABLE HOMEOPATHIC SOURCES:")
             for name, url in m.homeopathy_sources.items():
                 print(f"\n{name}:")
                 print(f"  {url}")
@@ -250,14 +251,14 @@ def main():
         
         if cmd.startswith('/homeo '):
             remedy = cmd[7:]
-            print(f"\n🌿 HOMEOPATHIC REMEDY: {remedy}\n")
+            print(f"\nðŸŒ¿ HOMEOPATHIC REMEDY: {remedy}\n")
             print(m.homeopathy_query(remedy))
             print()
             continue
         
         if cmd.startswith('/homeo-symptom '):
             symptoms = cmd[15:]
-            print(f"\n🌿 REMEDY FINDER for: {symptoms}\n")
+            print(f"\nðŸŒ¿ REMEDY FINDER for: {symptoms}\n")
             result = m.query(f"Suggest homeopathic remedies for: {symptoms}. List 3-5 remedies with key indications.", "homeopathy")
             print(result)
             print()
@@ -265,7 +266,7 @@ def main():
         
         if cmd.startswith('/integrative '):
             condition = cmd[13:]
-            print(f"\n🔄 INTEGRATIVE APPROACH for: {condition}\n")
+            print(f"\nðŸ”„ INTEGRATIVE APPROACH for: {condition}\n")
             result = m.query(f"Provide integrative medicine approach for {condition} including conventional treatment and complementary options like homeopathy, herbs, nutrition.", "integrative")
             print(result)
             print()
@@ -275,18 +276,18 @@ def main():
         if cmd.startswith('/emergency '):
             symptoms = cmd[11:]
             is_emerg, keyword, category = m.emergency_check(symptoms)
-            print(f"\n🚨 EMERGENCY CHECK: {symptoms}")
+            print(f"\nðŸš¨ EMERGENCY CHECK: {symptoms}")
             if is_emerg:
-                print(f"\n⚠️ URGENT: '{keyword}' - Call emergency services NOW!")
+                print(f"\nâš ï¸ URGENT: '{keyword}' - Call emergency services NOW!")
             else:
-                print("\n✅ No emergency signs detected. Consult doctor if concerned.")
+                print("\nâœ… No emergency signs detected. Consult doctor if concerned.")
             print()
             continue
         
         # First Aid
         if cmd.startswith('/firstaid '):
             situation = cmd[10:]
-            print(f"\n🩹 FIRST AID: {situation}\n")
+            print(f"\nðŸ©¹ FIRST AID: {situation}\n")
             print(m.first_aid(situation))
             print()
             continue
@@ -294,13 +295,13 @@ def main():
         # Medication
         if cmd.startswith('/med '):
             med = cmd[5:]
-            print(f"\n💊 MEDICATION: {med}\n")
+            print(f"\nðŸ’Š MEDICATION: {med}\n")
             print(m.get_medication(med))
             print()
             continue
         
         if cmd == '/categories':
-            print("\n📂 MEDICATION CATEGORIES:")
+            print("\nðŸ“‚ MEDICATION CATEGORIES:")
             for cat, meds in m.med_categories.items():
                 print(f"\n{cat.upper()}: {', '.join(meds)}")
             continue
@@ -329,7 +330,7 @@ def main():
         for prefix, specialty in specialties.items():
             if cmd.startswith(prefix + ' '):
                 topic = cmd[len(prefix)+1:]
-                print(f"\n🔬 {specialty.upper()}: {topic}\n")
+                print(f"\nðŸ”¬ {specialty.upper()}: {topic}\n")
                 print(m.query(topic, specialty))
                 print()
                 matched = True
@@ -341,7 +342,7 @@ def main():
         # General ask
         if cmd.startswith('/ask '):
             question = cmd[5:]
-            print(f"\n🔍 QUESTION: {question}\n")
+            print(f"\nðŸ” QUESTION: {question}\n")
             print(m.query(question, 'general'))
             print()
             continue

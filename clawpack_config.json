@@ -1,0 +1,20 @@
+﻿{
+  "version": "1.0",
+  "name": "Clawpack AI Agent Ecosystem",
+  "environment": "development",
+  "agents": {
+    "enabled": ["webclaw", "mediclaw", "agentforlaw", "tx-agent", "rustypycraw", "polyclaw", "mathematicaclaw", "docuclaw"],
+    "auto_start": true,
+    "heartbeat_interval_seconds": 30
+  },
+  "learning": {
+    "auto_learn_enabled": true,
+    "shared_memory_enabled": true,
+    "cross_learning_enabled": true
+  },
+  "logging": {
+    "level": "INFO",
+    "max_files": 100,
+    "max_size_mb": 10
+  }
+}

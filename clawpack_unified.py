@@ -1,4 +1,4 @@
-# clawpack_unified.py - Full Featured Unified Controller
+﻿# clawpack_unified.py - Full Featured Unified Controller
 import requests
 import sqlite3
 import os
@@ -6,7 +6,7 @@ from pathlib import Path
 
 # ===== CONFIGURATION - EDIT THESE =====
 # YOUR WORKING API KEY (copy this exactly)
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 CLOUD_MODEL = "deepseek/deepseek-chat"
 LOCAL_OLLAMA_URL = "http://127.0.0.1:11434"
 # ======================================
@@ -25,9 +25,9 @@ class ClawpackUnified:
         results = cursor.fetchall()
         conn.close()
         if results:
-            answer = "📚 ACCURATE (from TX knowledge base):\n\n"
+            answer = "ðŸ“š ACCURATE (from TX knowledge base):\n\n"
             for topic, content, source in results:
-                answer += f"📖 {topic}:\n{content}\n🔗 {source}\n\n"
+                answer += f"ðŸ“– {topic}:\n{content}\nðŸ”— {source}\n\n"
             return answer
         return None
     
@@ -36,7 +36,7 @@ class ClawpackUnified:
             response = requests.post(f"{LOCAL_OLLAMA_URL}/api/generate",
                 json={"model": model, "prompt": question, "stream": False, "temperature": 0.7}, timeout=120)
             if response.status_code == 200:
-                return f"🖥️ LOCAL ({model}):\n{response.json()['response']}"
+                return f"ðŸ–¥ï¸ LOCAL ({model}):\n{response.json()['response']}"
             return f"Local error: {response.status_code}"
         except Exception as e:
             return f"Local error: {str(e)}"
@@ -47,7 +47,7 @@ class ClawpackUnified:
                 headers={"Authorization": f"Bearer {CLOUD_API_KEY}", "Content-Type": "application/json"},
                 json={"model": CLOUD_MODEL, "messages": [{"role": "user", "content": question}]}, timeout=60)
             if response.status_code == 200:
-                return f"☁️ CLOUD ({CLOUD_MODEL}):\n{response.json()['choices'][0]['message']['content']}"
+                return f"â˜ï¸ CLOUD ({CLOUD_MODEL}):\n{response.json()['choices'][0]['message']['content']}"
             return f"Cloud error: {response.status_code} - {response.text[:200]}"
         except Exception as e:
             return f"Cloud error: {str(e)}"
@@ -61,7 +61,7 @@ class ClawpackUnified:
             if keyword in question_lower:
                 db_answer = self.db_query(question)
                 if db_answer:
-                    return db_answer + "\n💡 Tip: This answer is from your local TX knowledge base (100% accurate)."
+                    return db_answer + "\nðŸ’¡ Tip: This answer is from your local TX knowledge base (100% accurate)."
         
         for keyword in coding_keywords:
             if keyword in question_lower:
@@ -71,27 +71,27 @@ class ClawpackUnified:
     
     def compare_modes(self, question):
         print("\n" + "="*70)
-        print(f"🔍 COMPARING ANSWERS FOR: {question}")
+        print(f"ðŸ” COMPARING ANSWERS FOR: {question}")
         print("="*70)
         
         db_answer = self.db_query(question)
         if db_answer:
-            print("\n📚 DATABASE (100% accurate):")
+            print("\nðŸ“š DATABASE (100% accurate):")
             print("-"*50)
             print(db_answer)
         else:
-            print("\n📚 DATABASE: No exact match found")
+            print("\nðŸ“š DATABASE: No exact match found")
         
-        print("\n🖥️ LOCAL MODEL (gemma3:4b - fast):")
+        print("\nðŸ–¥ï¸ LOCAL MODEL (gemma3:4b - fast):")
         print("-"*50)
         print(self.local_query(question, "gemma3:4b"))
         
-        print("\n☁️ CLOUD MODEL (DeepSeek - powerful):")
+        print("\nâ˜ï¸ CLOUD MODEL (DeepSeek - powerful):")
         print("-"*50)
         print(self.cloud_query(question))
         
         print("\n" + "="*70)
-        print("💡 RECOMMENDATION:")
+        print("ðŸ’¡ RECOMMENDATION:")
         if db_answer:
             print("   Use DATABASE for factual TX questions (100% accurate)")
         print("   Use LOCAL for quick answers and coding")
@@ -102,7 +102,7 @@ def main():
     claw = ClawpackUnified()
     
     print("\n" + "="*70)
-    print("🦞 CLAWPACK UNIFIED - Best of Both Worlds")
+    print("ðŸ¦ž CLAWPACK UNIFIED - Best of Both Worlds")
     print("="*70)
     print("\nMODES:")
     print("  auto    - Smart routing (recommended)")
@@ -115,7 +115,7 @@ def main():
     print("\n" + "="*70)
     
     while True:
-        mode = input("\n🔧 Mode [auto/local/cloud/db/compare/help/quit]: ").strip().lower()
+        mode = input("\nðŸ”§ Mode [auto/local/cloud/db/compare/help/quit]: ").strip().lower()
         
         if mode == 'quit':
             break
@@ -127,7 +127,7 @@ def main():
             print("compare - See answer from all sources side-by-side")
             continue
         elif mode == 'compare':
-            question = input("❓ Question: ").strip()
+            question = input("â“ Question: ").strip()
             if question:
                 claw.compare_modes(question)
             continue
@@ -136,7 +136,7 @@ def main():
             continue
         
         while True:
-            question = input(f"\n❓ [{mode.upper()}] Your question (or 'back' to change mode): ").strip()
+            question = input(f"\nâ“ [{mode.upper()}] Your question (or 'back' to change mode): ").strip()
             
             if question.lower() == 'back':
                 break
@@ -145,7 +145,7 @@ def main():
             if not question:
                 continue
             
-            print("\n🤔 Processing...\n")
+            print("\nðŸ¤” Processing...\n")
             
             if mode == 'auto':
                 answer = claw.smart_route(question)

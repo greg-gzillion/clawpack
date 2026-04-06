@@ -1,15 +1,16 @@
+﻿import os
 # clawpack_simple.py - Simplified Unified Controller
 import requests
 import sqlite3
 from pathlib import Path
 
 # YOUR WORKING API KEY (hardcoded for reliability)
-CLOUD_API_KEY = "sk-or-v1-9ac727fd3c357e1004288bd430a5a38c5ca773be60a0ea115a90e5400c9ac2b"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 LOCAL_URL = "http://127.0.0.1:11434"
 DB_PATH = Path.home() / ".claw_memory" / "shared_memory.db"
 
 print("\n" + "="*60)
-print("🦞 CLAWPACK UNIFIED (Working Version)")
+print("ðŸ¦ž CLAWPACK UNIFIED (Working Version)")
 print("="*60)
 print("\nCommands:")
 print("  /db [question]  - Database only (100% accurate)")
@@ -36,7 +37,7 @@ while True:
     # Parse command and question
     if cmd.startswith('/db '):
         question = cmd[4:]
-        print("\n📚 DATABASE (100% accurate):")
+        print("\nðŸ“š DATABASE (100% accurate):")
         conn = sqlite3.connect(str(DB_PATH))
         c = conn.cursor()
         c.execute("SELECT topic, content FROM tx_knowledge WHERE topic LIKE ? OR content LIKE ? LIMIT 3", 
@@ -45,13 +46,13 @@ while True:
         conn.close()
         if results:
             for topic, content in results:
-                print(f"\n📖 {topic}:\n{content}\n")
+                print(f"\nðŸ“– {topic}:\n{content}\n")
         else:
             print("No exact match found.")
     
     elif cmd.startswith('/local '):
         question = cmd[7:]
-        print("\n🖥️ LOCAL MODEL (thinking)...")
+        print("\nðŸ–¥ï¸ LOCAL MODEL (thinking)...")
         try:
             r = requests.post(f"{LOCAL_URL}/api/generate", 
                             json={"model": "gemma3:4b", "prompt": question, "stream": False}, timeout=120)
@@ -64,7 +65,7 @@ while True:
     
     elif cmd.startswith('/cloud '):
         question = cmd[7:]
-        print("\n☁️ CLOUD MODEL (thinking)...")
+        print("\nâ˜ï¸ CLOUD MODEL (thinking)...")
         try:
             r = requests.post("https://openrouter.ai/api/v1/chat/completions",
                             headers={"Authorization": f"Bearer {CLOUD_API_KEY}", "Content-Type": "application/json"},
@@ -84,7 +85,7 @@ while True:
         print("="*60)
         
         # Database
-        print("\n📚 DATABASE:")
+        print("\nðŸ“š DATABASE:")
         conn = sqlite3.connect(str(DB_PATH))
         c = conn.cursor()
         c.execute("SELECT content FROM tx_knowledge WHERE topic LIKE ? OR content LIKE ? LIMIT 1", 
@@ -97,7 +98,7 @@ while True:
             print("No match in database")
         
         # Local
-        print("\n🖥️ LOCAL (gemma3:4b):")
+        print("\nðŸ–¥ï¸ LOCAL (gemma3:4b):")
         try:
             r = requests.post(f"{LOCAL_URL}/api/generate", 
                             json={"model": "gemma3:4b", "prompt": question, "stream": False}, timeout=60)
@@ -107,7 +108,7 @@ while True:
             print("Local model error")
         
         # Cloud
-        print("\n☁️ CLOUD (DeepSeek):")
+        print("\nâ˜ï¸ CLOUD (DeepSeek):")
         try:
             r = requests.post("https://openrouter.ai/api/v1/chat/completions",
                             headers={"Authorization": f"Bearer {CLOUD_API_KEY}", "Content-Type": "application/json"},

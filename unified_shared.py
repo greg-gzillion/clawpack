@@ -1,10 +1,11 @@
+﻿import os
 # unified_shared.py - Unified Controller with Cross-Learning
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class UnifiedShared:
     def __init__(self):
@@ -61,7 +62,7 @@ class UnifiedShared:
         
         if medical:
             conn.close()
-            return f"📚 [FROM {medical[1]}]\n{medical[0]}"
+            return f"ðŸ“š [FROM {medical[1]}]\n{medical[0]}"
         
         # Check TX knowledge
         cursor.execute("SELECT content FROM tx_knowledge WHERE topic LIKE ?", (f"%{question}%",))
@@ -69,7 +70,7 @@ class UnifiedShared:
         
         if tx:
             conn.close()
-            return f"🔗 [FROM TX KNOWLEDGE BASE]\n{tx[0]}"
+            return f"ðŸ”— [FROM TX KNOWLEDGE BASE]\n{tx[0]}"
         
         conn.close()
         
@@ -98,27 +99,27 @@ class UnifiedShared:
                 conn.commit()
                 conn.close()
                 
-                return f"🤖 [NEW - SAVED TO SHARED MEMORY]\n{result}"
+                return f"ðŸ¤– [NEW - SAVED TO SHARED MEMORY]\n{result}"
             return f"Error: {response.status_code}"
         except Exception as e:
             return f"Error: {e}"
     
     def chat(self):
         print("\n" + "="*70)
-        print("🦞 UNIFIED SHARED - Cross-Learning Controller")
+        print("ðŸ¦ž UNIFIED SHARED - Cross-Learning Controller")
         print("="*70)
-        print("\n💡 This agent reads from AND writes to shared memory!")
+        print("\nðŸ’¡ This agent reads from AND writes to shared memory!")
         print("   Other agents (Mediclaw, Polyclaw) can learn from these answers.")
         print("="*70)
         
         while True:
-            question = input("\n❓ Ask me anything: ").strip()
+            question = input("\nâ“ Ask me anything: ").strip()
             if not question:
                 continue
             if question.lower() == 'quit':
                 break
             
-            print("\n🤔 Searching shared memory...")
+            print("\nðŸ¤” Searching shared memory...")
             result = self.smart_query(question)
             print(f"\n{result}\n")
             print("-"*50)

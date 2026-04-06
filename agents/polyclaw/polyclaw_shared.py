@@ -1,10 +1,29 @@
+# Secure API key loading - NO HARDCODED KEYS
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load from .env file (NEVER commit to git)
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
+CLOUD_API_KEY = os.environ.get('OPENROUTER_API_KEY')
+
+if not CLOUD_API_KEY:
+    print("? ERROR: OPENROUTER_API_KEY not found!")
+    print("   Create a .env file in the project root with:")
+    print("   OPENROUTER_API_KEY=your-key-here")
+    print("   Or set environment variable: OPENROUTER_API_KEY")
+    raise ValueError("Missing API key")
+
+import os
 # polyclaw_shared.py - Polyclaw with Cross-Learning Translation
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 
 class PolyclawShared:
     def __init__(self):

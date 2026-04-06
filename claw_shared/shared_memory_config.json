@@ -1,0 +1,16 @@
+﻿{
+  "version": "1.0",
+  "memory_types": ["episodic", "semantic", "procedural"],
+  "retention": {
+    "episodic_days": 7,
+    "semantic_days": 90,
+    "procedural_days": 365
+  },
+  "sharing": {
+    "cross_agent": true,
+    "global_context": true,
+    "learned_patterns": true
+  },
+  "context_window": 10000,
+  "compression_enabled": true
+}

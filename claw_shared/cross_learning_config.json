@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0",
+  "enabled": true,
+  "sync_frequency_minutes": 5,
+  "learning_methods": {
+    "imitation": true,
+    "collaboration": true,
+    "competition": false,
+    "ensemble": true
+  },
+  "knowledge_sharing": {
+    "explicit": true,
+    "implicit": true,
+    "via_memory": true
+  },
+  "agent_roles": {
+    "webclaw": "reference_keeper",
+    "mediclaw": "medical_expert",
+    "agentforlaw": "legal_expert",
+    "tx-agent": "blockchain_expert"
+  }
+}

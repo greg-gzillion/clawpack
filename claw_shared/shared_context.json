@@ -1,0 +1,23 @@
+﻿{
+    "global_knowledge":  {
+                             "medical_specialties":  48,
+                             "programming_languages":  18,
+                             "legal_categories":  13,
+                             "references_count":  154
+                         },
+    "created":  "2026-04-05 17:38:38",
+    "agents":  [
+                   "webclaw",
+                   "mediclaw",
+                   "agentforlaw",
+                   "tx-agent",
+                   "rustypycraw",
+                   "polyclaw",
+                   "mathematicaclaw",
+                   "docuclaw"
+               ],
+    "version":  "1.0",
+    "active_sessions":  {
+
+                        }
+}

@@ -1,10 +1,11 @@
+﻿import os
 # mediclaw_shared.py - Mediclaw with Shared Learning
 import requests
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-CLOUD_API_KEY = "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"
+CLOUD_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
 class MediclawShared:
     def __init__(self):
@@ -79,7 +80,7 @@ class MediclawShared:
         
         if result:
             conn.close()
-            return f"📚 [LEARNED FROM OTHER AGENTS]\n{result[0]}"
+            return f"ðŸ“š [LEARNED FROM OTHER AGENTS]\n{result[0]}"
         
         # Check tx_knowledge for blockchain medical info
         cursor.execute("SELECT content FROM tx_knowledge WHERE topic LIKE ?", (f"%{query}%",))
@@ -87,7 +88,7 @@ class MediclawShared:
         
         conn.close()
         if result:
-            return f"🔗 [FROM TX BLOCKCHAIN KNOWLEDGE]\n{result[0]}"
+            return f"ðŸ”— [FROM TX BLOCKCHAIN KNOWLEDGE]\n{result[0]}"
         
         return None
     
@@ -101,7 +102,7 @@ class MediclawShared:
         """, (query, response, specialty, datetime.now().isoformat(), "Mediclaw"))
         conn.commit()
         conn.close()
-        print("💡 [Mediclaw shared this knowledge with other agents]")
+        print("ðŸ’¡ [Mediclaw shared this knowledge with other agents]")
     
     def query_ai(self, topic, specialty="general"):
         """Query AI and cache results"""
@@ -141,19 +142,19 @@ def main():
     m = MediclawShared()
     
     print("\n" + "="*70)
-    print("🦞 MEDICLAW SHARED - Cross-Learning Medical Agent")
+    print("ðŸ¦ž MEDICLAW SHARED - Cross-Learning Medical Agent")
     print("="*70)
-    print("\n⚠️ DISCLAIMER: For medical education only.")
-    print("💡 This agent shares knowledge with other Clawpack agents!")
+    print("\nâš ï¸ DISCLAIMER: For medical education only.")
+    print("ðŸ’¡ This agent shares knowledge with other Clawpack agents!")
     print("="*70)
     
-    print("\n📚 COMMANDS:")
+    print("\nðŸ“š COMMANDS:")
     print("  /ask [question]       - Medical question (reads from shared memory)")
     print("  /emergency [symptoms] - Emergency checker")
     print("  /quit                 - Exit")
     
     while True:
-        cmd = input("\n🏥 Mediclaw> ").strip()
+        cmd = input("\nðŸ¥ Mediclaw> ").strip()
         
         if not cmd:
             continue
@@ -162,7 +163,7 @@ def main():
         
         if cmd.startswith('/ask '):
             question = cmd[5:]
-            print(f"\n🔍 Checking shared memory for: {question}\n")
+            print(f"\nðŸ” Checking shared memory for: {question}\n")
             result = m.query_ai(question)
             print(result)
             print()
@@ -171,9 +172,9 @@ def main():
             symptoms = cmd[11:]
             is_emerg, keyword, category = m.emergency_check(symptoms)
             if is_emerg:
-                print(f"\n⚠️ URGENT: '{keyword}' - Call emergency services NOW!")
+                print(f"\nâš ï¸ URGENT: '{keyword}' - Call emergency services NOW!")
             else:
-                print("\n✅ No emergency signs detected.")
+                print("\nâœ… No emergency signs detected.")
             print()
         
         else:

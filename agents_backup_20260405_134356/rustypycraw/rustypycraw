@@ -1,0 +1,37 @@
+#!/bin/bash
+cd /home/greg/dev/rustypycraw
+source .venv/bin/activate
+
+# Check for model selection flags
+if [[ "$1" == "--groq" ]]; then
+    shift
+    python3 -c "
+from rustypycraw.models import ModelProvider
+import sys
+provider = ModelProvider()
+if len(sys.argv) > 1 and sys.argv[1] == '--ask':
+    question = ' '.join(sys.argv[2:])
+    print(provider.ask(question, provider='groq'))
+" "$@"
+elif [[ "$1" == "--ollama" ]]; then
+    shift
+    python3 -c "
+from rustypycraw.models import ModelProvider
+import sys
+provider = ModelProvider()
+if len(sys.argv) > 1 and sys.argv[1] == '--ask':
+    question = ' '.join(sys.argv[2:])
+    model = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith('--') else 'codellama:7b'
+    print(provider.ask(question, provider='ollama', model=model))
+" "$@"
+elif [[ "$1" == "--list-models" ]]; then
+    python3 -c "
+from rustypycraw.models import ModelProvider
+provider = ModelProvider()
+for name in provider.list_models():
+    print(name)
+"
+else
+    # Default to original CLI
+    python -m rustypycraw.cli "$@"
+fi
