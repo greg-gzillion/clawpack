@@ -1,0 +1,22 @@
+﻿# Text-to-Speech Resources
+
+## Free Online TTS
+https://translate.google.com/
+https://www.bing.com/translator
+https://www.reverso.net/text-translation
+https://ttsreader.com/
+https://www.naturalreaders.com/online/
+https://www.fromtexttospeech.com/
+
+## Free TTS APIs
+https://cloud.google.com/text-to-speech (1M chars/month free)
+https://azure.microsoft.com/services/cognitive-services/text-to-speech/ (500k chars/month)
+https://aws.amazon.com/polly/ (1M chars/month)
+
+## Python Libraries
+pip install pyttsx3
+pip install gtts
+pip install edge-tts
+## Russian-Specific TTS
+https://www.russianpod101.com/pronunciation/
+https://www.forvo.com/languages/ru/

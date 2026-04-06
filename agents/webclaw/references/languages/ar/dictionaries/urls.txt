@@ -1,0 +1,16 @@
+﻿# Dictionary Resources
+
+## Multi-Language Dictionaries
+https://www.wordreference.com/
+https://context.reverso.net/
+https://www.linguee.com/
+https://glosbe.com/
+
+## Translation APIs
+https://cloud.google.com/translate
+https://azure.microsoft.com/services/cognitive-services/translator/
+https://www.deepl.com/pro-api
+https://libretranslate.com/
+## Arabic-Specific Dictionaries
+https://www.almaany.com/
+https://context.reverso.net/translation/arabic-english/

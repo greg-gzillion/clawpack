@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use PhoenixPME in your research, please cite this repository."
+authors:
+  - family-names: "Greg"
+    given-names: "Greg"
+    alias: "greg-gzillion"
+title: "PhoenixPME: Precious Metals Exchange on TX Blockchain"
+version: "0.2.0"
+date-released: 2026-02-14
+url: "https://github.com/greg-gzillion/TX"
+keywords:
+  - "tx-blockchain"
+  - "coreum"
+  - "sologenic"
+  - "cosmwasm"
+  - "precious-metals"
+  - "blockchain"

@@ -1,0 +1,18 @@
+﻿# Dictionary Resources
+
+## Multi-Language Dictionaries
+https://www.wordreference.com/
+https://context.reverso.net/
+https://www.linguee.com/
+https://glosbe.com/
+https://dictionary.cambridge.org/
+
+## Translation APIs
+https://cloud.google.com/translate (500k chars/month free)
+https://azure.microsoft.com/services/cognitive-services/translator/ (2M chars/month)
+https://www.deepl.com/pro-api (500k chars/month)
+https://libretranslate.com/ (self-hosted, free)
+## Japanese-Specific Dictionaries
+https://jisho.org/
+https://www.takoboto.jp/
+https://www.weblio.jp/

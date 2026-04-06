@@ -1,0 +1,89 @@
+﻿{
+  "version": "2.0",
+  "llm_providers": {
+    "ollama": {
+      "enabled": true,
+      "base_url": "http://localhost:11434",
+      "models": {
+        "qwen3-vl:30b": {
+          "size": "19GB",
+          "capabilities": ["vision", "multimodal", "general"],
+          "use_cases": ["image understanding", "general Q&A"]
+        },
+        "qwen3-coder:30b": {
+          "size": "18GB",
+          "capabilities": ["code", "programming"],
+          "use_cases": ["code generation", "debugging", "code review"]
+        },
+        "gemma3:27b": {
+          "size": "17GB",
+          "capabilities": ["general", "reasoning", "medical", "legal"],
+          "use_cases": ["medical diagnosis", "legal research", "complex reasoning"]
+        },
+        "gemma3:12b": {
+          "size": "8.1GB",
+          "capabilities": ["general", "balanced"],
+          "use_cases": ["general Q&A", "content creation"]
+        },
+        "deepseek-r1:8b": {
+          "size": "5.2GB",
+          "capabilities": ["reasoning", "math", "logic"],
+          "use_cases": ["mathematical problems", "logical reasoning"]
+        },
+        "gemma3:4b": {
+          "size": "3.3GB",
+          "capabilities": ["fast", "general"],
+          "use_cases": ["quick responses", "chat"]
+        },
+        "codellama:7b": {
+          "size": "3.8GB",
+          "capabilities": ["code", "programming"],
+          "use_cases": ["code completion", "explanation"]
+        },
+        "deepseek-coder:6.7b": {
+          "size": "3.8GB",
+          "capabilities": ["code", "programming"],
+          "use_cases": ["code generation", "technical Q&A"]
+        },
+        "llama3.2:3b": {
+          "size": "2.0GB",
+          "capabilities": ["general", "fast", "lightweight"],
+          "use_cases": ["general chat", "quick responses"]
+        },
+        "gemma3:1b": {
+          "size": "815MB",
+          "capabilities": ["ultra-fast", "embedded"],
+          "use_cases": ["simple tasks", "classification"]
+        }
+      },
+      "model_recommendations": {
+        "code": ["qwen3-coder:30b", "deepseek-coder:6.7b", "codellama:7b"],
+        "vision": ["qwen3-vl:30b"],
+        "medical": ["gemma3:27b", "gemma3:12b"],
+        "legal": ["gemma3:27b", "deepseek-r1:8b"],
+        "reasoning": ["deepseek-r1:8b", "gemma3:27b"],
+        "fast": ["llama3.2:3b", "gemma3:4b", "gemma3:1b"]
+      }
+    },
+    "openrouter": {
+      "enabled": true,
+      "api_key_env": "OPENROUTER_API_KEY",
+      "default_model": "deepseek/deepseek-chat"
+    },
+    "groq": {
+      "enabled": true,
+      "api_key_env": "GROQ_API_KEY"
+    },
+    "deepseek": {
+      "enabled": true,
+      "api_key_env": "DEEPSEEK_API_KEY"
+    }
+  },
+  "fallback_chain": [
+    "openrouter",
+    "groq",
+    "deepseek",
+    "ollama"
+  ],
+  "local_first": true
+}

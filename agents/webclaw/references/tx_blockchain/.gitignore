@@ -1,0 +1,64 @@
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+*.bak
+*.backup
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+.project
+.classpath
+.cursor/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+venv/
+ENV/
+env/
+.venv
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Build directories
+dist/
+build/
+out/
+node_modules/
+.coverage
+.coverage.*
+.nyc_output/
+
+# Documentation build
+_site/
+site/
+.pdf
+*.epub
+
+# Backup directories
+backup/
+*.backup/
+
+# IDE specific
+.session.vim
+.local/

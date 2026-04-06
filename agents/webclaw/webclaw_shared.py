@@ -26,7 +26,7 @@ class WebclawShared:
         self.memory = get_memory(self.name)
         self.learner = CrossAgentLearner()
         self.shared_path = Path.home() / ".claw_memory" / "shared_memory.db"
-        self.medical_base = Path(__file__).parent / "references/mediclaw/medical"
+        self.medical_base = Path(__file__).parent / "references/mediclaw"
         
         # Register with the agent registry
         self.memory.register(
@@ -230,3 +230,47 @@ Base your research on authoritative sources."""
 if __name__ == "__main__":
     webclaw = WebclawShared()
     webclaw.run()
+    def search_tx_docs(self, query):
+        """Search TX Blockchain documentation"""
+        import os
+        
+        tx_path = os.path.join(self.references_path, "tx_blockchain")
+        if not os.path.exists(tx_path):
+            return "TX Blockchain documentation not found. Please ensure TXdocumentation is copied to references/tx_blockchain/"
+        
+        results = []
+        query_lower = query.lower()
+        
+        for root, dirs, files in os.walk(tx_path):
+            for file in files:
+                if file.endswith('.md'):
+                    filepath = os.path.join(root, file)
+                    try:
+                        with open(filepath, 'r', encoding='utf-8') as f:
+                            content = f.read()
+                            if query_lower in content.lower():
+                                # Find the section containing the query
+                                lines = content.split('\n')
+                                for i, line in enumerate(lines):
+                                    if query_lower in line.lower():
+                                        start = max(0, i-2)
+                                        end = min(len(lines), i+3)
+                                        excerpt = '\n'.join(lines[start:end])
+                                        results.append({
+                                            'file': file,
+                                            'excerpt': excerpt.strip(),
+                                            'path': filepath
+                                        })
+                                        break
+                    except Exception as e:
+                        continue
+        
+        if not results:
+            return f"No results found for '{query}' in TX Blockchain documentation."
+        
+        output = f"?? Found {len(results)} results for '{query}' in TX Blockchain docs:\n\n"
+        for i, result in enumerate(results[:5], 1):
+            output += f"{i}. **{result['file']}**\n"
+            output += f"   {result['excerpt']}\n\n"
+        
+        return output

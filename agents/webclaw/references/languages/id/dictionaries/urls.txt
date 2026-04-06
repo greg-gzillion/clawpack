@@ -1,0 +1,16 @@
+﻿# Dictionary Resources
+
+## Multi-Language Dictionaries
+https://www.wordreference.com/
+https://context.reverso.net/
+https://www.linguee.com/
+https://glosbe.com/
+
+## Translation APIs
+https://cloud.google.com/translate
+https://azure.microsoft.com/services/cognitive-services/translator/
+https://www.deepl.com/pro-api
+https://libretranslate.com/
+## Indonesian-Specific Dictionaries
+https://kbbi.kemdikbud.go.id/
+https://www.wordreference.com/id/
