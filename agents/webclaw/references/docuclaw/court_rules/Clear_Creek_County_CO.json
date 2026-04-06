@@ -1,0 +1,47 @@
+﻿{
+    "jurisdiction": "Clear Creek County, Colorado",
+    "court_name": "Clear Creek County Combined Court",
+    "address": "405 Argentine Street, Georgetown, CO 80444",
+    "phone": "(303) 679-2330",
+    "website": "https://www.courts.state.co.us/Courts/District/Index.cfm?DistrictID=5",
+    
+    "formatting_rules": {
+        "font": "Times New Roman, 12pt",
+        "margins": {
+            "top": 1.0,
+            "bottom": 1.0,
+            "left": 1.25,
+            "right": 1.0
+        },
+        "line_spacing": 2.0,
+        "page_limit": 20,
+        "color": "black only",
+        "paper": "8.5 x 11 inches",
+        "binding": "left side only"
+    },
+    
+    "header_requirements": {
+        "required": true,
+        "content": "Case number, party names, document title",
+        "position": "top center"
+    },
+    
+    "caption_format": "C.R.C.P. 10",
+    
+    "filing_requirements": {
+        "electronic": true,
+        "efile_system": "Colorado Judicial E-Filing System",
+        "efile_url": "https://www.courts.state.co.us/efiling",
+        "paper_copies": 2,
+        "deadline": "4:30 PM local time"
+    },
+    
+    "local_rules_citation": "Clear Creek County Local Rules",
+    "rules_url": "https://www.courts.state.co.us/Courts/District/District.cfm?DistrictID=5",
+    
+    "notes": [
+        "All filings must include a certificate of service",
+        "Proposed orders must be submitted as separate documents",
+        "Emergency filings require immediate notice to all parties"
+    ]
+}
