@@ -1,0 +1,21 @@
+﻿# Ochiltree County Family Court
+
+## Court Information
+- **County**: Ochiltree
+- **Court Name**: Ochiltree County Family Court
+- **Phone**: (806) 435-8000
+- **Address**: 511 S Main Street, Perryton, TX 79070
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Services
+- Divorce and Dissolution
+- Child Custody and Visitation
+- Child Support
+- Domestic Violence Protection Orders
+- Paternity
+- Adoption
+- Guardianships of minors
+
+---
+*Last updated: 2026-04-06*
+*Source: Texas Courts*

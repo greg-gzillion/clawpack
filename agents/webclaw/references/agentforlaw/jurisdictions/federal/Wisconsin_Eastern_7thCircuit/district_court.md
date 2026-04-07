@@ -1,32 +1,27 @@
-﻿# Federal District Court: Wisconsin Eastern
-## Circuit: 7th Circuit Court of Appeals
-## Location: Milwaukee
+﻿# United States District Court
+##   District
 
-### Official Information
-- **Court Website**: https://www.wisconsineasternd.uscourts.gov/
-- **PACER Access**: https://pacer.uscourts.gov/
-- **Court Location**: Milwaukee, [State]
+## Court Information
+- **Court Name**: United States District Court for the   District
+- **Circuit**:  Circuit
+- **Website**: https://www.d.uscourts.gov
+- **Phone**: (414) 297-3372
+- **Address**: 517 E Wisconsin Avenue, Milwaukee, WI 53202
+- **Hours**: Monday-Friday, 8:30 AM - 5:00 PM local time
 
-### Contact
-- **Clerk's Office**: [Check court website]
-- **Phone**: [Check court website]
-- **Hours**: [Check court website]
+## Jurisdiction
+- Federal question jurisdiction
+- Diversity jurisdiction (cases between citizens of different states)
+- Federal criminal cases
+- Bankruptcy cases (through separate bankruptcy court)
+- Admiralty and maritime cases
+- Civil rights cases
+- Habeas corpus petitions
 
-### Case Access
-- **CourtListener**: https://www.courtlistener.com/?court=Wisconsin Eastern_7thCircuit
-- **RECAP Archive**: https://www.courtlistener.com/recap/
-- **PACER (Free under \/quarter)**: https://pacer.uscourts.gov/
-
-### Judges
-- **District Judges**: [List on court website]
-- **Magistrate Judges**: [List on court website]
-- **Bankruptcy Judges**: [List on court website]
-
-### Practice Information
-- **Local Rules**: https://www.wisconsineasternd.uscourts.gov/local-rules
-- **Court Forms**: https://www.wisconsineasternd.uscourts.gov/forms
-- **CM/ECF Filing**: https://www.wisconsineasternd.uscourts.gov/cmecf
+## Related Courts
+- **Appeals To**:  Circuit Court of Appeals
+- **Supreme Court Appeals**: U.S. Supreme Court
 
 ---
-*Circuit: 7th Circuit*
-*Updated: 2026-04-06*
+*Last updated: 2026-04-06*
+*Source: United States Courts*

@@ -1,0 +1,21 @@
+﻿# Columbus County Family Court
+
+## Court Information
+- **County**: Columbus
+- **Court Name**: Columbus County Family Court
+- **Phone**: (910) 640-6600
+- **Address**: 612 N Lee Street, Whiteville, NC 28472
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM ET
+
+## Services
+- Divorce and Dissolution
+- Child Custody and Visitation
+- Child Support
+- Domestic Violence Protection Orders
+- Paternity
+- Adoption
+- Guardianships of minors
+
+---
+*Last updated: 2026-04-06*
+*Source: North Carolina Judicial Branch*

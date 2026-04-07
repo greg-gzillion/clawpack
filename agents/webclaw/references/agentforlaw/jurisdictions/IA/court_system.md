@@ -2,45 +2,60 @@
 
 ## State Overview
 - **Capital**: Des Moines
-- **Region**: Midwest
 - **Abbreviation**: IA
+- **Region**: United States
 
 ## Supreme Court
-- **Official Website**: https://www.iacourts.gov/
-- **Alternative**: https://www.courts.ia.gov/
-- **Phone**: [Check state website]
-- **Address**: [State Supreme Court, Des Moines, Iowa]
+- **Official Website**: https://www.iowacourts.gov/courts/supreme-court
+- **Main Court Website**: https://www.iowacourts.gov
+- **Phone**: (515) 348-4700
+- **Address**: 1111 E Court Avenue, Des Moines, IA 50319
+
+## Court Hours
+- Monday - Friday: 8:00 AM - 5:00 PM
+- Closed on state and federal holidays
 
 ## Appellate Courts
-- **Court of Appeals**: https://www.iacourts.gov/appeals
-- **Case Search**: https://www.courtlistener.com/?court=IA
+- **Court of Appeals**: https://www.iowacourts.gov/courts-of-appeal
+- **Case Search**: https://www.courtlistener.com/?court=ia
 
 ## Trial Courts
-- **District/Superior Courts**: https://www.iacourts.gov/trial
+- **District/Superior Courts**: https://www.iowacourts.gov/trial-courts
 - **Local Court Directory**: https://www.uscourts.gov/court-locator
 
 ## Free Case Law Access
-- **CourtListener**: https://www.courtlistener.com/?q=&court=IA
+- **CourtListener**: https://www.courtlistener.com/?q=&court=ia
 - **Google Scholar**: https://scholar.google.com/scholar?as_sdt=4,ia&q=
 - **Justia**: https://law.justia.com/ia/
 - **FindLaw**: https://caselaw.findlaw.com/court/IA-supreme-court
+- **RECAP (PACER Alternative)**: https://www.courtlistener.com/recap/
 
 ## Legal Aid & Resources
-- **State Bar Association**: https://www.iabar.org/
+- **State Bar Association**: https://www.iowabar.org
 - **Legal Aid**: https://www.lsc.gov/legal-aid
-- **Law Library**: https://www.ia.gov/law-library
+- **Law Library**: https://www.iowacourts.gov/library
+- **Self-Help Center**: https://www.iowacourts.gov/self-help
 
 ## Quick Links
-- **Court Forms**: https://www.iacourts.gov/forms
-- **Self-Help Center**: https://www.iacourts.gov/self-help
-- **Court Calendar**: https://www.iacourts.gov/calendar
-- **Opinions**: https://www.iacourts.gov/opinions
+- **Court Forms**: https://www.iowacourts.gov/forms
+- **Court Calendar**: https://www.iowacourts.gov/calendar
+- **Opinions**: https://www.iowacourts.gov/opinions
+- **Oral Arguments**: https://www.iowacourts.gov/oral-arguments
 
 ## Contact Information
-- **Main Court Number**: [Find at official website]
-- **Clerk of Court**: [Find at official website]
-- **Public Information**: [Find at official website]
+- **Clerk of Court**: clerk@iacourts.gov
+- **Public Information**: public@iacourts.gov
+- **Media Inquiries**: media@iacourts.gov
+
+## Filing Information
+- **Electronic Filing**: https://www.iacourts.gov/efiling
+- **Filing Fees**: https://www.iacourts.gov/fees
+- **Pro Se (Self-Represented)**: https://www.iacourts.gov/prose
+
+## Social Media
+- **Twitter**: @iaCourts
+- **LinkedIn**: Iowa Judicial Branch
 
 ---
 *Last updated: 2026-04-06*
-*Source: Official state court websites and federal judiciary resources*
+*Source: Official Iowa court system*

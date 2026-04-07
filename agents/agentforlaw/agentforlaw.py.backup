@@ -1,0 +1,382 @@
+﻿#!/usr/bin/env python3
+"""
+AGENTFORLAW - Open Court Access Agent
+Part of Clawpack Cross-Learning Ecosystem
+
+ARCHITECTURE:
+- ALL references come from Webclaw (central reference hub)
+- ALL documents go to DocuClaw for creation
+- ALL knowledge shared via shared memory
+- NO hardcoded data - everything is referenced
+"""
+
+import sys
+import os
+import sqlite3
+import re
+import urllib.parse
+import webbrowser
+from pathlib import Path
+from datetime import datetime
+
+# ============================================
+# CLAWPACK PATHS
+# ============================================
+AGENT_DIR = Path(__file__).parent
+ROOT_DIR = AGENT_DIR.parent.parent
+WEBCLAW_REFS = ROOT_DIR / "webclaw" / "references" / "agentforlaw"
+SHARED_DB = Path.home() / ".claw_memory" / "shared_memory.db"
+
+# ============================================
+# SHARED MEMORY - Cross-Learning
+# ============================================
+SHARED_DB.parent.mkdir(exist_ok=True)
+
+def init_shared_memory():
+    """Initialize shared memory tables for cross-agent learning"""
+    conn = sqlite3.connect(str(SHARED_DB))
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS agentforlaw_knowledge
+                 (id INTEGER PRIMARY KEY, query TEXT UNIQUE, 
+                  response TEXT, category TEXT, jurisdiction TEXT,
+                  timestamp TEXT, source_agent TEXT, usage_count INTEGER DEFAULT 1)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS case_searches
+                 (id INTEGER PRIMARY KEY, query TEXT, citation TEXT,
+                  court TEXT, date TEXT, timestamp TEXT)''')
+    conn.commit()
+    conn.close()
+
+def save_to_shared_memory(query, response, category="general", jurisdiction="federal"):
+    """Save knowledge so ALL agents can learn from it"""
+    try:
+        conn = sqlite3.connect(str(SHARED_DB))
+        c = conn.cursor()
+        c.execute('''INSERT OR REPLACE INTO agentforlaw_knowledge 
+                     (query, response, category, jurisdiction, timestamp, source_agent, usage_count) 
+                     VALUES (?,?,?,?,?,?,1)''',
+                  (query.lower(), response[:500], category, jurisdiction, 
+                   datetime.now().isoformat(), "agentforlaw"))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        return False
+
+# ============================================
+# WEBCLAW QUERY FUNCTIONS
+# ============================================
+
+def query_webclaw_reference(topic):
+    """Search Webclaw reference files for information"""
+    if not WEBCLAW_REFS.exists():
+        return None
+    
+    topic_lower = topic.lower()
+    results = []
+    
+    # Search all category folders
+    for category_dir in WEBCLAW_REFS.iterdir():
+        if category_dir.is_dir():
+            for md_file in category_dir.glob("*.md"):
+                try:
+                    content = md_file.read_text(encoding='utf-8')
+                    if topic_lower in content.lower():
+                        # Extract relevant section
+                        results.append({
+                            "category": category_dir.name,
+                            "file": md_file.name,
+                            "content": content[:1000]  # First 1000 chars
+                        })
+                except:
+                    pass
+    
+    return results[:3]  # Return top 3 matches
+
+def get_court_info(jurisdiction):
+    """Get court information from Webclaw jurisdictions folder"""
+    juris_path = WEBCLAW_REFS / "jurisdictions" / jurisdiction.upper()
+    
+    if juris_path.exists():
+        court_file = juris_path / "court_system.md"
+        if court_file.exists():
+            return court_file.read_text(encoding='utf-8')
+    
+    # Try partial match
+    for state_dir in (WEBCLAW_REFS / "jurisdictions").iterdir():
+        if state_dir.is_dir() and jurisdiction.lower() in state_dir.name.lower():
+            court_file = state_dir / "court_system.md"
+            if court_file.exists():
+                return court_file.read_text(encoding='utf-8')
+    
+    return None
+
+def get_federal_court_info(circuit=None, district=None):
+    """Get federal court information from Webclaw"""
+    federal_path = WEBCLAW_REFS / "jurisdictions" / "federal"
+    
+    if not federal_path.exists():
+        return None
+    
+    if circuit:
+        # Search by circuit
+        for district_dir in federal_path.iterdir():
+            if district_dir.is_dir() and circuit.lower() in district_dir.name.lower():
+                court_file = district_dir / "district_court.md"
+                if court_file.exists():
+                    return court_file.read_text(encoding='utf-8')
+    
+    if district:
+        for district_dir in federal_path.iterdir():
+            if district_dir.is_dir() and district.lower() in district_dir.name.lower():
+                court_file = district_dir / "district_court.md"
+                if court_file.exists():
+                    return court_file.read_text(encoding='utf-8')
+    
+    return None
+
+# ============================================
+# SEARCH FUNCTIONS (Free Access, No Paywalls)
+# ============================================
+
+FREE_SEARCH_ENGINES = {
+    "courtlistener": "https://www.courtlistener.com/?q={query}",
+    "google_scholar": "https://scholar.google.com/scholar?as_sdt=4,60&q={query}",
+    "justia": "https://law.justia.com/search?q={query}",
+    "findlaw": "https://caselaw.findlaw.com/search?q={query}",
+    "openjurist": "https://openjurist.org/search?q={query}",
+    "recap": "https://www.courtlistener.com/recap/?q={query}",
+}
+
+CITATION_PATTERNS = {
+    "supreme_court": r'(\d+)\s+U\.?S\.?\s+(\d+)',
+    "federal_reporter": r'(\d+)\s+F\.\s*(\d+)[a-z]?\s+(\d+)',
+    "federal_supplement": r'(\d+)\s+F\.\s*Supp\.\s*(\d+)[a-z]?\s+(\d+)',
+    "california": r'(\d+)\s+Cal\.\s*(\d+)[a-z]?\s+(\d+)',
+    "new_york": r'(\d+)\s+N\.?Y\.?\s*(\d+)[a-z]?\s+(\d+)',
+}
+
+def search_case_law(query):
+    """Open free case law searches in browser"""
+    encoded = urllib.parse.quote(query)
+    results = {}
+    for name, url_template in FREE_SEARCH_ENGINES.items():
+        results[name] = url_template.format(query=encoded)
+    return results
+
+def parse_citation(text):
+    """Parse legal citation from text"""
+    matches = []
+    for cite_type, pattern in CITATION_PATTERNS.items():
+        found = re.findall(pattern, text)
+        for match in found:
+            matches.append({"type": cite_type, "citation": text, "components": match})
+    return matches
+
+# ============================================
+# DOCUCLAW INTEGRATION
+# ============================================
+
+DOCUCLAW_PATH = ROOT_DIR / "agents" / "docuclaw" / "docuclaw.py"
+
+def send_to_docuclaw(document_type, content, format="pdf"):
+    """Send document creation request to DocuClaw"""
+    if DOCUCLAW_PATH.exists():
+        # This would call DocuClaw's API or function
+        return f"📄 Document request sent to DocuClaw: {document_type}"
+    return "⚠️ DocuClaw agent not found. Install docuclaw agent for document creation."
+
+# ============================================
+# MAIN AGENT CLASS
+# ============================================
+
+class AgentForLaw:
+    """Open access to US court systems and public records via Webclaw"""
+    
+    def __init__(self):
+        self.name = "agentforlaw"
+        init_shared_memory()
+        self.print_welcome()
+    
+    def print_welcome(self):
+        print("\n" + "="*70)
+        print("⚖️ AGENTFORLAW - Open Court Access")
+        print("="*70)
+        print("🔓 FREE ACCESS TO:")
+        print("  • All US court systems (via Webclaw references)")
+        print("  • 50 State Courts + Federal Courts")
+        print("  • Case law search (no paywalls)")
+        print("  • Legal citations and forms")
+        print("="*70)
+        print("\n📚 COMMANDS:")
+        print("  /search [case/citation] - Search case law (opens free databases)")
+        print("  /cite [citation]        - Parse legal citation")
+        print("  /court [state/circuit]  - Get court information (from Webclaw)")
+        print("  /federal [circuit]      - Get federal court information")
+        print("  /doc [type] [content]   - Create legal document (via DocuClaw)")
+        print("  /ref [topic]            - Search Webclaw references")
+        print("  /stats                  - Show shared memory stats")
+        print("  /help, /quit")
+        print("="*70)
+        print("💡 All references come from Webclaw - the central hub")
+        print("🔗 All knowledge shared with other Clawpack agents")
+        print("="*70)
+    
+    def handle_search(self, query):
+        """Handle case law search"""
+        print(f"\n🔍 Searching for: {query}")
+        print("-" * 50)
+        
+        # First, check Webclaw references
+        refs = query_webclaw_reference(query)
+        if refs:
+            print("📚 Found in Webclaw references:")
+            for ref in refs:
+                print(f"  • {ref['category']}/{ref['file']}")
+        
+        # Open free search engines
+        searches = search_case_law(query)
+        print("\n🔓 Opening free case law databases (no paywalls):")
+        for name, url in searches.items():
+            print(f"  • {name}: {url}")
+            webbrowser.open(url)
+        
+        # Save to shared memory
+        save_to_shared_memory(query, f"Searched: {query}", "search")
+        print(f"\n💡 Search saved to shared memory - all agents can learn from this")
+    
+    def handle_court(self, jurisdiction):
+        """Get court information from Webclaw"""
+        print(f"\n🏛️ Looking up court information for: {jurisdiction}")
+        print("-" * 50)
+        
+        info = get_court_info(jurisdiction)
+        if info:
+            print(info[:1500])
+            save_to_shared_memory(f"court_{jurisdiction}", info[:500], "court_info", jurisdiction)
+        else:
+            # Try federal
+            federal_info = get_federal_court_info(jurisdiction)
+            if federal_info:
+                print(federal_info[:1500])
+            else:
+                print(f"❌ No court information found for: {jurisdiction}")
+                print("Try: /court CA, /court NY, /court TX, or /federal 9th")
+    
+    def handle_federal(self, circuit):
+        """Get federal court information"""
+        print(f"\n🏛️ Looking up federal court information for Circuit: {circuit}")
+        print("-" * 50)
+        
+        info = get_federal_court_info(circuit)
+        if info:
+            print(info[:1500])
+            save_to_shared_memory(f"federal_{circuit}", info[:500], "federal_court", circuit)
+        else:
+            print(f"❌ No federal court information found for: {circuit}")
+            print("Try: /federal 9th, /federal 2nd, /federal CA")
+    
+    def handle_cite(self, citation_text):
+        """Parse legal citation"""
+        print(f"\n📖 Parsing citation: {citation_text}")
+        print("-" * 50)
+        
+        matches = parse_citation(citation_text)
+        if matches:
+            for match in matches:
+                print(f"  Type: {match['type']}")
+                print(f"  Citation: {match['citation']}")
+                print(f"  Components: {match['components']}")
+                
+                # Offer to search
+                search_url = f"https://www.courtlistener.com/?q={urllib.parse.quote(citation_text)}"
+                print(f"  Search: {search_url}")
+        else:
+            print("No standard citation format detected. Try /search instead.")
+    
+    def handle_ref(self, topic):
+        """Search Webclaw references"""
+        print(f"\n📚 Searching Webclaw references for: {topic}")
+        print("-" * 50)
+        
+        results = query_webclaw_reference(topic)
+        if results:
+            for r in results:
+                print(f"\n📁 Category: {r['category']}")
+                print(f"📄 File: {r['file']}")
+                print(f"📝 Preview: {r['content'][:300]}...")
+        else:
+            print(f"No references found for: {topic}")
+            print(f"Check Webclaw at: {WEBCLAW_REFS}")
+    
+    def handle_doc(self, doc_type, content):
+        """Send document creation request to DocuClaw"""
+        print(f"\n📄 Creating document: {doc_type}")
+        print("-" * 50)
+        result = send_to_docuclaw(doc_type, content)
+        print(result)
+    
+    def show_stats(self):
+        """Show shared memory statistics"""
+        conn = sqlite3.connect(str(SHARED_DB))
+        c = conn.cursor()
+        
+        try:
+            c.execute('SELECT COUNT(*) FROM agentforlaw_knowledge')
+            count = c.fetchone()[0]
+            print(f"\n📊 Shared memory entries: {count}")
+            
+            print("\n📚 Recent knowledge:")
+            c.execute('SELECT query, category, timestamp FROM agentforlaw_knowledge ORDER BY id DESC LIMIT 5')
+            for row in c.fetchall():
+                print(f"  • {row[0][:40]}... ({row[1]}) - {row[2][:16]}")
+        except:
+            print("No knowledge in shared memory yet")
+        
+        conn.close()
+    
+    def run(self):
+        """Main command loop"""
+        self.print_welcome()
+        
+        while True:
+            try:
+                cmd = input("\n⚖️ AgentForLaw> ").strip()
+                if not cmd:
+                    continue
+                
+                if cmd == "/quit":
+                    print("Goodbye! Justice should be free for all.")
+                    break
+                elif cmd == "/help":
+                    self.print_welcome()
+                elif cmd == "/stats":
+                    self.show_stats()
+                elif cmd.startswith("/search "):
+                    self.handle_search(cmd[8:])
+                elif cmd.startswith("/court "):
+                    self.handle_court(cmd[7:])
+                elif cmd.startswith("/federal "):
+                    self.handle_federal(cmd[9:])
+                elif cmd.startswith("/cite "):
+                    self.handle_cite(cmd[6:])
+                elif cmd.startswith("/ref "):
+                    self.handle_ref(cmd[5:])
+                elif cmd.startswith("/doc "):
+                    parts = cmd[5:].split(" ", 1)
+                    if len(parts) == 2:
+                        self.handle_doc(parts[0], parts[1])
+                    else:
+                        print("Usage: /doc [type] [content]")
+                else:
+                    # Treat as natural language search
+                    self.handle_search(cmd)
+                    
+            except KeyboardInterrupt:
+                print("\nGoodbye!")
+                break
+            except Exception as e:
+                print(f"Error: {e}")
+
+if __name__ == "__main__":
+    agent = AgentForLaw()
+    agent.run()

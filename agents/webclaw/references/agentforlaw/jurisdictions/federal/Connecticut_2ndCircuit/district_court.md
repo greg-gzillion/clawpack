@@ -1,32 +1,27 @@
-﻿# Federal District Court: Connecticut
-## Circuit: 2nd Circuit Court of Appeals
-## Location: New Haven
+﻿# United States District Court
+## Connecticut District District
 
-### Official Information
-- **Court Website**: https://www.connecticutd.uscourts.gov/
-- **PACER Access**: https://pacer.uscourts.gov/
-- **Court Location**: New Haven, [State]
+## Court Information
+- **Court Name**: United States District Court for the Connecticut District District
+- **Circuit**: Unknown Circuit
+- **Website**: https://www.connecticutd.uscourts.gov
+- **Phone**: (203) 773-2140
+- **Address**: 141 Church Street, New Haven, CT 06510
+- **Hours**: Monday-Friday, 8:30 AM - 5:00 PM local time
 
-### Contact
-- **Clerk's Office**: [Check court website]
-- **Phone**: [Check court website]
-- **Hours**: [Check court website]
+## Jurisdiction
+- Federal question jurisdiction
+- Diversity jurisdiction (cases between citizens of different states)
+- Federal criminal cases
+- Bankruptcy cases (through separate bankruptcy court)
+- Admiralty and maritime cases
+- Civil rights cases
+- Habeas corpus petitions
 
-### Case Access
-- **CourtListener**: https://www.courtlistener.com/?court=Connecticut_2ndCircuit
-- **RECAP Archive**: https://www.courtlistener.com/recap/
-- **PACER (Free under \/quarter)**: https://pacer.uscourts.gov/
-
-### Judges
-- **District Judges**: [List on court website]
-- **Magistrate Judges**: [List on court website]
-- **Bankruptcy Judges**: [List on court website]
-
-### Practice Information
-- **Local Rules**: https://www.connecticutd.uscourts.gov/local-rules
-- **Court Forms**: https://www.connecticutd.uscourts.gov/forms
-- **CM/ECF Filing**: https://www.connecticutd.uscourts.gov/cmecf
+## Related Courts
+- **Appeals To**: Unknown Circuit Court of Appeals
+- **Supreme Court Appeals**: U.S. Supreme Court
 
 ---
-*Circuit: 2nd Circuit*
-*Updated: 2026-04-06*
+*Last updated: 2026-04-06*
+*Source: United States Courts*

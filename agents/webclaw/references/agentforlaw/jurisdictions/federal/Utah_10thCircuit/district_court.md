@@ -1,32 +1,27 @@
-﻿# Federal District Court: Utah
-## Circuit: 10th Circuit Court of Appeals
-## Location: Salt Lake City
+﻿# United States District Court
+## Utah District District
 
-### Official Information
-- **Court Website**: https://www.utahd.uscourts.gov/
-- **PACER Access**: https://pacer.uscourts.gov/
-- **Court Location**: Salt Lake City, [State]
+## Court Information
+- **Court Name**: United States District Court for the Utah District District
+- **Circuit**: Unknown Circuit
+- **Website**: https://www.utahd.uscourts.gov
+- **Phone**: (801) 524-6100
+- **Address**: 351 S West Temple, Salt Lake City, UT 84101
+- **Hours**: Monday-Friday, 8:30 AM - 5:00 PM local time
 
-### Contact
-- **Clerk's Office**: [Check court website]
-- **Phone**: [Check court website]
-- **Hours**: [Check court website]
+## Jurisdiction
+- Federal question jurisdiction
+- Diversity jurisdiction (cases between citizens of different states)
+- Federal criminal cases
+- Bankruptcy cases (through separate bankruptcy court)
+- Admiralty and maritime cases
+- Civil rights cases
+- Habeas corpus petitions
 
-### Case Access
-- **CourtListener**: https://www.courtlistener.com/?court=Utah_10thCircuit
-- **RECAP Archive**: https://www.courtlistener.com/recap/
-- **PACER (Free under \/quarter)**: https://pacer.uscourts.gov/
-
-### Judges
-- **District Judges**: [List on court website]
-- **Magistrate Judges**: [List on court website]
-- **Bankruptcy Judges**: [List on court website]
-
-### Practice Information
-- **Local Rules**: https://www.utahd.uscourts.gov/local-rules
-- **Court Forms**: https://www.utahd.uscourts.gov/forms
-- **CM/ECF Filing**: https://www.utahd.uscourts.gov/cmecf
+## Related Courts
+- **Appeals To**: Unknown Circuit Court of Appeals
+- **Supreme Court Appeals**: U.S. Supreme Court
 
 ---
-*Circuit: 10th Circuit*
-*Updated: 2026-04-06*
+*Last updated: 2026-04-06*
+*Source: United States Courts*

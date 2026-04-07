@@ -1,32 +1,27 @@
-﻿# Federal District Court: Louisiana Middle
-## Circuit: 5th Circuit Court of Appeals
-## Location: Baton Rouge
+﻿# United States District Court
+##   District
 
-### Official Information
-- **Court Website**: https://www.louisianamiddled.uscourts.gov/
-- **PACER Access**: https://pacer.uscourts.gov/
-- **Court Location**: Baton Rouge, [State]
+## Court Information
+- **Court Name**: United States District Court for the   District
+- **Circuit**:  Circuit
+- **Website**: https://www.d.uscourts.gov
+- **Phone**: (225) 389-3600
+- **Address**: 777 Florida Street, Baton Rouge, LA 70801
+- **Hours**: Monday-Friday, 8:30 AM - 5:00 PM local time
 
-### Contact
-- **Clerk's Office**: [Check court website]
-- **Phone**: [Check court website]
-- **Hours**: [Check court website]
+## Jurisdiction
+- Federal question jurisdiction
+- Diversity jurisdiction (cases between citizens of different states)
+- Federal criminal cases
+- Bankruptcy cases (through separate bankruptcy court)
+- Admiralty and maritime cases
+- Civil rights cases
+- Habeas corpus petitions
 
-### Case Access
-- **CourtListener**: https://www.courtlistener.com/?court=Louisiana Middle_5thCircuit
-- **RECAP Archive**: https://www.courtlistener.com/recap/
-- **PACER (Free under \/quarter)**: https://pacer.uscourts.gov/
-
-### Judges
-- **District Judges**: [List on court website]
-- **Magistrate Judges**: [List on court website]
-- **Bankruptcy Judges**: [List on court website]
-
-### Practice Information
-- **Local Rules**: https://www.louisianamiddled.uscourts.gov/local-rules
-- **Court Forms**: https://www.louisianamiddled.uscourts.gov/forms
-- **CM/ECF Filing**: https://www.louisianamiddled.uscourts.gov/cmecf
+## Related Courts
+- **Appeals To**:  Circuit Court of Appeals
+- **Supreme Court Appeals**: U.S. Supreme Court
 
 ---
-*Circuit: 5th Circuit*
-*Updated: 2026-04-06*
+*Last updated: 2026-04-06*
+*Source: United States Courts*
