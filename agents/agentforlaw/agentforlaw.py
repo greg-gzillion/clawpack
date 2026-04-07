@@ -2,18 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 AGENTFORLAW - Complete Legal Research System
-With OpenRouter API, Legal Resources, and Cross-Agent Search
 """
 
 import sys
-import sqlite3
 import urllib.parse
 import urllib.request
-import webbrowser
 import os
 import json
 from pathlib import Path
-from datetime import datetime
 
 # ============================================
 # PATHS
@@ -38,14 +34,15 @@ class AgentForLaw:
     
     def print_welcome(self):
         print("\n" + "="*70)
-        print("⚖️ AGENTFORLAW - COMPLETE LEGAL RESEARCH")
+        print("AGENTFORLAW - COMPLETE LEGAL RESEARCH")
         print("="*70)
         print("\nCOMMANDS:")
         print("  /stats")
         print("  /llm [question]")
         print("  /search [query]")
         print("  /court [state]")
-        print("  /browse [jurisdiction]")
+        print("  /court [state]/[county]")
+        print("  /browse [state]")
         print("  /list")
         print("  /help, /quit")
         print("="*70)
@@ -54,11 +51,10 @@ class AgentForLaw:
         self.print_welcome()
         while True:
             try:
-                cmd = input("\n⚖️ AgentForLaw> ").strip()
+                cmd = input("\nAgentForLaw> ").strip()
                 if not cmd:
                     continue
                 
-                # Parse command and arguments
                 parts = cmd.split(' ', 1)
                 command = parts[0].lower()
                 args = parts[1] if len(parts) > 1 else ""
@@ -76,10 +72,10 @@ class AgentForLaw:
                     self.handle_llm(args)
                 elif command == "/search":
                     self.handle_search(args)
+                elif command == "/browse":
+                    self.handle_browse(args)
                 elif command == "/court":
                     self.handle_court(args)
-                elif command == "/browse":
-                    self.browse_jurisdiction(args)
                 else:
                     print(f"Unknown command: {command}")
                     print("Type /help for available commands")
@@ -92,101 +88,80 @@ class AgentForLaw:
     
     def show_stats(self):
         print("\n" + "="*50)
-        print("📊 SYSTEM STATISTICS")
+        print("SYSTEM STATISTICS")
         print("="*50)
         api_key = os.environ.get('OPENROUTER_API_KEY')
         if api_key:
-            print(f"✅ OpenRouter API: Configured")
+            print("OpenRouter API: Configured")
         else:
-            print("❌ OpenRouter API: Not configured")
-        print(f"📁 Legal Resources: {LEGAL_REFS}")
-        print(f"💾 Shared Memory: {SHARED_DB}")
+            print("OpenRouter API: Not configured")
+        print(f"Legal Resources: {LEGAL_REFS}")
+        print(f"Shared Memory: {SHARED_DB}")
         
-        # Count available jurisdictions
         juris_path = LEGAL_REFS / "jurisdictions"
         if juris_path.exists():
             states = [d.name for d in juris_path.iterdir() if d.is_dir()]
-            print(f"🗺️ Jurisdictions Available: {len(states)} states")
+            print(f"Jurisdictions Available: {len(states)} states")
         print("="*50)
     
     def list_jurisdictions(self):
-        """List all available jurisdictions"""
         print("\n" + "="*50)
-        print("🗺️ AVAILABLE JURISDICTIONS")
+        print("AVAILABLE JURISDICTIONS")
         print("="*50)
         
         juris_path = LEGAL_REFS / "jurisdictions"
         if juris_path.exists():
             states = sorted([d.name for d in juris_path.iterdir() if d.is_dir()])
             print(f"\nFound {len(states)} states:\n")
-            # Display in columns
             for i, state in enumerate(states, 1):
                 print(f"  {state}", end="  ")
                 if i % 8 == 0:
                     print()
-            print(f"\n\n💡 Use /browse {states[0]} to explore a state")
+            print(f"\n\nUse /browse STATE to explore a state")
         else:
             print("No jurisdictions found")
     
-    def browse_jurisdiction(self, state):
-        """Browse a specific jurisdiction's court files"""
+    def handle_browse(self, state):
         if not state:
-            print("❌ Please provide a state code (e.g., TX, CA, NY)")
+            print("Please provide a state code (e.g., TX, CA, NY)")
             return
         
         state = state.strip().upper()
         state_path = LEGAL_REFS / "jurisdictions" / state
         
         if not state_path.exists():
-            print(f"❌ State '{state}' not found")
-            print("\nAvailable states:")
-            juris_path = LEGAL_REFS / "jurisdictions"
-            if juris_path.exists():
-                states = [d.name for d in juris_path.iterdir() if d.is_dir()][:20]
-                print(f"  {', '.join(states)}...")
+            print(f"State '{state}' not found")
             return
         
-        print(f"\n📁 Exploring {state} Court System")
+        print(f"\nExploring {state} Court System")
         print("="*50)
         
-        # Find all county directories
         counties = [d for d in state_path.iterdir() if d.is_dir()]
         
         if counties:
-            print(f"\n🏛️ COUNTIES ({len(counties)} total):\n")
+            print(f"\nCOUNTIES ({len(counties)} total):\n")
             for county in sorted(counties)[:30]:
-                # Count court files in this county
                 court_files = list(county.rglob("*.md"))
-                print(f"  • {county.name}: {len(court_files)} court files")
+                print(f"  {county.name}: {len(court_files)} court files")
             
             if len(counties) > 30:
                 print(f"\n  ... and {len(counties) - 30} more counties")
             
-            print(f"\n💡 To view a specific county: /browse {state}/DALLAS")
-        else:
-            # Look for direct court files
-            court_files = list(state_path.rglob("*.md"))
-            if court_files:
-                print(f"\n📄 Court Documents ({len(court_files)} files):\n")
-                for cf in court_files[:20]:
-                    rel_path = cf.relative_to(state_path)
-                    print(f"  • {rel_path}")
+            print(f"\nTo view a specific county: /court {state}/COUNTYNAME")
     
     def handle_llm(self, question):
-        """Handle LLM queries using OpenRouter"""
         if not question:
-            print("❌ Please provide a question")
-            print("Example: /llm What is tort law?")
+            print("Please provide a question")
             return
         
         api_key = os.environ.get('OPENROUTER_API_KEY')
         if not api_key:
-            print("\n❌ OPENROUTER_API_KEY not configured")
+            print("\nOPENROUTER_API_KEY not configured")
             return
         
-        print(f"\n🤖 QUESTION: {question}")
+        print(f"\nQUESTION: {question}")
         print("="*60)
-        print("📡 Contacting OpenRouter API...")
+        print("Contacting OpenRouter API...")
         
         data = {
             "model": "openai/gpt-3.5-turbo",
@@ -213,66 +188,64 @@ class AgentForLaw:
                 result = json.loads(response.read().decode('utf-8'))
                 answer = result['choices'][0]['message']['content']
                 print("\n" + "="*60)
-                print("🤖 RESPONSE:")
+                print("RESPONSE:")
                 print("="*60)
                 print(answer)
                 print("="*60)
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
     
     def handle_search(self, query):
-        """Search legal resources including jurisdictions"""
+        """Search legal resources and display ALL content - NO TRUNCATION"""
         if not query:
-            print("❌ Please provide a search query")
+            print("Please provide a search query")
             return
         
-        print(f"\n🔍 SEARCHING: {query}")
-        print("-"*50)
+        print(f"\nSEARCHING: {query}")
+        print("-"*70)
         
         results = []
         
-        # Search in all legal resources
         if LEGAL_REFS.exists():
             for area in LEGAL_REFS.iterdir():
                 if area.is_dir():
                     for md_file in area.rglob("*.md"):
                         try:
-                            # Read first 10KB for performance
-                            content = md_file.read_text(encoding='utf-8', errors='ignore')[:10000]
+                            content = md_file.read_text(encoding='utf-8', errors='ignore')
                             if query.lower() in content.lower():
-                                rel_path = md_file.relative_to(LEGAL_REFS)
-                                results.append(rel_path)
-                                if len(results) >= 10:
+                                results.append(md_file)
+                                if len(results) >= 3:
                                     break
                         except:
                             pass
-                if len(results) >= 10:
+                if len(results) >= 3:
                     break
         
         if results:
-            print(f"\n✅ Found {len(results)} results:\n")
+            print(f"\nFound {len(results)} results:\n")
             for r in results:
-                # Highlight the area
-                area = str(r).split('\\')[0] if '\\' in str(r) else "general"
-                print(f"  📁 {area}")
-                print(f"     📄 {r.name}")
-                print()
+                rel_path = r.relative_to(LEGAL_REFS)
+                area = rel_path.parts[0] if len(rel_path.parts) > 0 else "unknown"
+                print(f"\n{'='*70}")
+                print(f"AREA: {area.upper()}")
+                print(f"FILE: {r.name}")
+                print('='*70)
+                
+                # Read and display EVERYTHING - NO CUTTING, NO TRUNCATION
+                full_content = r.read_text(encoding='utf-8', errors='ignore')
+                sys.stdout.write(full_content)
+                sys.stdout.write("\n")
         else:
-            print("\n❌ No results found")
-            print("\n💡 Tips:")
-            print("   • Use /list to see available jurisdictions")
-            print("   • Use /browse to explore specific states")
-            print("   • Use /llm for AI-powered answers")
+            print("\nNo results found")
+            print("\nTips: Use /list to see available jurisdictions")
     
     def handle_court(self, location):
-        """Get court information for a state or county"""
         if not location:
-            print("❌ Please provide a state (e.g., TX) or state/county (e.g., TX/DALLAS)")
+            print("Please provide a state (e.g., TX) or state/county (e.g., TX/DALLAS)")
             return
         
         location = location.strip().upper()
         
-        # Check if it's state/county format
         if '/' in location:
             state, county = location.split('/', 1)
             self.show_county_courts(state, county)
@@ -280,66 +253,51 @@ class AgentForLaw:
             self.show_state_courts(location)
     
     def show_state_courts(self, state):
-        """Show courts for a state"""
         state_path = LEGAL_REFS / "jurisdictions" / state
         
         if not state_path.exists():
-            print(f"\n❌ No data found for {state}")
-            print("\n💡 Available states:")
-            juris_path = LEGAL_REFS / "jurisdictions"
-            if juris_path.exists():
-                states = [d.name for d in juris_path.iterdir() if d.is_dir()][:15]
-                print(f"   {', '.join(states)}")
+            print(f"\nNo data found for {state}")
             return
         
-        print(f"\n🏛️ {state} COURT SYSTEM")
+        print(f"\n{state} COURT SYSTEM")
         print("="*50)
         
-        # Look for state-level court files
-        state_files = list(state_path.rglob("*.md"))
-        
-        if state_files:
-            print("\n📄 State Court Documents:\n")
-            for sf in state_files[:10]:
-                if 'state' in str(sf).lower():
-                    content = sf.read_text(encoding='utf-8', errors='ignore')[:500]
-                    lines = content.split('\n')
-                    title = lines[0].replace('#', '').strip() if lines else sf.stem
-                    print(f"  • {title}")
-        
-        # Count counties
         counties = [d for d in state_path.iterdir() if d.is_dir()]
         if counties:
-            print(f"\n🗺️ Counties with court data: {len(counties)}")
-            print(f"\n💡 To view a specific county: /court {state}/DALLAS")
+            print(f"\nCounties with court data: {len(counties)}")
+            print(f"\nTo view a specific county: /court {state}/COUNTYNAME")
     
     def show_county_courts(self, state, county):
-        """Show courts for a specific county"""
         county_path = LEGAL_REFS / "jurisdictions" / state / county
         
         if not county_path.exists():
-            print(f"\n❌ No data found for {county} County, {state}")
-            return
+            state_path = LEGAL_REFS / "jurisdictions" / state
+            if state_path.exists():
+                for d in state_path.iterdir():
+                    if d.is_dir() and d.name.upper() == county.upper():
+                        county_path = d
+                        break
+            
+            if not county_path or not county_path.exists():
+                print(f"\nNo data found for {county} County, {state}")
+                return
         
-        print(f"\n🏛️ {county} COUNTY, {state}")
+        print(f"\n{county_path.name.upper()} COUNTY, {state}")
         print("="*50)
         
         court_files = list(county_path.glob("*.md"))
         
         if court_files:
-            print(f"\n📄 Court Information ({len(court_files)} files):\n")
+            print(f"\nCourt Information ({len(court_files)} files):\n")
             for cf in court_files:
                 content = cf.read_text(encoding='utf-8', errors='ignore')
-                # Get title from first line
                 lines = content.split('\n')
                 title = lines[0].replace('#', '').strip() if lines else cf.stem
                 print(f"\n{'='*40}")
-                print(f"📋 {title}")
+                print(f"{title}")
                 print('='*40)
-                # Show first 800 characters
-                print(content[:800])
-                if len(content) > 800:
-                    print("\n... (truncated)")
+                sys.stdout.write(content)
+                sys.stdout.write("\n")
         else:
             print("No court files found for this county")
 
