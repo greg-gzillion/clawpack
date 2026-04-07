@@ -21,6 +21,7 @@ STRUCTURE:
 """
 
 import sys
+import sqlite3
 import os
 import json
 import shutil

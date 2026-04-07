@@ -1,0 +1,67 @@
+﻿#!/usr/bin/env python3
+"""
+UNIFIED CONTROLLER - Smart Router
+"""
+
+import sys
+import sqlite3
+from pathlib import Path
+from datetime import datetime
+
+SHARED_DB = Path.home() / ".claw_memory" / "shared_memory.db"
+SHARED_DB.parent.mkdir(exist_ok=True)
+
+class UnifiedController:
+    def __init__(self):
+        self.name = "unified"
+        self.init_shared_memory()
+        self.print_welcome()
+    
+    def init_shared_memory(self):
+        try:
+            conn = sqlite3.connect(str(SHARED_DB))
+            c = conn.cursor()
+            tables = ['medical_knowledge', 'translations', 'math_knowledge', 'language_vocab']
+            for table in tables:
+                c.execute(f'''CREATE TABLE IF NOT EXISTS {table}
+                             (id INTEGER PRIMARY KEY, query TEXT UNIQUE,
+                              response TEXT, timestamp TEXT, source_agent TEXT)''')
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print(f"Init error: {e}")
+    
+    def print_welcome(self):
+        print("\n" + "="*60)
+        print("🧠 UNIFIED CONTROLLER - Smart Router")
+        print("="*60)
+        print("Commands: /help, /stats, /knowledge")
+        print("Running. Press Ctrl+C to stop.\n")
+    
+    def run(self):
+        try:
+            while True:
+                cmd = input("\n🧠 Unified> ").strip()
+                if cmd == "/quit":
+                    break
+                elif cmd == "/stats":
+                    conn = sqlite3.connect(str(SHARED_DB))
+                    c = conn.cursor()
+                    for table in ['medical_knowledge', 'translations', 'math_knowledge']:
+                        try:
+                            c.execute(f"SELECT COUNT(*) FROM {table}")
+                            count = c.fetchone()[0]
+                            print(f"  {table}: {count} entries")
+                        except:
+                            pass
+                    conn.close()
+                elif cmd == "/help":
+                    print("Commands: /stats, /knowledge, /quit")
+                else:
+                    print(f"Unknown: {cmd}")
+        except KeyboardInterrupt:
+            print("\nShutting down...")
+
+if __name__ == "__main__":
+    agent = UnifiedController()
+    agent.run()

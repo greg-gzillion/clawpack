@@ -1,0 +1,398 @@
+# 🦞 CLAWpack - Cross-Learning Agent Workspace
+## A Tethered Multi-Agent Legal Research & Knowledge System
+
+---
+
+## 📋 Overview
+
+CLAWpack is a **tethered multi-agent system** where 19 specialized AI agents share knowledge through a common SQLite database. Each agent has a specific domain expertise, but they all learn from each other through **shared memory**.
+
+### Core Philosophy
+- **No silos** - Every agent can learn from every other agent
+- **Shared memory** - A central database where all knowledge lives
+- **Cross-agent search** - Query all agents' knowledge from any agent
+- **Free & open** - No paywalls, all data is local
+
+---
+
+## 🏗️ System Architecture
+┌─────────────────────────────────────────────────────────────────────┐
+│ SHARED MEMORY LAYER │
+│ ~/.claw_memory/shared_memory.db │
+│ │
+│ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ │
+│ │agentfor- │ │ medical_ │ │ math_ │ │ trans- │ │ unified_ │ │
+│ │ law_know │ │knowledge │ │knowledge │ │ lations │ │knowledge │ │
+│ │ ledge │ │ │ │ │ │ │ │ │ │
+│ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘ │
+│ │
+└─────────────────────────────────────────────────────────────────────┘
+↕
+┌─────────────────────────────────────────────────────────────────────┐
+│ AGENT LAYER │
+│ │
+│ ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐ │
+│ │ AgentForLaw│ │ MedicLaw │ │PolyClaw │ │Mathematica-│ │
+│ │ (Legal) │ │ (Medical) │ │(Translate) │ │ Claw │ │
+│ └────────────┘ └────────────┘ └────────────┘ └────────────┘ │
+│ │
+│ ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐ │
+│ │ DocuClaw │ │ Webclaw │ │ Unified │ │ +11 more │ │
+│ │ (Docs) │ │ (Web Ref) │ │ (Brain) │ │ Agents │ │
+│ └────────────┘ └────────────┘ └────────────┘ └────────────┘ │
+│ │
+└─────────────────────────────────────────────────────────────────────┘
+↕
+┌─────────────────────────────────────────────────────────────────────┐
+│ DATA LAYER │
+│ │
+│ 📁 50 US States with county-level court data │
+│ 📁 254 Texas counties × 5 court files = 1,270+ files │
+│ 📁 Federal courts by circuit │
+│ 📁 60+ legal reference categories │
+│ │
+└─────────────────────────────────────────────────────────────────────┘
+
+text
+
+---
+
+## 🤖 The Agents
+
+### Core Agents (Fully Operational)
+
+| Agent | Domain | Knowledge Count | Key Commands |
+|-------|--------|-----------------|--------------|
+| **AgentForLaw** | Legal/Court | 36 entries | `/court`, `/cross`, `/federal` |
+| **MedicLaw** | Medical/Health | 10 entries | Medical symptoms, treatments |
+| **PolyClaw** | Translation | 59 entries | Multi-language translation |
+| **MathematicaClaw** | Math | 6 entries | Calculations |
+| **Unified** | Orchestration | 4 entries | Cross-agent routing |
+| **Memory** | General Storage | 28 entries | Persistent knowledge |
+| **DocuClaw** | Documents | 1 entry | Document creation |
+
+### Additional Agents (Ready to Activate)
+- `dataclaw` - Data querying
+- `webclaw` - Web reference hub
+- `langclaw` - Language processing
+- `tx_agent` - Texas blockchain
+- `eagleclaw` - Web scraping
+- `sysclaw` - System monitoring
+- `masterclaw` - Master control
+- And more...
+
+---
+
+## 💾 Shared Memory Database
+
+### Location
+C:\Users[YourName].claw_memory\shared_memory.db
+
+text
+
+### Key Tables
+
+```sql
+-- Legal knowledge (AgentForLaw)
+agentforlaw_knowledge (query, response, category, jurisdiction, timestamp)
+
+-- Medical knowledge (MedicLaw)  
+medical_knowledge (query, response)
+
+-- Math knowledge (MathematicaClaw)
+math_knowledge (question, answer)
+
+-- Translations (PolyClaw)
+translations (source_text, translated_text, target_lang)
+
+-- Cross-agent routing (Unified)
+unified_knowledge (query, response, agent_source)
+
+-- General memory
+memories (memory_text, category)
+
+-- Documents
+documents (title, content, format)
+Cross-Agent Query Example
+When you run /cross symptoms, AgentForLaw queries ALL tables:
+
+python
+def cross_agent_search(query):
+    results = []
+    
+    # Query medical_knowledge
+    c.execute("SELECT * FROM medical_knowledge WHERE ...")
+    
+    # Query translations  
+    c.execute("SELECT * FROM translations WHERE ...")
+    
+    # Query math_knowledge
+    c.execute("SELECT * FROM math_knowledge WHERE ...")
+    
+    # Query unified_knowledge
+    c.execute("SELECT * FROM unified_knowledge WHERE ...")
+    
+    return results  # Returns knowledge from ALL agents
+📁 Data Structure: 50 US States
+Directory Structure
+text
+agents/webclaw/references/agentforlaw/jurisdictions/
+├── TX/                          # Texas (254 counties)
+│   ├── state/                   # State-level courts
+│   │   ├── supreme_court.md
+│   │   ├── court_of_appeals.md
+│   │   └── state_resources.md
+│   ├── Anderson/                # County folder
+│   │   ├── county_court.md
+│   │   ├── district_court.md
+│   │   ├── family_court.md
+│   │   ├── juvenile_court.md
+│   │   └── probate_court.md
+│   ├── Andrews/
+│   ├── Angelina/
+│   └── ... (254 counties total)
+├── CA/                          # California (58 counties)
+├── NY/                          # New York (62 counties)
+├── FL/                          # Florida (67 counties)
+└── ... (50 states total)
+County Court File Format Example
+markdown
+# Dallas County District Court
+
+## Court Information
+- **County**: Dallas
+- **Court Name**: Dallas County District Court
+- **Phone**: (214) 653-6000
+- **Address**: 600 Commerce Street, Dallas, TX 75202
+
+## Jurisdiction
+- Felonies
+- Civil cases over $10,000
+- Domestic relations
+- Juvenile matters
+- Appeals from lower courts
+🚀 Getting Started
+Prerequisites
+bash
+# Clone the repository
+git clone https://github.com/greg-gzillion/clawpack.git
+cd clawpack
+
+# No special dependencies needed - uses Python standard library only
+# Python 3.8+ required
+Run AgentForLaw (Main Legal Agent)
+bash
+python agents/agentforlaw/agentforlaw.py
+Available Commands
+Command	Description	Example
+/court [state]	Get state court info	/court TX
+/court [state]/[county]	Get county court info	/court TX/Dallas
+/federal [circuit]	Get federal court info	/federal 9th
+/cross [query]	Search ALL agents' knowledge	/cross symptoms
+/cross-stats	Show all agent statistics	/cross-stats
+/stats	Show local agent stats	/stats
+Example Usage Session
+bash
+$ python agents/agentforlaw/agentforlaw.py
+
+⚖️ AgentForLaw> /cross-stats
+
+📊 CROSS-AGENT SHARED MEMORY STATISTICS
+  ⚖️ AgentForLaw: 36 entries
+  🏥 MedicLaw: 10 entries
+  🌐 PolyClaw: 59 entries
+  📚 TOTAL: 144 knowledge entries
+
+⚖️ AgentForLaw> /cross symptoms
+
+✅ Found 7 results across agents:
+
+🏥 MedicLaw
+   Q: what are the symptoms of flu
+   A: Fever, cough, sore throat, body aches...
+
+🏥 MedicLaw
+   Q: What are the symptoms of the common cold?
+   A: Runny nose, sneezing, sore throat...
+
+⚖️ AgentForLaw> /cross hello
+
+✅ Found 11 results across agents:
+
+🌐 PolyClaw
+   Q: hello → hola (Spanish)
+   Q: hello → bonjour (French)
+   Q: hello → hallo (German)
+
+⚖️ AgentForLaw> /court TX/Dallas
+
+# Dallas County, TX
+
+## County Court
+- Phone: (214) 653-6000
+- Address: 600 Commerce Street, Dallas, TX 75202
+- Jurisdiction: Misdemeanors, small claims, traffic...
+
+## District Court
+- Jurisdiction: Felonies, civil cases over $10,000...
+🔗 How Agents Learn From Each Other
+1. Writing to Shared Memory
+python
+# Any agent can save knowledge
+def save_to_shared_memory(query, response, agent_name):
+    conn = sqlite3.connect(SHARED_DB)
+    c = conn.cursor()
+    c.execute('''INSERT INTO cross_agent_knowledge 
+                 (query, response, agent_source, timestamp)
+                 VALUES (?, ?, ?, ?)''',
+              (query, response, agent_name, datetime.now()))
+    conn.commit()
+2. Reading from Shared Memory
+python
+# Any agent can search ALL knowledge
+def cross_agent_search(query):
+    conn = sqlite3.connect(SHARED_DB)
+    c = conn.cursor()
+    
+    # Search medical_knowledge
+    c.execute("SELECT * FROM medical_knowledge WHERE ...")
+    
+    # Search translations  
+    c.execute("SELECT * FROM translations WHERE ...")
+    
+    # Search all other agent tables...
+    return results
+3. Real-World Learning Flow
+text
+1. User asks MedicLaw: "What are flu symptoms?"
+2. MedicLaw saves answer to medical_knowledge table
+3. Later, User asks AgentForLaw: "/cross symptoms"
+4. AgentForLaw queries medical_knowledge table
+5. AgentForLaw returns MedicLaw's answer!
+📊 Current Knowledge Statistics
+text
+┌─────────────────────────────────────────────────────────────┐
+│              KNOWLEDGE DISTRIBUTION (144 total)             │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ████████████████████████████████████████  PolyClaw (59)    │
+│  ████████████████████████                  AgentForLaw (36) │
+│  ██████████████████                        Memory (28)      │
+│  ██████                                     MedicLaw (10)   │
+│  ████                                       Math (6)        │
+│  ██                                         Unified (4)     │
+│  ▌                                          DocuClaw (1)    │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+What Each Agent Knows
+🏥 MedicLaw (Medical)
+
+Flu symptoms, causes, spread, treatment
+
+Common cold symptoms
+
+Headache causes and treatments
+
+High blood pressure treatment
+
+Dehydration signs
+
+Burn treatment
+
+Sprained ankle care
+
+🌐 PolyClaw (Translations)
+
+"hello" → Spanish, French, German, Italian, Japanese, Chinese, Korean, Russian
+
+"goodbye" → Spanish, French, German, Italian, Japanese, Chinese, Korean, Russian
+
+"how are you?" → Spanish
+
+Technical blockchain translations
+
+⚖️ AgentForLaw (Legal)
+
+All 254 Texas counties with 5 court files each
+
+Texas Supreme Court
+
+Texas Court of Appeals (14 districts)
+
+Federal courts by circuit
+
+Legal resources and references
+
+📐 MathematicaClaw (Math)
+
+Basic arithmetic operations
+
+Mathematical calculations
+
+🛠️ Extending the System
+Adding a New State's Court Data
+bash
+# Create state directory
+mkdir agents/webclaw/references/agentforlaw/jurisdictions/XX/
+
+# Create state-level courts
+mkdir agents/webclaw/references/agentforlaw/jurisdictions/XX/state/
+# Add supreme_court.md, court_of_appeals.md, state_resources.md
+
+# Add counties (each with 5 court files)
+mkdir agents/webclaw/references/agentforlaw/jurisdictions/XX/CountyName/
+# Add county_court.md, district_court.md, family_court.md,
+# juvenile_court.md, probate_court.md
+Adding a New Agent
+python
+# 1. Create agent directory
+# 2. Implement shared memory integration
+# 3. Register with unified system
+# 4. Start saving knowledge to shared DB
+
+class NewAgent:
+    def __init__(self):
+        self.SHARED_DB = Path.home() / ".claw_memory" / "shared_memory.db"
+    
+    def save_knowledge(self, query, answer):
+        conn = sqlite3.connect(self.SHARED_DB)
+        c = conn.cursor()
+        c.execute('''INSERT INTO new_agent_knowledge 
+                     (query, response) VALUES (?, ?)''',
+                  (query, answer))
+        conn.commit()
+🔧 Troubleshooting
+"No results found" in cross-search
+bash
+# Check if other agents have populated memory
+/cross-stats
+
+# Run other agents to populate data
+python agents/mediclaw/mediclaw.py
+python agents/polyclaw/polyclaw.py
+Shared memory database locked
+bash
+# Close all agents and delete lock file
+rm ~/.claw_memory/shared_memory.db-journal
+Court data not showing
+bash
+# Verify the state directory exists
+ls agents/webclaw/references/agentforlaw/jurisdictions/TX/
+
+# Check county files
+ls agents/webclaw/references/agentforlaw/jurisdictions/TX/Dallas/
+📈 Future Enhancements
+Add Ollama LLM integration for natural language queries
+
+Implement agent-to-agent messaging
+
+Add confidence scoring for knowledge
+
+Create web UI for all agents
+
+Add scheduled knowledge consolidation
+
+Implement knowledge expiration/refreshing
+
+Add export/import of knowledge base
+
