@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+﻿use std::collections::BTreeMap;
 use std::fs::{self, File};
 use std::io::{self, Read};
 use std::path::PathBuf;
@@ -252,7 +252,7 @@ pub fn code_challenge_s256(verifier: &str) -> String {
 
 #[must_use]
 pub fn loopback_redirect_uri(port: u16) -> String {
-    format!("http://localhost:{port}/callback")
+    format!("https://localhost:{port}/callback")
 }
 
 pub fn credentials_path() -> io::Result<PathBuf> {

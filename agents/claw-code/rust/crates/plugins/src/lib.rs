@@ -1,4 +1,4 @@
-mod hooks;
+﻿mod hooks;
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::{Display, Formatter};
@@ -2068,7 +2068,7 @@ fn resolve_local_source(source: &str) -> Result<PathBuf, PluginError> {
 }
 
 fn parse_install_source(source: &str) -> Result<PluginInstallSource, PluginError> {
-    if source.starts_with("http://")
+    if source.starts_with("https://")
         || source.starts_with("https://")
         || source.starts_with("git@")
         || Path::new(source)

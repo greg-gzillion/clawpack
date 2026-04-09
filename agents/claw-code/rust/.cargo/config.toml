@@ -1,0 +1,11 @@
+﻿# Security: Deny HTTP connections
+[net]
+git-fetch-with-cli = true
+
+# Require HTTPS for all dependencies
+[registries.crates-io]
+protocol = "https"
+
+# Deny warnings for security lints
+[target.'cfg(not(target_arch = "wasm32"))']
+rustflags = ["-D", "clippy::panic_in_result_fn"]

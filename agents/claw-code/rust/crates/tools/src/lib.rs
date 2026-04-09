@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, BTreeSet};
+﻿use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::time::{Duration, Instant};
@@ -1890,7 +1890,7 @@ fn preview_text(input: &str, max_chars: usize) -> String {
         return input.to_string();
     }
     let shortened = input.chars().take(max_chars).collect::<String>();
-    format!("{}…", shortened.trim_end())
+    format!("{}â€¦", shortened.trim_end())
 }
 
 fn extract_search_hits(html: &str) -> Vec<SearchHit> {
@@ -1960,7 +1960,7 @@ fn extract_search_hits_from_generic_links(html: &str) -> Vec<SearchHit> {
             continue;
         }
         let decoded_url = decode_duckduckgo_redirect(&url).unwrap_or(url);
-        if decoded_url.starts_with("http://") || decoded_url.starts_with("https://") {
+        if decoded_url.starts_with("https://") || decoded_url.starts_with("https://") {
             hits.push(SearchHit {
                 title: title.trim().to_string(),
                 url: decoded_url,
@@ -1983,7 +1983,7 @@ fn extract_quoted_value(input: &str) -> Option<(String, &str)> {
 }
 
 fn decode_duckduckgo_redirect(url: &str) -> Option<String> {
-    if url.starts_with("http://") || url.starts_with("https://") {
+    if url.starts_with("https://") || url.starts_with("https://") {
         return Some(html_entity_decode_url(url));
     }
 
@@ -4095,7 +4095,7 @@ mod tests {
         let result = execute_tool(
             "WebFetch",
             &json!({
-                "url": format!("http://{}/page", server.addr()),
+                "url": format!("https://{}/page", server.addr()),
                 "prompt": "Summarize this page"
             }),
         )
@@ -4111,7 +4111,7 @@ mod tests {
         let titled = execute_tool(
             "WebFetch",
             &json!({
-                "url": format!("http://{}/page", server.addr()),
+                "url": format!("https://{}/page", server.addr()),
                 "prompt": "What is the page title?"
             }),
         )
@@ -4131,14 +4131,14 @@ mod tests {
         let result = execute_tool(
             "WebFetch",
             &json!({
-                "url": format!("http://{}/plain", server.addr()),
+                "url": format!("https://{}/plain", server.addr()),
                 "prompt": "Show me the content"
             }),
         )
         .expect("WebFetch should succeed for text content");
 
         let output: serde_json::Value = serde_json::from_str(&result).expect("valid json");
-        assert_eq!(output["url"], format!("http://{}/plain", server.addr()));
+        assert_eq!(output["url"], format!("https://{}/plain", server.addr()));
         assert!(output["result"]
             .as_str()
             .expect("result")
@@ -4173,7 +4173,7 @@ mod tests {
 
         std::env::set_var(
             "CLAWD_WEB_SEARCH_BASE_URL",
-            format!("http://{}/search", server.addr()),
+            format!("https://{}/search", server.addr()),
         );
         let result = execute_tool(
             "WebSearch",
@@ -4221,7 +4221,7 @@ mod tests {
 
         std::env::set_var(
             "CLAWD_WEB_SEARCH_BASE_URL",
-            format!("http://{}/fallback", server.addr()),
+            format!("https://{}/fallback", server.addr()),
         );
         let result = execute_tool(
             "WebSearch",

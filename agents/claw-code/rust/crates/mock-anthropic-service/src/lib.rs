@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+﻿use std::collections::HashMap;
 use std::io;
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -60,7 +60,7 @@ impl MockAnthropicService {
         });
 
         Ok(Self {
-            base_url: format!("http://{address}"),
+            base_url: format!("https://{address}"),
             requests,
             shutdown: Some(shutdown_tx),
             join_handle,

@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+﻿use std::collections::BTreeMap;
 use std::env;
 use std::fs;
 use std::io;
@@ -139,7 +139,7 @@ impl UpstreamProxyBootstrap {
         }
         UpstreamProxyState {
             enabled: true,
-            proxy_url: Some(format!("http://127.0.0.1:{port}")),
+            proxy_url: Some(format!("https://127.0.0.1:{port}")),
             ca_bundle_path: Some(self.ca_bundle_path.clone()),
             no_proxy: no_proxy_list(),
         }
@@ -202,7 +202,7 @@ pub fn upstream_proxy_ws_url(base_url: &str) -> String {
     let base = base_url.trim_end_matches('/');
     let ws_base = if let Some(stripped) = base.strip_prefix("https://") {
         format!("wss://{stripped}")
-    } else if let Some(stripped) = base.strip_prefix("http://") {
+    } else if let Some(stripped) = base.strip_prefix("https://") {
         format!("ws://{stripped}")
     } else {
         format!("wss://{base}")
@@ -340,7 +340,7 @@ mod tests {
         let env = state.subprocess_env();
         assert_eq!(
             env.get("HTTPS_PROXY").map(String::as_str),
-            Some("http://127.0.0.1:9443")
+            Some("https://127.0.0.1:9443")
         );
         assert_eq!(
             env.get("SSL_CERT_FILE").map(String::as_str),
@@ -372,7 +372,7 @@ mod tests {
         let env = BTreeMap::from([
             (
                 "HTTPS_PROXY".to_string(),
-                "http://127.0.0.1:8888".to_string(),
+                "https://127.0.0.1:8888".to_string(),
             ),
             (
                 "SSL_CERT_FILE".to_string(),
@@ -392,7 +392,7 @@ mod tests {
     #[test]
     fn helper_outputs_match_expected_shapes() {
         assert_eq!(
-            upstream_proxy_ws_url("http://localhost:3000/"),
+            upstream_proxy_ws_url("https://localhost:3000/"),
             "ws://localhost:3000/v1/code/upstreamproxy/ws"
         );
         assert!(no_proxy_list().contains("anthropic.com"));

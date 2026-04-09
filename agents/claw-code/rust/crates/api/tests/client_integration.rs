@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+﻿use std::collections::HashMap;
 use std::sync::Arc;
 use std::sync::{Mutex as StdMutex, OnceLock};
 use std::time::Duration;
@@ -726,7 +726,7 @@ async fn spawn_server(
     });
 
     TestServer {
-        base_url: format!("http://{address}"),
+        base_url: format!("https://{address}"),
         join_handle,
     }
 }
