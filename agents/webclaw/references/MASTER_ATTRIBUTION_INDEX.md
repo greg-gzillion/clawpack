@@ -1,4 +1,4 @@
-﻿# 📚 CLAWPACK REFERENCE MASTER ATTRIBUTION INDEX
+# 📚 CLAWPACK REFERENCE MASTER ATTRIBUTION INDEX
 
 This document tracks the source attribution for all reference materials used across the Clawpack agent ecosystem.
 
@@ -30,7 +30,7 @@ This document tracks the source attribution for all reference materials used acr
 - **License**: Open source database documentation
 - **Last Verified**: 2026-04-05
 
-### ⚖️ Legal (AgentForLaw)
+### ⚖️ Legal (lawclaw)
 - **Primary Sources**: Legal Information Institute, Cornell Law School, Justia
 - **License**: Public legal information - educational use
 - **Last Verified**: 2026-04-05
