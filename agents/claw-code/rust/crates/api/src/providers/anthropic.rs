@@ -909,7 +909,7 @@ mod tests {
                 .write_all(response.as_bytes())
                 .expect("write response");
         });
-        format!("http://{address}/oauth/token")
+        format!("https://{address}/oauth/token")
     }
 
     #[test]
