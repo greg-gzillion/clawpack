@@ -1,3 +1,4 @@
+﻿pub mod utils;
 mod client;
 mod error;
 mod prompt_cache;
@@ -32,3 +33,4 @@ pub use telemetry::{
     MemoryTelemetrySink, SessionTraceRecord, SessionTracer, TelemetryEvent, TelemetrySink,
     DEFAULT_ANTHROPIC_VERSION,
 };
+
