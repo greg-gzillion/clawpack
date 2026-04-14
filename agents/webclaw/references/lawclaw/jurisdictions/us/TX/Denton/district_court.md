@@ -1,0 +1,22 @@
+﻿# Denton County District Court
+
+## Court Information
+- **County**: Denton
+- **County Seat**: Denton
+- **Court Name**: Denton County District Court
+- **Website**: https://www.txcourts.gov/district-courts
+- **Phone**: (940) 349-2100
+- **Address**: 1450 E McKinney Street, Denton, TX 76209
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Felonies
+- Civil cases over \,000
+- Domestic relations
+- Juvenile matters
+- Appeals from lower courts
+- Many counties have multiple district courts with specialized jurisdiction
+
+---
+*Last updated: 2026-04-06*
+*Source: Texas Courts*

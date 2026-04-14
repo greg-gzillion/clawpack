@@ -1,0 +1,19 @@
+﻿# Brooks County Probate Court
+
+## Court Information
+- **County**: Brooks
+- **Court Name**: Brooks County Probate Court
+- **Phone**: (361) 325-5644
+- **Address**: 100 E Rice Street, Falfurrias, TX 78355
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Wills and Estates
+- Trusts
+- Guardianships
+- Conservatorships
+- Mental health commitments
+
+---
+*Last updated: 2026-04-06*
+*Source: Texas Courts*

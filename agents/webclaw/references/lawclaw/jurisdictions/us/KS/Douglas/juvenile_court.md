@@ -1,0 +1,19 @@
+﻿# Douglas County Juvenile Court
+
+## Court Information
+- **County**: Douglas
+- **Court Name**: Douglas County Juvenile Court
+- **Phone**: (785) 832-5250
+- **Address**: 1100 Massachusetts Street, Lawrence, KS 66044
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Juvenile delinquency
+- Child in Need of Care (CINC)
+- Termination of parental rights
+- Emancipation
+- Truancy
+
+---
+*Last updated: 2026-04-06*
+*Source: Kansas Courts*

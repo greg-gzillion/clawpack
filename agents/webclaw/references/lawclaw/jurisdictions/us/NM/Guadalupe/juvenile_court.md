@@ -1,0 +1,19 @@
+﻿# Guadalupe County Juvenile Court
+
+## Court Information
+- **County**: Guadalupe
+- **Court Name**: Guadalupe County Juvenile Court
+- **Phone**: (575) 472-3161
+- **Address**: 420 Parker Avenue, Santa Rosa, NM 88435
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM MT
+
+## Jurisdiction
+- Juvenile delinquency
+- Abuse and neglect
+- Termination of parental rights
+- Emancipation
+- Children in Need of Supervision
+
+---
+*Last updated: 2026-04-06*
+*Source: New Mexico Courts*

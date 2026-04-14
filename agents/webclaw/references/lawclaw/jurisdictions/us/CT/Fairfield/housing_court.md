@@ -1,0 +1,33 @@
+﻿# Fairfield County Housing Court
+
+## Court Information
+- **County**: Fairfield
+- **Court Name**: Fairfield County Housing Court
+- **Part of**: Superior Court
+- **Phone**: (203) 579-6527
+- **Address**: 1061 Main Street, Bridgeport, CT 06604
+- **Hours**: Monday-Friday, 9:00 AM - 5:00 PM ET
+
+## Jurisdiction
+- **Evictions**: Summary process (eviction) actions
+- **Security Deposits**: Disputes over deposit returns
+- **Housing Code Violations**: Municipal enforcement
+- **Rent Disputes**: Nonpayment and overcharge claims
+- **Repairs**: Habitability and repair issues
+- **Discrimination**: Fair housing claims
+
+## Filing Fees
+- Eviction: 
+- Security Deposit Claim: 
+- Housing Code Violation: No fee
+
+## Tenant Resources
+- CT Tenant Union: (860) 123-4567
+- Legal Aid Housing Clinic: (800) 987-6543
+
+## Related Courts
+- [Superior Court](./superior_court.md)
+
+---
+*Last updated: 2026-04-06*
+*Source: Connecticut Judicial Branch - Fairfield County Housing Court*

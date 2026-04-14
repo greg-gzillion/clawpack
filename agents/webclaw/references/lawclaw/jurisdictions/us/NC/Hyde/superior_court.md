@@ -1,0 +1,20 @@
+﻿# Hyde County Superior Court
+
+## Court Information
+- **County**: Hyde
+- **County Seat**: Swan Quarter
+- **Court Name**: Hyde County Superior Court
+- **Website**: https://www.nccourts.gov/learn/courts/superior-court
+- **Phone**: (252) 926-4200
+- **Address**: 30 Oyster Creek Road, Swan Quarter, NC 27885
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM ET
+
+## Jurisdiction
+- Felonies
+- Civil cases over \,000
+- Appeals from District Court
+- Exclusive jurisdiction over certain equity matters
+
+---
+*Last updated: 2026-04-06*
+*Source: North Carolina Judicial Branch*
