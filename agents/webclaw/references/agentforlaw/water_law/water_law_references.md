@@ -1,4 +1,4 @@
-﻿#  - Complete Reference
+#  - Complete Reference
 
 ## Overview
 **** - Comprehensive framework, statutes, regulations, case law, and practice guidelines for this area.
@@ -36,7 +36,7 @@
 ### Practice Guides
 - [Practice guide reference to be added]
 
-### Legal Encyclopedias
+### law Encyclopedias
 - [Encyclopedia reference to be added]
 
 ---
