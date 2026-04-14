@@ -1,0 +1,25 @@
+﻿# Crawford County Family Court
+
+## Court Information
+- **County**: Crawford
+- **Court Name**: Crawford County Family Court
+- **Part of**: Circuit Court
+- **Phone**: (479) 474-2281
+- **Address**: 30 S 6th Street, Van Buren, AR 72956
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Services
+- Divorce and Separation
+- Child Custody and Visitation
+- Child Support
+- Domestic Violence Protection
+- Paternity
+- Adoption
+
+## Related Courts
+- [Circuit Court](./circuit_court.md)
+- [Juvenile Court](./juvenile_court.md)
+
+---
+*Last updated: 2026-04-06*
+*Source: Arkansas Courts - Family Court of Crawford County*

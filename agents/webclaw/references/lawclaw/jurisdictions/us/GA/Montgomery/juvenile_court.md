@@ -1,0 +1,19 @@
+﻿# Montgomery County Juvenile Court
+
+## Court Information
+- **County**: Montgomery
+- **Court Name**: Montgomery County Juvenile Court
+- **Phone**: (912) 583-2731
+- **Address**: 121 S Railroad Avenue, Mount Vernon, GA 30445
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM ET
+
+## Jurisdiction
+- Juvenile delinquency (under 17)
+- Deprivation (abuse/neglect)
+- Children in Need of Services (CHINS)
+- Termination of parental rights
+- Emancipation
+
+---
+*Last updated: 2026-04-06*
+*Source: Georgia Court System*

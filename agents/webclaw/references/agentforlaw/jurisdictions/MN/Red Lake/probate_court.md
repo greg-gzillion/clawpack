@@ -1,0 +1,19 @@
+﻿# Red Lake County Probate Court
+
+## Court Information
+- **County**: Red Lake
+- **Court Name**: Red Lake County Probate Court
+- **Phone**: (218) 253-2898
+- **Address**: 125 Edward Avenue, Red Lake Falls, MN 56750
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Wills and Estates
+- Trusts
+- Guardianships
+- Conservatorships
+- Mental health commitments
+
+---
+*Last updated: 2026-04-06*
+*Source: Minnesota Judicial Branch*

@@ -1,0 +1,19 @@
+﻿# Carlisle County Juvenile Court
+
+## Court Information
+- **County**: Carlisle
+- **Court Name**: Carlisle County Juvenile Court
+- **Phone**: (270) 628-5200
+- **Address**: 102 E Court Street, Bardwell, KY 42023
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM ET
+
+## Jurisdiction
+- Juvenile delinquency
+- Dependency, neglect, and abuse (DNA)
+- Termination of parental rights
+- Emancipation
+- Status offenses
+
+---
+*Last updated: 2026-04-06*
+*Source: Kentucky Courts*

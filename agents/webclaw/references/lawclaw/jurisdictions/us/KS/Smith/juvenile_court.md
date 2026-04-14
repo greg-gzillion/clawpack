@@ -1,0 +1,19 @@
+﻿# Smith County Juvenile Court
+
+## Court Information
+- **County**: Smith
+- **Court Name**: Smith County Juvenile Court
+- **Phone**: (785) 282-5140
+- **Address**: 218 S Grant Street, Smith Center, KS 66967
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Juvenile delinquency
+- Child in Need of Care (CINC)
+- Termination of parental rights
+- Emancipation
+- Truancy
+
+---
+*Last updated: 2026-04-06*
+*Source: Kansas Courts*

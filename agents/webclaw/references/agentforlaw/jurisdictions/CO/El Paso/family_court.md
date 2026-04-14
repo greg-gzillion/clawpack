@@ -1,0 +1,26 @@
+﻿# El Paso County Family Court
+
+## Court Information
+- **County**: El Paso
+- **Court Name**: El Paso County Family Court
+- **Part of**: District Court
+- **Phone**: (719) 452-5000
+- **Address**: 270 S Tejon Street, Colorado Springs, CO 80903
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM MT
+
+## Services
+- Divorce and Legal Separation
+- Child Custody and Parenting Time
+- Child Support
+- Domestic Violence Protection Orders
+- Paternity
+- Adoption
+- Grandparent Visitation
+
+## Related Courts
+- [District Court](./district_court.md)
+- [Juvenile Court](./juvenile_court.md)
+
+---
+*Last updated: 2026-04-06*
+*Source: Colorado Courts - Family Court of El Paso County*

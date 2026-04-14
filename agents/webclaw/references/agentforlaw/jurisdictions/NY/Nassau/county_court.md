@@ -1,0 +1,21 @@
+﻿# Nassau County Court
+
+## Court Information
+- **County**: Nassau
+- **Court Name**: Nassau County Court
+- **Phone**: (516) 493-3500
+- **Address**: 240 Old Country Road, Mineola, NY 11501
+- **Hours**: Monday-Friday, 9:00 AM - 5:00 PM ET
+
+## Jurisdiction
+- Felonies (not handled by Supreme Court)
+- Misdemeanors
+- Small claims (up to \,000)
+- Civil cases under \,000
+- Traffic violations
+
+## Small Claims Limit: \,000
+
+---
+*Last updated: 2026-04-06*
+*Source: New York Courts*

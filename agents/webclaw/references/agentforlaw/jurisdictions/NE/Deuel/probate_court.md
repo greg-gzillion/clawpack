@@ -1,0 +1,19 @@
+﻿# Deuel County Probate Court
+
+## Court Information
+- **County**: Deuel
+- **Court Name**: Deuel County Probate Court
+- **Phone**: (308) 874-2502
+- **Address**: 319 Vincent Avenue, Chappell, NE 69129
+- **Hours**: Monday-Friday, 8:00 AM - 5:00 PM CT
+
+## Jurisdiction
+- Wills and Estates
+- Trusts
+- Guardianships
+- Conservatorships
+- Mental health commitments
+
+---
+*Last updated: 2026-04-06*
+*Source: Nebraska Judicial Branch*

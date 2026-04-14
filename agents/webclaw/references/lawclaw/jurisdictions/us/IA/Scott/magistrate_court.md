@@ -1,0 +1,21 @@
+﻿# Scott County Magistrate Court
+
+## Court Information
+- **County**: Scott
+- **Court Name**: Iowa Magistrate Court for Scott County
+- **Phone**: (563) 326-8600
+- **Address**: 416 W 4th Street, Davenport, IA 52801
+- **Hours**: Monday-Friday, 8:00 AM - 4:30 PM CT
+
+## Jurisdiction
+- Small claims (up to \,500)
+- Simple misdemeanors
+- Preliminary hearings
+- Traffic violations
+- County ordinance violations
+
+## Small Claims Limit: \,500
+
+---
+*Last updated: 2026-04-06*
+*Source: Iowa Judicial Branch*
