@@ -286,6 +286,23 @@ More specialized agents
 
 Docker deployment
 
-Built with 🦞 by the Clawpack Team
 
+## 📚 Citation
+
+If you use LawClaw in your research, please cite it as:
+
+### APA
+> Frank, G. (2026). *Clawpack - Comprehensive Legal Reference System* (Version 3.0.0) [Computer software]. https://doi.org/10.5281/zenodo.19599131
+
+### BibTeX
+```bibtex
+@software{frank_clawpack_2026,
+  author       = {Greg Frank},
+  title        = {Clawpack - Comprehensive Law Reference System},
+  version      = {3.0.0},
+  year         = {2026},
+  doi          = {10.5281/zenodo.19599131},
+  url          = {https://github.com/greg-gzillion/clawpack},
+  abstract     = {Comprehensive legal reference system with 50+ practice areas and 8,000+ verified URLs}
+}
 
