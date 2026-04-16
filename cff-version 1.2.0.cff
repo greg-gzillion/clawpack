@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use Clawpack or LawClaw in your research, please cite it as below."
+authors:
+  - family-names: "Frank"
+    given-names: "Greg"
+    orcid: "https://orcid.org/"  # Optional - get one at https://orcid.org
+title: "Clawpack - Comprehens0009-0002-0660-1344ive Legal Reference System"
+version: 1.0.0
+date-released: 2026-04-15
+url: "https://github.com/greg-gzillion/clawpack"
+repository-code: "https://github.com/greg-gzillion/clawpack"
+abstract: "Clawpack is a comprehensive legal reference system containing modular legal knowledge structures across 50+ practice areas with 8,000+ verified URLs to authoritative sources. LawClaw, a component of Clawpack, provides structured legal references for AI agents, legal research, academic study, and professional practice."
+keywords:
+  - "legal-research"
+  - "artificial-intelligence"
+  - "law"
+  - "legal-reference"
+  - "knowledge-base"
+  - "legal-ai"
+  - "statutory-law"
+  - "case-law"
+  - "regulatory-law"
+license: "CC-BY-4.0"
+type: "software"
