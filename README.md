@@ -1,3 +1,6 @@
+
+
+[![DOI](https://zenodo.org/badge/1201006094.svg)](https://doi.org/10.5281/zenodo.19599130)
 # 🦞 CLAWPACK - Cross-Learning AI Agent Ecosystem
 
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
