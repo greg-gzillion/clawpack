@@ -44,3 +44,17 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Rust build artifacts
+target/
+*.rlib
+*.rmeta
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
