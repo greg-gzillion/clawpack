@@ -1,74 +1,75 @@
 # Diseases - Gastrointestinal Diseases
 
-## Esophageal Diseases
-| Disease | Pathophysiology | Key Features | Diagnosis | Treatment | URL |
-|---------|-----------------|--------------|-----------|-----------|-----|
-| GERD | Reflux of gastric contents | Heartburn, regurgitation | Clinical; EGD if alarm symptoms | PPI; Lifestyle modifications | https://www.ncbi.nlm.nih.gov/books/NBK441938/ |
-| Eosinophilic Esophagitis (EoE) | Eosinophilic inflammation | Dysphagia, food impaction | EGD with biopsy (=15 eos/HPF) | Dietary elimination; Topical steroids; Dupilumab | https://www.ncbi.nlm.nih.gov/books/NBK459297/ |
-| Achalasia | Failed LES relaxation | Dysphagia to solids and liquids | Manometry; Barium swallow (bird beak) | Pneumatic dilation; Heller myotomy; POEM | https://www.ncbi.nlm.nih.gov/books/NBK519515/ |
-| Esophageal Cancer | SCC (upper/mid); Adenocarcinoma (lower) | Progressive dysphagia, weight loss | EGD with biopsy | Chemoradiation; Surgery; Immunotherapy | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
+## Gastroesophageal Reflux Disease (GERD)
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Definition** | Reflux of gastric contents causing troublesome symptoms or complications | https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults |
+| **Symptoms** | **Heartburn**, **Regurgitation**, Chest pain, Chronic cough | https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/symptoms-causes |
+| **Alarm Features** | Dysphagia, Weight loss, Anemia, Early satiety (warrant EGD) | https://www.gastro.org/guidelines/gerd |
+| **Diagnosis** | Clinical (typical symptoms), **EGD** (alarm features or refractory), pH monitoring | https://www.gastro.org/guidelines/gerd |
+| **Treatment** | Lifestyle, **PPIs** (8 weeks), H2 blockers, Fundoplication | https://www.gastro.org/guidelines/gerd |
 
-## Gastric Diseases
-| Disease | Pathophysiology | Key Features | Diagnosis | Treatment | URL |
-|---------|-----------------|--------------|-----------|-----------|-----|
-| Peptic Ulcer Disease | H. pylori, NSAIDs | Epigastric pain, bleeding, perforation | EGD; H. pylori testing | PPI; H. pylori eradication; Discontinue NSAIDs | https://www.ncbi.nlm.nih.gov/books/NBK534792/ |
-| Gastritis | Inflammation of gastric mucosa | Epigastric pain, nausea | EGD with biopsy | PPI; Treat H. pylori if present | https://www.ncbi.nlm.nih.gov/books/NBK544250/ |
-| Gastric Cancer | Adenocarcinoma (most) | Weight loss, epigastric pain, anemia | EGD with biopsy | Surgery; Chemotherapy | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Gastroparesis | Delayed gastric emptying | Nausea, vomiting, early satiety | Gastric emptying study | Dietary modification; Prokinetics; G-POEM | https://www.ncbi.nlm.nih.gov/books/NBK551528/ |
-
-## Small Bowel Diseases
-| Disease | Pathophysiology | Key Features | Diagnosis | Treatment | URL |
-|---------|-----------------|--------------|-----------|-----------|-----|
-| Celiac Disease | Immune response to gluten | Diarrhea, weight loss, anemia, dermatitis herpetiformis | TTG-IgA; EGD with biopsy | Gluten-free diet | https://www.ncbi.nlm.nih.gov/books/NBK441900/ |
-| Crohn's Disease | Transmural inflammation | Abdominal pain, diarrhea, weight loss, fistulas | Ileocolonoscopy; Cross-sectional imaging | Corticosteroids; Biologics; Immunomodulators | https://www.ncbi.nlm.nih.gov/books/NBK436021/ |
-| Small Bowel Bacterial Overgrowth (SIBO) | Excessive bacteria in small bowel | Bloating, diarrhea, malabsorption | Breath test; Aspirate culture | Antibiotics; Treat underlying cause | https://www.ncbi.nlm.nih.gov/books/NBK546634/ |
+## Peptic Ulcer Disease (PUD)
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Etiology** | **H. pylori** (70-90% duodenal, 50-70% gastric), **NSAIDs** | https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers |
+| **Symptoms** | Epigastric pain (duodenal: relieved by food; gastric: worsened by food) | https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/symptoms-causes |
+| **Diagnosis** | **EGD** (gold standard), H. pylori testing (stool antigen, UBT) | https://www.gastro.org/guidelines/h-pylori |
+| **Treatment** | **PPI + Triple/Quadruple therapy for H. pylori** | https://www.gastro.org/guidelines/h-pylori |
+| **Complications** | **Bleeding**, Perforation, Gastric outlet obstruction | https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers |
 
 ## Inflammatory Bowel Disease (IBD)
-| Feature | Crohn's Disease | Ulcerative Colitis | URL |
-|---------|-----------------|-------------------|-----|
-| Distribution | Any part of GI tract (skip lesions) | Colon only (continuous from rectum) | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Depth | Transmural | Mucosal/submucosal | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Complications | Strictures, fistulas, abscesses | Toxic megacolon, CRC | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Histology | Non-caseating granulomas | Crypt abscesses, crypt distortion | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Smoking | Worsens | Protective | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
-| Surgery | Not curative | Curative (colectomy) | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
+| Feature | Crohn Disease | Ulcerative Colitis | URL |
+|---------|---------------|-------------------|-----|
+| **Distribution** | **Skip lesions**, Mouth to anus | **Continuous**, Colon only | https://www.crohnscolitisfoundation.org |
+| **Depth** | **Transmural** | Mucosal/submucosal | https://www.crohnscolitisfoundation.org |
+| **Rectal Involvement** | Often spared | **Always involved** | https://www.crohnscolitisfoundation.org |
+| **Complications** | **Strictures**, **Fistulas**, **Abscesses** | Toxic megacolon, **? CRC risk** | https://www.crohnscolitisfoundation.org |
+| **Smoking** | **Worsens** Crohn | **Protective** for UC | https://www.crohnscolitisfoundation.org |
+| **Treatment** | 5-ASA, Corticosteroids, Immunomodulators, Biologics | 5-ASA, Corticosteroids, Immunomodulators, Biologics | https://www.gastro.org/guidelines/ibd |
 
-## IBD Therapies
-| Class | Agents | Indications | URL |
-|-------|--------|-------------|-----|
-| 5-ASA | Mesalamine, Sulfasalazine | Mild-moderate UC; Mild Crohn's | https://www.gastro.org/guidelines |
-| Corticosteroids | Prednisone, Budesonide | Induction of remission | https://www.gastro.org/guidelines |
-| Immunomodulators | Azathioprine, 6-MP, Methotrexate | Maintenance; Steroid-sparing | https://www.gastro.org/guidelines |
-| Anti-TNF | Infliximab, Adalimumab, Certolizumab, Golimumab | Moderate-severe disease | https://www.gastro.org/guidelines |
-| Anti-Integrin | Vedolizumab, Natalizumab | Moderate-severe disease | https://www.gastro.org/guidelines |
-| Anti-IL-12/23 | Ustekinumab | Moderate-severe Crohn's, UC | https://www.gastro.org/guidelines |
-| JAK Inhibitor | Tofacitinib, Upadacitinib | Moderate-severe UC, Crohn's | https://www.gastro.org/guidelines |
-| S1P Modulator | Ozanimod, Etrasimod | Moderate-severe UC | https://www.gastro.org/guidelines |
+## Irritable Bowel Syndrome (IBS)
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Definition** | Functional GI disorder with abdominal pain and altered bowel habits | https://www.niddk.nih.gov/health-information/digestive-diseases/irritable-bowel-syndrome |
+| **Rome IV Criteria** | Recurrent abdominal pain =1 day/week x3 months + =2 of: related to defecation, Change in stool frequency, Change in stool form | https://theromefoundation.org |
+| **Subtypes** | IBS-C (constipation), IBS-D (diarrhea), IBS-M (mixed) | https://www.niddk.nih.gov/health-information/digestive-diseases/irritable-bowel-syndrome |
+| **Treatment** | Dietary (low FODMAP), Fiber, Antispasmodics, Neuromodulators, Secretagogues | https://www.gastro.org/guidelines/ibs |
 
-## Colonic Diseases
-| Disease | Pathophysiology | Key Features | Diagnosis | Treatment | URL |
-|---------|-----------------|--------------|-----------|-----------|-----|
-| Diverticulitis | Microperforation of diverticulum | LLQ pain, fever, leukocytosis | CT abdomen | Antibiotics (uncomplicated); Drainage/surgery (complicated) | https://www.ncbi.nlm.nih.gov/books/NBK459316/ |
-| Clostridioides difficile Infection | Toxin-mediated colitis | Diarrhea, abdominal pain, leukocytosis | PCR or EIA for toxin | Vancomycin, Fidaxomicin; FMT (recurrent) | https://www.idsociety.org/practice-guideline/clostridium-difficile/ |
-| Ischemic Colitis | Hypoperfusion of colon | Acute abdominal pain, hematochezia | CT abdomen; Colonoscopy | Supportive; Surgery if necrosis | https://www.ncbi.nlm.nih.gov/books/NBK562157/ |
-| Colorectal Cancer | Adenocarcinoma | Change in bowel habits, hematochezia, weight loss | Colonoscopy with biopsy | Surgery; Chemotherapy; Immunotherapy | https://www.ncbi.nlm.nih.gov/books/NBK470357/ |
+## Celiac Disease
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Definition** | Immune-mediated enteropathy triggered by gluten in genetically susceptible individuals | https://www.niddk.nih.gov/health-information/digestive-diseases/celiac-disease |
+| **Genetics** | **HLA-DQ2** (90-95%) or **HLA-DQ8** (5-10%) | https://celiac.org |
+| **Symptoms** | Diarrhea, Weight loss, Anemia, Dermatitis herpetiformis | https://www.niddk.nih.gov/health-information/digestive-diseases/celiac-disease/symptoms-causes |
+| **Diagnosis** | **tTG-IgA** (screening), **Duodenal biopsy** (confirmatory) | https://www.gastro.org/guidelines/celiac-disease |
+| **Treatment** | **Strict gluten-free diet** for life | https://celiac.org/gluten-free-diet |
 
-## Colorectal Cancer Screening
-| Test | Interval | URL |
-|------|----------|-----|
-| Colonoscopy | Every 10 years | https://www.uspreventiveservicestaskforce.org |
-| FIT (Fecal Immunochemical Test) | Annually | https://www.uspreventiveservicestaskforce.org |
-| FIT-DNA (Cologuard) | Every 3 years | https://www.uspreventiveservicestaskforce.org |
-| Flexible Sigmoidoscopy | Every 5 years (with annual FIT) | https://www.uspreventiveservicestaskforce.org |
-| CT Colonography | Every 5 years | https://www.uspreventiveservicestaskforce.org |
+## Colorectal Cancer (CRC)
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Epidemiology** | 3rd most common cancer, 2nd leading cause of cancer death | https://www.cancer.gov/types/colorectal |
+| **Risk Factors** | Age >50, IBD, Family history, Lynch syndrome, FAP | https://www.cdc.gov/cancer/colorectal/basic_info/risk_factors.htm |
+| **Screening** | **Colonoscopy** q10y starting age 45 | https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/colorectal-cancer-screening |
+| **Symptoms** | Change in bowel habits, **Hematochezia**, Weight loss, Anemia | https://www.cancer.gov/types/colorectal |
+| **Treatment** | Surgery, Chemotherapy, Radiation (rectal) | https://www.nccn.org/guidelines/colon |
 
-## Anorectal Diseases
-| Disease | Clinical Features | Treatment | URL |
-|---------|-------------------|-----------|-----|
-| Hemorrhoids | Painless bleeding (internal); Painful thrombosis (external) | Fiber; Topical; Rubber band ligation; Hemorrhoidectomy | https://www.ncbi.nlm.nih.gov/books/NBK500032/ |
-| Anal Fissure | Sharp pain with defecation; Sentinel tag | Fiber; Sitz baths; Topical nitroglycerin/CCB; Botox; LIS | https://www.ncbi.nlm.nih.gov/books/NBK526063/ |
-| Anorectal Abscess | Painful, fluctuant mass | Incision and drainage | https://www.ncbi.nlm.nih.gov/books/NBK441891/ |
-| Fistula-in-Ano | Chronic drainage; History of abscess | Fistulotomy; Seton; LIFT; VAAFT | https://www.ncbi.nlm.nih.gov/books/NBK535383/ |
+## Acute Pancreatitis
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Etiology** | **Gallstones** (40-70%), **Alcohol** (25-35%), Hypertriglyceridemia, ERCP | https://www.niddk.nih.gov/health-information/digestive-diseases/pancreatitis |
+| **Diagnosis** | **=2 of**: Epigastric pain, **Lipase/Amylase >3x ULN**, Imaging findings | https://www.gastro.org/guidelines/acute-pancreatitis |
+| **Severity** | Mild (no organ failure), Moderate (transient OF <48h), Severe (persistent OF >48h) | https://www.gastro.org/guidelines/acute-pancreatitis |
+| **Treatment** | **Aggressive IV fluids**, Pain control, NPO initially, Early enteral nutrition | https://www.gastro.org/guidelines/acute-pancreatitis |
+
+## Acute Appendicitis
+| Component | Description | URL |
+|-----------|-------------|-----|
+| **Pathophysiology** | Luminal obstruction ? Inflammation ? Ischemia ? Perforation | https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis |
+| **Symptoms** | Periumbilical pain migrating to **RLQ**, Anorexia, Nausea, Fever | https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis/symptoms-causes |
+| **Signs** | **McBurney point tenderness**, Rovsing sign, Psoas sign, Obturator sign | https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis |
+| **Diagnosis** | **CT abdomen/pelvis** (preferred), Ultrasound (children/pregnancy) | https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis/diagnosis |
+| **Treatment** | **Appendectomy** (surgical or antibiotics in select cases) | https://www.facs.org/for-patients |
 
 ---
 *Part of Clawpack Mediclaw - Diseases Reference*
