@@ -1,6 +1,8 @@
 
 
 [![DOI](https://zenodo.org/badge/1201006094.svg)](https://doi.org/10.5281/zenodo.19599130)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0002--0660--1344-green)](https://orcid.org/0009-0002-0660-1344)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # 🦞 CLAWPACK - Cross-Learning AI Agent Ecosystem
 
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
