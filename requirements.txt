@@ -1,5 +1,5 @@
-﻿# Core dependencies for Clawpack
+# Core dependencies for Clawpack
 requests>=2.31.0,<3.0.0
-python-dotenv>=1.0.0
+python-dotenv>=1.2.2
 
 # Note: sqlite3 is built into Python - no installation needed
